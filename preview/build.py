@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ghép một tool thành trang preview độc lập (CSS/JS inline): dist/preview/<slug>.html
 
-    python3 preview/build.py stm32-timer-pwm
+    python3 preview/build.py stm32-pwm      (bỏ trống = build mọi trang trong pages.json)
 """
 import json
 import sys
@@ -17,12 +17,14 @@ def read(path):
 
 def build(slug):
     meta = json.loads(read("preview/pages.json"))[slug]
-    css = read("assets/common/kn-tools.css") + "\n" + read(f"assets/tools/{slug}/tool.css")
+    deps = meta.get("deps", [])
+    css = "\n".join([read("assets/common/kn-tools.css")] + [read(f"assets/common/{d}.css") for d in deps] + [read(f"assets/tools/{slug}/tool.css")])
+    js = "\n".join([read(f"assets/common/{d}.js") for d in deps] + [read(f"assets/tools/{slug}/tool.js")])
     content = "\n".join(l for l in read(f"content/{slug}.html").splitlines() if not l.startswith("<!--"))
     html = read("preview/page.html")
     for key, val in {
         "TITLE": meta["title"], "H1": meta["h1"], "INTRO": meta["intro"], "SLUG": slug,
-        "CSS": css, "JS": read(f"assets/tools/{slug}/tool.js"), "CONTENT": content,
+        "CSS": css, "JS": js, "CONTENT": content,
     }.items():
         html = html.replace("{{" + key + "}}", val)
     out = ROOT / "dist" / "preview" / f"{slug}.html"
@@ -32,5 +34,5 @@ def build(slug):
 
 
 if __name__ == "__main__":
-    for s in sys.argv[1:] or ["stm32-timer-pwm"]:
+    for s in sys.argv[1:] or json.loads(read("preview/pages.json")).keys():
         build(s)

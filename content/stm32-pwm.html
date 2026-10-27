@@ -1,0 +1,21 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/stm32-pwm/. Dán vào Flatsome (element Text) hoặc trình soạn thảo WordPress. -->
+<h2>Công thức tần số và duty PWM</h2>
+<pre>f_PWM = f_TIM / ((PSC + 1) × (ARR + 1))
+duty  = CCR / (ARR + 1)</pre>
+<p>Ở chế độ PWM mode 1, bộ đếm chạy từ 0 tới ARR. Chân ra ở mức cao khi bộ đếm nhỏ hơn <strong>Pulse (CCR)</strong> và xuống mức thấp khi đạt CCR. Vì vậy ARR quyết định tần số, còn CCR quyết định duty.</p>
+
+<h2>Ví dụ: PWM 1 kHz, duty 25 % trên Blue Pill</h2>
+<p>TIM2 nhận 72 MHz. Chọn PSC = 71 để timer đếm 1 MHz, ARR = 999 để một chu kỳ có 1000 tick, tức 1 kHz. Duty 25 % là CCR = 250.</p>
+<pre>72 000 000 / ((71 + 1) × (999 + 1)) = 1 000 Hz</pre>
+
+<h2>Số mức duty</h2>
+<p>Duty chỉ chỉnh được theo từng bước 1 / (ARR + 1). ARR = 999 cho 1000 mức, đủ cho LED và động cơ. Khi tăng tần số PWM, ARR nhỏ lại và số mức giảm theo: với clock 72 MHz, PWM 1 MHz chỉ còn 72 mức. Công cụ ưu tiên giữ ít nhất 1000 mức nếu tần số cho phép.</p>
+
+<h2>Clock timer lấy ở đâu?</h2>
+<p>Clock vào timer đi từ SYSCLK qua AHB Prescaler, rồi APB Prescaler. Nếu APB Prescaler khác 1 thì clock timer được nhân 2. Hình clock tree trong công cụ vẽ đúng các khối này như tab <em>Clock Configuration</em> của STM32CubeMX để bạn đối chiếu.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/hoc-lap-trinh-mcu/stm32/">Chuyên mục Lập trình STM32</a></li>
+</ul>

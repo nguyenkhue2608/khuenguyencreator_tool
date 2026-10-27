@@ -28,12 +28,25 @@ function kn_tools_render_tool( $atts ) {
 
 	kn_tools_enqueue_common();
 
+	$js_deps = array();
+	$tool    = $tools[ $slug ];
+	foreach ( isset( $tool['deps'] ) ? $tool['deps'] : array() as $dep ) {
+		$path = 'assets/common/' . $dep;
+		if ( file_exists( KN_TOOLS_DIR . $path . '.css' ) ) {
+			wp_enqueue_style( 'kn-' . $dep, KN_TOOLS_URL . $path . '.css', array( 'kn-tools-common' ), KN_TOOLS_VERSION );
+		}
+		if ( file_exists( KN_TOOLS_DIR . $path . '.js' ) ) {
+			wp_enqueue_script( 'kn-' . $dep, KN_TOOLS_URL . $path . '.js', array(), KN_TOOLS_VERSION, true );
+			$js_deps[] = 'kn-' . $dep;
+		}
+	}
+
 	$base = 'assets/tools/' . $slug . '/';
 	if ( file_exists( KN_TOOLS_DIR . $base . 'tool.css' ) ) {
 		wp_enqueue_style( 'kn-tool-' . $slug, KN_TOOLS_URL . $base . 'tool.css', array( 'kn-tools-common' ), KN_TOOLS_VERSION );
 	}
 	if ( file_exists( KN_TOOLS_DIR . $base . 'tool.js' ) ) {
-		wp_enqueue_script( 'kn-tool-' . $slug, KN_TOOLS_URL . $base . 'tool.js', array(), KN_TOOLS_VERSION, true );
+		wp_enqueue_script( 'kn-tool-' . $slug, KN_TOOLS_URL . $base . 'tool.js', $js_deps, KN_TOOLS_VERSION, true );
 		wp_localize_script( 'kn-tool-' . $slug, 'KN_TOOLS', array( 'dataUrl' => KN_TOOLS_URL . 'data/' ) );
 	}
 

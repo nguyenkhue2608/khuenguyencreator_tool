@@ -1,0 +1,27 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/stm32-timer-interrupt/. Dán vào Flatsome (element Text) hoặc trình soạn thảo WordPress. -->
+<h2>Clock của timer đi từ đâu?</h2>
+<p>Đây là chỗ hay nhầm nhất. Timer không chạy theo SYSCLK mà đi qua ba bước, đúng như trong tab <em>Clock Configuration</em> của STM32CubeMX:</p>
+<ol>
+	<li><strong>SYSCLK</strong> qua <strong>AHB Prescaler</strong> thành <strong>HCLK</strong>.</li>
+	<li><strong>HCLK</strong> qua <strong>APB1</strong> hoặc <strong>APB2 Prescaler</strong> thành clock ngoại vi PCLK1 hoặc PCLK2.</li>
+	<li>Nếu APB Prescaler khác 1, phần cứng <strong>nhân 2</strong> trước khi đưa vào timer. Đó là ô <em>APB1 Timer clocks</em> và <em>APB2 Timer clocks</em> trong CubeMX.</li>
+</ol>
+<p>Ví dụ STM32F103 chạy 72 MHz: APB1 chia 2 nên PCLK1 chỉ 36 MHz, nhưng TIM2, TIM3, TIM4 vẫn nhận 72 MHz. Ai lấy 36 MHz để tính sẽ ra thời gian ngắt sai gấp đôi.</p>
+
+<h2>Công thức thời gian ngắt</h2>
+<pre>T_ngắt = (PSC + 1) × (ARR + 1) / f_TIM</pre>
+<p>Timer chia clock qua <strong>Prescaler (PSC)</strong>, rồi đếm từ 0 tới <strong>Counter Period (ARR)</strong>. Mỗi lần đếm tràn, timer sinh ngắt update. Cộng 1 vào PSC và ARR vì cả hai đều đếm từ 0.</p>
+
+<h2>Ví dụ: ngắt mỗi 1 ms trên Blue Pill</h2>
+<p>TIM2 nhận 72 MHz. Chọn PSC = 71 thì timer đếm 1 MHz (1 µs mỗi tick). Cần 1000 tick cho 1 ms nên ARR = 999.</p>
+<pre>(71 + 1) × (999 + 1) / 72 000 000 = 0.001 s = 1 ms</pre>
+<p>Trong CubeMX nhớ bật <em>NVIC Settings → TIM2 global interrupt</em>, sau đó gọi <code>HAL_TIM_Base_Start_IT(&amp;htim2)</code> và viết code trong <code>HAL_TIM_PeriodElapsedCallback()</code>.</p>
+
+<h2>Timer 16-bit và 32-bit</h2>
+<p>PSC và ARR của hầu hết timer là 16-bit (0 – 65535). Với 72 MHz, timer 16-bit ngắt chậm nhất khoảng 59.6 giây một lần. TIM2 và TIM5 trên F401, F411, F407 có ARR 32-bit nên đếm được lâu hơn rất nhiều.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/hoc-lap-trinh-mcu/stm32/">Chuyên mục Lập trình STM32</a></li>
+</ul>

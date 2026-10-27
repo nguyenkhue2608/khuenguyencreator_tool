@@ -1,7 +1,14 @@
 {
-  "stm32-timer-pwm": {
-    "title": "STM32 Timer PWM Calculator",
-    "h1": "Tính PSC, ARR, CCR cho Timer và PWM STM32",
-    "intro": "Nhập clock timer và tần số mong muốn, công cụ trả về giá trị Prescaler, Counter Period và Pulse để điền vào STM32CubeMX hoặc code HAL."
+  "stm32-timer-interrupt": {
+    "title": "STM32 Timer Interrupt Calculator",
+    "h1": "Tính thời gian ngắt Timer STM32",
+    "intro": "Chọn chip và timer, nhập thời gian muốn ngắt, công cụ trả về Prescaler và Counter Period để điền vào STM32CubeMX, kèm clock tree từ SYSCLK tới timer.",
+    "deps": ["stm32-clock"]
+  },
+  "stm32-pwm": {
+    "title": "STM32 PWM Calculator",
+    "h1": "Tính tần số và duty PWM STM32",
+    "intro": "Chọn chip và timer, nhập tần số PWM và duty, công cụ trả về Prescaler, Counter Period và Pulse để điền vào STM32CubeMX, kèm clock tree từ SYSCLK tới timer.",
+    "deps": ["stm32-clock"]
   }
 }

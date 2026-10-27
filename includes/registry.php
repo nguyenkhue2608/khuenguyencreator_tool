@@ -2,6 +2,7 @@
 /**
  * Danh sách tool. Thêm tool mới: thêm một dòng ở đây và tạo assets/tools/<slug>/tool.js (+ tool.css nếu cần).
  * status: 'live' = đã xong, hiện trên Hub; 'planned' = chưa làm, Hub hiện "Sắp ra mắt".
+ * deps: phần dùng chung trong assets/common/<dep>.js|.css, nạp trước tool.js.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -33,7 +34,8 @@ function kn_tools_registry() {
 		'opamp-gain'             => array( 'group' => 'phan-cung', 'title' => 'Hệ số khuếch đại Op-amp', 'status' => 'planned' ),
 
 		// 2. MCU
-		'stm32-timer-pwm'        => array( 'group' => 'mcu', 'title' => 'STM32 Timer / PWM calculator', 'status' => 'live' ),
+		'stm32-timer-interrupt'  => array( 'group' => 'mcu', 'title' => 'STM32: tính thời gian ngắt Timer', 'status' => 'live', 'deps' => array( 'stm32-clock' ) ),
+		'stm32-pwm'              => array( 'group' => 'mcu', 'title' => 'STM32: tính tần số và duty PWM', 'status' => 'live', 'deps' => array( 'stm32-clock' ) ),
 		'pinout'                 => array( 'group' => 'mcu', 'title' => 'Pinout viewer', 'status' => 'planned' ),
 
 		// 3. Dữ liệu / giao thức

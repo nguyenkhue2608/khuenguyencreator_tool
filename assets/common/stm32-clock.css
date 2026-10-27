@@ -1,0 +1,153 @@
+/* Style dùng chung cho các tool STM32 (timer interrupt, PWM).
+   Layout: lưới [nhập liệu | kết quả] -> hình clock tree -> hình bên trong timer -> code. */
+
+.kn-stm__body {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+	gap: 24px;
+	padding: 20px;
+}
+
+.kn-stm__inputs { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.kn-stm__field { display: grid; gap: 6px; min-width: 0; }
+.kn-stm__field > label {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--kn-ink);
+	margin: 0;
+}
+.kn-stm__row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.kn-stm__pair { display: grid; grid-template-columns: minmax(0, 1fr) 88px; gap: 8px; }
+
+.kn-stm__clock {
+	background: var(--kn-panel);
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	padding: 10px 12px;
+	display: grid;
+	gap: 10px;
+}
+.kn-stm__clock-sum {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	font-family: var(--kn-mono);
+	font-size: 12px;
+	color: var(--kn-muted);
+}
+.kn-stm__clock-edit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+.kn-stm__link {
+	border: none;
+	background: none;
+	padding: 0;
+	min-height: 0;
+	height: auto;
+	line-height: 1.4;
+	color: var(--kn-accent-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* ---- Kết quả ---- */
+.kn-stm__results { display: grid; gap: 14px; align-content: start; min-width: 0; }
+
+.kn-stm__regs { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
+.kn-stm__reg {
+	border: 1px solid var(--kn-line);
+	border-radius: 8px;
+	padding: 10px 12px;
+	display: grid;
+	gap: 2px;
+	min-width: 0;
+}
+.kn-stm__reg-name {
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	color: var(--kn-muted);
+}
+.kn-stm__reg-val {
+	font-family: var(--kn-mono);
+	font-variant-numeric: tabular-nums;
+	font-size: 26px;
+	font-weight: 700;
+	color: var(--kn-accent-ink);
+	line-height: 1.2;
+	overflow-wrap: anywhere;
+}
+
+.kn-stm__stats { margin: 0; border-top: 1px solid var(--kn-line); }
+.kn-stm__stats > div {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--kn-line);
+	font-size: 14px;
+}
+.kn-stm__stats dt { color: var(--kn-muted); margin: 0; font-weight: 400; }
+.kn-stm__stats dd { margin: 0; font-family: var(--kn-mono); font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+
+.kn-stm__msg { font-size: 14px; line-height: 1.5; border-radius: 6px; padding: 10px 12px; }
+.kn-stm__msg.is-warn { background: var(--kn-warn-soft); color: var(--kn-warn); }
+.kn-stm__msg.is-error { background: var(--kn-error-soft); color: var(--kn-error); }
+
+.kn-stm__wave { border: 1px solid var(--kn-line); border-radius: 8px; padding: 8px 8px 4px; }
+.kn-stm__wave svg { display: block; width: 100%; height: auto; }
+
+/* ---- Hình + code ---- */
+.kn-stm__more { border-top: 1px solid var(--kn-line); padding: 20px; display: grid; gap: 22px; }
+.kn-stm__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.kn-stm__head h3 { margin: 0; font-size: 16px; }
+.kn-stm__hint { font-size: 12px; color: var(--kn-muted); margin: 0; line-height: 1.45; }
+
+.kn-stm__figure { overflow-x: auto; border: 1px solid var(--kn-line); border-radius: 8px; padding: 12px; background: var(--kn-paper); }
+.kn-stm__figure svg { display: block; width: 100%; min-width: 680px; height: auto; }
+
+.kn-stm__btn {
+	height: 32px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	line-height: 30px;
+	min-height: 0;
+	cursor: pointer;
+}
+.kn-stm__btn:hover { border-color: var(--kn-accent); color: var(--kn-accent-ink); }
+
+.kn-stm__code {
+	margin: 0;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #14201d;
+	color: #d7e7e1;
+	font-family: var(--kn-mono);
+	font-size: 13px;
+	line-height: 1.6;
+	overflow-x: auto;
+	white-space: pre;
+}
+.kn-stm__code .c { color: #8fa9a1; }
+
+@media (max-width: 849px) {
+	.kn-stm__body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+	.kn-stm__body,
+	.kn-stm__more { padding: 16px; }
+	.kn-stm__reg-val { font-size: 21px; }
+}
