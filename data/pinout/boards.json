@@ -1,0 +1,27 @@
+{
+  "_note": "Danh sách board cho Pinout viewer. Mỗi board có file dữ liệu riêng data/pinout/<id>.json (chưa tạo). priority: 1 = làm trước.",
+  "boards": [
+    { "id": "esp32-devkit-v1",     "name": "ESP32 DevKit V1 (30/38 chân)",  "family": "ESP32",        "priority": 1 },
+    { "id": "esp8266-nodemcu",     "name": "ESP8266 NodeMCU",               "family": "ESP32",        "priority": 1 },
+    { "id": "stm32-blue-pill",     "name": "STM32F103C8 Blue Pill",         "family": "STM32",        "priority": 1 },
+    { "id": "arduino-uno",         "name": "Arduino Uno R3",                "family": "Arduino",      "priority": 1 },
+    { "id": "arduino-nano",        "name": "Arduino Nano",                  "family": "Arduino",      "priority": 1 },
+    { "id": "at89s52-dip40",       "name": "8051 AT89S52 (DIP-40)",         "family": "8051",         "priority": 1 },
+
+    { "id": "esp32-s3-devkitc",    "name": "ESP32-S3 DevKitC-1",            "family": "ESP32",        "priority": 2 },
+    { "id": "esp32-c3-supermini",  "name": "ESP32-C3 SuperMini",            "family": "ESP32",        "priority": 2 },
+    { "id": "esp32-cam",           "name": "ESP32-CAM",                     "family": "ESP32",        "priority": 2 },
+    { "id": "wemos-d1-mini",       "name": "Wemos D1 mini",                 "family": "ESP32",        "priority": 2 },
+    { "id": "stm32-black-pill",    "name": "STM32F401/F411 Black Pill",     "family": "STM32",        "priority": 2 },
+    { "id": "stm32f407-discovery", "name": "STM32F407 Discovery",           "family": "STM32",        "priority": 2 },
+    { "id": "arduino-mega-2560",   "name": "Arduino Mega 2560",             "family": "Arduino",      "priority": 2 },
+    { "id": "rpi-pico",            "name": "Raspberry Pi Pico / Pico W",    "family": "Raspberry Pi", "priority": 2 },
+    { "id": "rpi-gpio-40",         "name": "Raspberry Pi GPIO 40 chân",     "family": "Raspberry Pi", "priority": 2 },
+
+    { "id": "nucleo-f103rb",       "name": "Nucleo-F103RB",                 "family": "STM32",        "priority": 3 },
+    { "id": "nucleo-f401re",       "name": "Nucleo-F401RE / F411RE",        "family": "STM32",        "priority": 3 },
+    { "id": "arduino-pro-mini",    "name": "Arduino Pro Mini",              "family": "Arduino",      "priority": 3 },
+    { "id": "n76e885",             "name": "Nuvoton N76E885 / N76E003",     "family": "8051",         "priority": 3 },
+    { "id": "stm8s103f3",          "name": "STM8S103F3 board",              "family": "STM8",         "priority": 3 }
+  ]
+}
