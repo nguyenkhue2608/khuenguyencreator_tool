@@ -1,0 +1,815 @@
+{
+  "id": "nucleo-f401re",
+  "name": "Nucleo-F401RE",
+  "mcu": "STM32F401RET6",
+  "family": "STM32",
+  "style": "nucleo",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, phần ST-LINK (cổng mini USB) ở phía trên. Header Morpho CN7 bên trái, CN10 bên phải, chân 1 ở góc trên bên trái mỗi header",
+  "shape": {
+    "w": 70,
+    "h": 82.5,
+    "rowGap": 0,
+    "r": 2,
+    "numbers": false,
+    "parts": [
+      {
+        "type": "usb",
+        "x": 31,
+        "y": -2.2,
+        "w": 8,
+        "h": 7
+      },
+      {
+        "type": "chip",
+        "x": 24,
+        "y": 7,
+        "w": 7,
+        "h": 7,
+        "pins": 8,
+        "label": "ST-LINK",
+        "fs": 6.5
+      },
+      {
+        "type": "text",
+        "x": 35,
+        "y": 21.5,
+        "fs": 8,
+        "label": "- - - - - - - - - - - - - - - - - -"
+      },
+      {
+        "type": "button",
+        "x": 18,
+        "y": 24,
+        "w": 5.5,
+        "h": 5.5,
+        "label": "USER"
+      },
+      {
+        "type": "button",
+        "x": 46.5,
+        "y": 24,
+        "w": 5.5,
+        "h": 5.5,
+        "label": "RESET"
+      },
+      {
+        "type": "led",
+        "x": 33.6,
+        "y": 26,
+        "w": 2,
+        "h": 1.1,
+        "color": "#3ddc84"
+      },
+      {
+        "type": "text",
+        "x": 34.6,
+        "y": 29.6,
+        "fs": 6.5,
+        "label": "LD2"
+      },
+      {
+        "type": "chip",
+        "x": 30,
+        "y": 50,
+        "w": 10,
+        "h": 10,
+        "pins": 10,
+        "label": "STM32F401RE",
+        "fs": 7
+      },
+      {
+        "type": "text",
+        "x": 5,
+        "y": 30,
+        "fs": 9,
+        "label": "CN7",
+        "weight": 700
+      },
+      {
+        "type": "text",
+        "x": 65,
+        "y": 30,
+        "fs": 9,
+        "label": "CN10",
+        "weight": 700
+      }
+    ]
+  },
+  "groups": [
+    {
+      "x": 3.81,
+      "y": 32,
+      "dir": "down",
+      "labels": "left",
+      "pins": [
+        {
+          "l": "PC10",
+          "n": 1,
+          "name": "PC10",
+          "f": [
+            "spi:SPI3_SCK",
+            "other:SDIO_D2"
+          ]
+        },
+        {
+          "l": "PC12",
+          "n": 3,
+          "name": "PC12",
+          "f": [
+            "spi:SPI3_MOSI",
+            "other:SDIO_CK"
+          ]
+        },
+        {
+          "l": "VDD",
+          "n": 5,
+          "k": "power",
+          "note": "Nguồn 3.3V của MCU"
+        },
+        {
+          "l": "BOOT0",
+          "n": 7,
+          "k": "sys",
+          "note": "Chọn chế độ khởi động"
+        },
+        {
+          "l": "NC",
+          "n": 9,
+          "k": "nc"
+        },
+        {
+          "l": "NC",
+          "n": 11,
+          "k": "nc"
+        },
+        {
+          "l": "PA13",
+          "n": 13,
+          "name": "PA13",
+          "f": [
+            "other:SWDIO"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối ST-LINK (SWDIO). Không dùng làm GPIO nếu muốn nạp và debug"
+        },
+        {
+          "l": "PA14",
+          "n": 15,
+          "name": "PA14",
+          "f": [
+            "other:SWCLK"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối ST-LINK (SWCLK). Không dùng làm GPIO nếu muốn nạp và debug"
+        },
+        {
+          "l": "PA15",
+          "n": 17,
+          "name": "PA15",
+          "f": [
+            "other:JTDI",
+            "pwm:TIM2_CH1",
+            "spi:SPI1_NSS",
+            "spi:SPI3_NSS"
+          ]
+        },
+        {
+          "l": "GND",
+          "n": 19,
+          "k": "gnd"
+        },
+        {
+          "l": "PB7",
+          "n": 21,
+          "name": "PB7",
+          "f": [
+            "i2c:I2C1_SDA",
+            "uart:USART1_RX",
+            "pwm:TIM4_CH2"
+          ]
+        },
+        {
+          "l": "PC13",
+          "n": 23,
+          "name": "PC13",
+          "f": [
+            "other:TAMPER / RTC"
+          ],
+          "note": "Nối nút USER B1 màu xanh (nhấn = LOW)"
+        },
+        {
+          "l": "PC14",
+          "n": 25,
+          "name": "PC14",
+          "f": [
+            "other:OSC32_IN"
+          ],
+          "note": "Thạch anh 32.768 kHz (LSE) trên board"
+        },
+        {
+          "l": "PC15",
+          "n": 27,
+          "name": "PC15",
+          "f": [
+            "other:OSC32_OUT"
+          ],
+          "note": "Thạch anh 32.768 kHz (LSE) trên board"
+        },
+        {
+          "l": "PH0",
+          "n": 29,
+          "name": "PH0",
+          "f": [
+            "other:OSC_IN"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nhận clock 8 MHz từ ST-LINK (MCO) qua cầu hàn, không nối header theo mặc định"
+        },
+        {
+          "l": "PH1",
+          "n": 31,
+          "name": "PH1",
+          "f": [
+            "other:OSC_OUT"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nhận clock 8 MHz từ ST-LINK (MCO) qua cầu hàn, không nối header theo mặc định"
+        },
+        {
+          "l": "VBAT",
+          "n": 33,
+          "k": "power",
+          "note": "Nguồn pin dự phòng cho RTC"
+        },
+        {
+          "l": "PC2",
+          "n": 35,
+          "name": "PC2",
+          "f": [
+            "adc:ADC1_IN12",
+            "spi:SPI2_MISO"
+          ]
+        },
+        {
+          "l": "PC3",
+          "n": 37,
+          "name": "PC3",
+          "f": [
+            "adc:ADC1_IN13",
+            "spi:SPI2_MOSI"
+          ]
+        }
+      ]
+    },
+    {
+      "x": 6.35,
+      "y": 32,
+      "dir": "down",
+      "labels": "right",
+      "align": "pad",
+      "pins": [
+        {
+          "l": "PC11",
+          "n": 2,
+          "name": "PC11",
+          "f": [
+            "spi:SPI3_MISO",
+            "other:SDIO_D3"
+          ]
+        },
+        {
+          "l": "PD2",
+          "n": 4,
+          "name": "PD2",
+          "f": [
+            "pwm:TIM3_ETR",
+            "other:SDIO_CMD"
+          ]
+        },
+        {
+          "l": "E5V",
+          "n": 6,
+          "k": "power",
+          "note": "Ngõ vào 5V ngoài (chọn bằng jumper JP5)"
+        },
+        {
+          "l": "GND",
+          "n": 8,
+          "k": "gnd"
+        },
+        {
+          "l": "NC",
+          "n": 10,
+          "k": "nc"
+        },
+        {
+          "l": "IOREF",
+          "n": 12,
+          "k": "power",
+          "note": "Mức logic của board (3.3V) cho shield"
+        },
+        {
+          "l": "RESET",
+          "n": 14,
+          "k": "sys",
+          "f": [
+            "other:NRST"
+          ],
+          "note": "Nối nút RESET B2 (đen)"
+        },
+        {
+          "l": "+3V3",
+          "n": 16,
+          "k": "power",
+          "note": "Ngõ ra 3.3V"
+        },
+        {
+          "l": "+5V",
+          "n": 18,
+          "k": "power",
+          "note": "Ngõ ra 5V"
+        },
+        {
+          "l": "GND",
+          "n": 20,
+          "k": "gnd"
+        },
+        {
+          "l": "GND",
+          "n": 22,
+          "k": "gnd"
+        },
+        {
+          "l": "VIN",
+          "n": 24,
+          "k": "power",
+          "note": "Nguồn vào 7–12V"
+        },
+        {
+          "l": "NC",
+          "n": 26,
+          "k": "nc"
+        },
+        {
+          "l": "PA0",
+          "n": 28,
+          "name": "PA0",
+          "f": [
+            "other:Arduino A0",
+            "adc:ADC1_IN0",
+            "pwm:TIM2_CH1",
+            "pwm:TIM5_CH1",
+            "uart:USART2_CTS",
+            "other:WKUP"
+          ]
+        },
+        {
+          "l": "PA1",
+          "n": 30,
+          "name": "PA1",
+          "f": [
+            "other:Arduino A1",
+            "adc:ADC1_IN1",
+            "pwm:TIM2_CH2",
+            "pwm:TIM5_CH2",
+            "uart:USART2_RTS"
+          ]
+        },
+        {
+          "l": "PA4",
+          "n": 32,
+          "name": "PA4",
+          "f": [
+            "other:Arduino A2",
+            "spi:SPI1_NSS",
+            "adc:ADC1_IN4",
+            "spi:SPI3_NSS"
+          ]
+        },
+        {
+          "l": "PB0",
+          "n": 34,
+          "name": "PB0",
+          "f": [
+            "other:Arduino A3",
+            "adc:ADC1_IN8",
+            "pwm:TIM3_CH3",
+            "pwm:TIM1_CH2N"
+          ]
+        },
+        {
+          "l": "PC1",
+          "n": 36,
+          "name": "PC1",
+          "f": [
+            "other:Arduino A4",
+            "adc:ADC1_IN11"
+          ]
+        },
+        {
+          "l": "PC0",
+          "n": 38,
+          "name": "PC0",
+          "f": [
+            "other:Arduino A5",
+            "adc:ADC1_IN10"
+          ]
+        }
+      ]
+    },
+    {
+      "x": 63.65,
+      "y": 32,
+      "dir": "down",
+      "labels": "left",
+      "align": "pad",
+      "pins": [
+        {
+          "l": "PC9",
+          "n": 1,
+          "name": "PC9",
+          "f": [
+            "pwm:TIM3_CH4",
+            "i2c:I2C3_SDA",
+            "other:MCO2"
+          ]
+        },
+        {
+          "l": "PB8",
+          "n": 3,
+          "name": "PB8",
+          "f": [
+            "other:Arduino D15",
+            "i2c:I2C1_SCL",
+            "pwm:TIM4_CH3",
+            "pwm:TIM10_CH1"
+          ]
+        },
+        {
+          "l": "PB9",
+          "n": 5,
+          "name": "PB9",
+          "f": [
+            "other:Arduino D14",
+            "i2c:I2C1_SDA",
+            "pwm:TIM4_CH4",
+            "pwm:TIM11_CH1",
+            "spi:SPI2_NSS"
+          ]
+        },
+        {
+          "l": "AVDD",
+          "n": 7,
+          "k": "power",
+          "note": "Nguồn analog"
+        },
+        {
+          "l": "GND",
+          "n": 9,
+          "k": "gnd"
+        },
+        {
+          "l": "PA5",
+          "n": 11,
+          "name": "PA5",
+          "f": [
+            "other:Arduino D13",
+            "spi:SPI1_SCK",
+            "adc:ADC1_IN5",
+            "pwm:TIM2_CH1"
+          ],
+          "note": "Nối LED xanh LD2 (sáng khi HIGH)"
+        },
+        {
+          "l": "PA6",
+          "n": 13,
+          "name": "PA6",
+          "f": [
+            "other:Arduino D12",
+            "spi:SPI1_MISO",
+            "adc:ADC1_IN6",
+            "pwm:TIM3_CH1",
+            "pwm:TIM1_BKIN"
+          ]
+        },
+        {
+          "l": "PA7",
+          "n": 15,
+          "name": "PA7",
+          "f": [
+            "other:Arduino D11",
+            "spi:SPI1_MOSI",
+            "adc:ADC1_IN7",
+            "pwm:TIM3_CH2",
+            "pwm:TIM1_CH1N"
+          ]
+        },
+        {
+          "l": "PB6",
+          "n": 17,
+          "name": "PB6",
+          "f": [
+            "other:Arduino D10",
+            "i2c:I2C1_SCL",
+            "uart:USART1_TX",
+            "pwm:TIM4_CH1"
+          ]
+        },
+        {
+          "l": "PC7",
+          "n": 19,
+          "name": "PC7",
+          "f": [
+            "other:Arduino D9",
+            "uart:USART6_RX",
+            "pwm:TIM3_CH2"
+          ]
+        },
+        {
+          "l": "PA9",
+          "n": 21,
+          "name": "PA9",
+          "f": [
+            "other:Arduino D8",
+            "uart:USART1_TX",
+            "pwm:TIM1_CH2",
+            "usb:OTG_FS_VBUS"
+          ]
+        },
+        {
+          "l": "PA8",
+          "n": 23,
+          "name": "PA8",
+          "f": [
+            "other:Arduino D7",
+            "pwm:TIM1_CH1",
+            "i2c:I2C3_SCL",
+            "other:MCO1",
+            "uart:USART1_CK"
+          ]
+        },
+        {
+          "l": "PB10",
+          "n": 25,
+          "name": "PB10",
+          "f": [
+            "other:Arduino D6",
+            "i2c:I2C2_SCL",
+            "spi:SPI2_SCK",
+            "pwm:TIM2_CH3"
+          ]
+        },
+        {
+          "l": "PB4",
+          "n": 27,
+          "name": "PB4",
+          "f": [
+            "other:Arduino D5",
+            "other:NJTRST",
+            "pwm:TIM3_CH1",
+            "spi:SPI1_MISO",
+            "spi:SPI3_MISO"
+          ]
+        },
+        {
+          "l": "PB5",
+          "n": 29,
+          "name": "PB5",
+          "f": [
+            "other:Arduino D4",
+            "pwm:TIM3_CH2",
+            "spi:SPI1_MOSI",
+            "spi:SPI3_MOSI",
+            "i2c:I2C1_SMBA"
+          ]
+        },
+        {
+          "l": "PB3",
+          "n": 31,
+          "name": "PB3",
+          "f": [
+            "other:Arduino D3",
+            "other:JTDO / SWO",
+            "pwm:TIM2_CH2",
+            "spi:SPI1_SCK",
+            "spi:SPI3_SCK"
+          ]
+        },
+        {
+          "l": "PA10",
+          "n": 33,
+          "name": "PA10",
+          "f": [
+            "other:Arduino D2",
+            "uart:USART1_RX",
+            "pwm:TIM1_CH3",
+            "usb:OTG_FS_ID"
+          ]
+        },
+        {
+          "l": "PA2",
+          "n": 35,
+          "name": "PA2",
+          "f": [
+            "other:Arduino D1",
+            "uart:USART2_TX",
+            "adc:ADC1_IN2",
+            "pwm:TIM2_CH3",
+            "pwm:TIM5_CH3",
+            "pwm:TIM9_CH1"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "USART2_TX nối ST-LINK (cổng COM ảo). Dùng làm GPIO sẽ mất Serial qua USB"
+        },
+        {
+          "l": "PA3",
+          "n": 37,
+          "name": "PA3",
+          "f": [
+            "other:Arduino D0",
+            "uart:USART2_RX",
+            "adc:ADC1_IN3",
+            "pwm:TIM2_CH4",
+            "pwm:TIM5_CH4",
+            "pwm:TIM9_CH2"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "USART2_RX nối ST-LINK (cổng COM ảo). Dùng làm GPIO sẽ mất Serial qua USB"
+        }
+      ]
+    },
+    {
+      "x": 66.19,
+      "y": 32,
+      "dir": "down",
+      "labels": "right",
+      "pins": [
+        {
+          "l": "PC8",
+          "n": 2,
+          "name": "PC8",
+          "f": [
+            "pwm:TIM3_CH3",
+            "other:SDIO_D0"
+          ]
+        },
+        {
+          "l": "PC6",
+          "n": 4,
+          "name": "PC6",
+          "f": [
+            "uart:USART6_TX",
+            "pwm:TIM3_CH1"
+          ]
+        },
+        {
+          "l": "PC5",
+          "n": 6,
+          "name": "PC5",
+          "f": [
+            "adc:ADC1_IN15"
+          ]
+        },
+        {
+          "l": "U5V",
+          "n": 8,
+          "k": "power",
+          "note": "5V từ cổng USB ST-LINK"
+        },
+        {
+          "l": "NC",
+          "n": 10,
+          "k": "nc"
+        },
+        {
+          "l": "PA12",
+          "n": 12,
+          "name": "PA12",
+          "f": [
+            "usb:USB_DP",
+            "pwm:TIM1_ETR",
+            "uart:USART6_RX",
+            "uart:USART1_RTS"
+          ]
+        },
+        {
+          "l": "PA11",
+          "n": 14,
+          "name": "PA11",
+          "f": [
+            "usb:USB_DM",
+            "pwm:TIM1_CH4",
+            "uart:USART6_TX",
+            "uart:USART1_CTS"
+          ]
+        },
+        {
+          "l": "PB12",
+          "n": 16,
+          "name": "PB12",
+          "f": [
+            "spi:SPI2_NSS",
+            "pwm:TIM1_BKIN"
+          ]
+        },
+        {
+          "l": "NC",
+          "n": 18,
+          "k": "nc"
+        },
+        {
+          "l": "GND",
+          "n": 20,
+          "k": "gnd"
+        },
+        {
+          "l": "PB2",
+          "n": 22,
+          "name": "PB2",
+          "f": [
+            "other:BOOT1"
+          ]
+        },
+        {
+          "l": "PB1",
+          "n": 24,
+          "name": "PB1",
+          "f": [
+            "adc:ADC1_IN9",
+            "pwm:TIM3_CH4",
+            "pwm:TIM1_CH3N"
+          ]
+        },
+        {
+          "l": "PB15",
+          "n": 26,
+          "name": "PB15",
+          "f": [
+            "spi:SPI2_MOSI",
+            "pwm:TIM1_CH3N"
+          ]
+        },
+        {
+          "l": "PB14",
+          "n": 28,
+          "name": "PB14",
+          "f": [
+            "spi:SPI2_MISO",
+            "pwm:TIM1_CH2N"
+          ]
+        },
+        {
+          "l": "PB13",
+          "n": 30,
+          "name": "PB13",
+          "f": [
+            "spi:SPI2_SCK",
+            "pwm:TIM1_CH1N"
+          ]
+        },
+        {
+          "l": "AGND",
+          "n": 32,
+          "k": "gnd"
+        },
+        {
+          "l": "PC4",
+          "n": 34,
+          "name": "PC4",
+          "f": [
+            "adc:ADC1_IN14"
+          ]
+        },
+        {
+          "l": "NC",
+          "n": 36,
+          "k": "nc"
+        },
+        {
+          "l": "NC",
+          "n": 38,
+          "k": "nc"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V. Header Morpho (CN7, CN10) đưa ra mọi chân của MCU; header kiểu Arduino ở giữa board nối cùng các chân, ghi ở ô \"Arduino Dx/Ax\".",
+    "PA2, PA3 (D1, D0) nối cổng COM ảo của ST-LINK nên Serial qua USB dùng hai chân này.",
+    "LED LD2 ở PA5 (D13), nút USER ở PC13.",
+    "STM32F401RE chạy tới 84 MHz, có USB OTG FS ở PA11, PA12."
+  ]
+}

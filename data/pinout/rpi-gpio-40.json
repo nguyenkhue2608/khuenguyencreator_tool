@@ -1,0 +1,322 @@
+{
+  "id": "rpi-gpio-40",
+  "name": "Raspberry Pi GPIO 40 chân",
+  "mcu": "BCM2711 / BCM2712 (Pi 4, Pi 5)",
+  "family": "Raspberry Pi",
+  "style": "header",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, header ở mép board, chân 1 (3V3, đế vuông) ở góc trên bên trái. Cột trái là chân lẻ, cột phải là chân chẵn. Áp dụng cho Pi 2, 3, 4, 5, Zero",
+  "shape": {
+    "w": 5.08,
+    "h": 50.8,
+    "rowGap": 2.54,
+    "start": 1.27,
+    "r": 0.3,
+    "numbers": false,
+    "parts": [
+      {
+        "type": "smd",
+        "x": 0.3,
+        "y": 0.3,
+        "w": 1.94,
+        "h": 1.94,
+        "fill": "#d4a017"
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "3V3",
+      "n": 1,
+      "k": "power"
+    },
+    {
+      "l": "GPIO2",
+      "n": 3,
+      "name": "BCM 2",
+      "f": [
+        "i2c:SDA1"
+      ],
+      "note": "Có điện trở kéo lên 1.8 kΩ trên board"
+    },
+    {
+      "l": "GPIO3",
+      "n": 5,
+      "name": "BCM 3",
+      "f": [
+        "i2c:SCL1"
+      ],
+      "note": "Có điện trở kéo lên 1.8 kΩ trên board"
+    },
+    {
+      "l": "GPIO4",
+      "n": 7,
+      "name": "BCM 4",
+      "f": [
+        "other:GPCLK0",
+        "other:1-Wire (mặc định)"
+      ]
+    },
+    {
+      "l": "GND",
+      "n": 9,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO17",
+      "n": 11,
+      "name": "BCM 17",
+      "f": [
+        "spi:SPI1_CE1"
+      ]
+    },
+    {
+      "l": "GPIO27",
+      "n": 13,
+      "name": "BCM 27"
+    },
+    {
+      "l": "GPIO22",
+      "n": 15,
+      "name": "BCM 22"
+    },
+    {
+      "l": "3V3",
+      "n": 17,
+      "k": "power"
+    },
+    {
+      "l": "GPIO10",
+      "n": 19,
+      "name": "BCM 10",
+      "f": [
+        "spi:SPI0_MOSI"
+      ]
+    },
+    {
+      "l": "GPIO9",
+      "n": 21,
+      "name": "BCM 9",
+      "f": [
+        "spi:SPI0_MISO"
+      ]
+    },
+    {
+      "l": "GPIO11",
+      "n": 23,
+      "name": "BCM 11",
+      "f": [
+        "spi:SPI0_SCLK"
+      ]
+    },
+    {
+      "l": "GND",
+      "n": 25,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO0",
+      "n": 27,
+      "name": "BCM 0",
+      "f": [
+        "i2c:ID_SD (EEPROM HAT)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Dành cho EEPROM nhận dạng HAT, không nên dùng"
+    },
+    {
+      "l": "GPIO5",
+      "n": 29,
+      "name": "BCM 5",
+      "f": [
+        "other:GPCLK1"
+      ]
+    },
+    {
+      "l": "GPIO6",
+      "n": 31,
+      "name": "BCM 6",
+      "f": [
+        "other:GPCLK2"
+      ]
+    },
+    {
+      "l": "GPIO13",
+      "n": 33,
+      "name": "BCM 13",
+      "f": [
+        "pwm:PWM1"
+      ]
+    },
+    {
+      "l": "GPIO19",
+      "n": 35,
+      "name": "BCM 19",
+      "f": [
+        "pwm:PWM1",
+        "spi:SPI1_MISO",
+        "other:PCM_FS"
+      ]
+    },
+    {
+      "l": "GPIO26",
+      "n": 37,
+      "name": "BCM 26"
+    },
+    {
+      "l": "GND",
+      "n": 39,
+      "k": "gnd"
+    }
+  ],
+  "right": [
+    {
+      "l": "5V",
+      "n": 2,
+      "k": "power"
+    },
+    {
+      "l": "5V",
+      "n": 4,
+      "k": "power"
+    },
+    {
+      "l": "GND",
+      "n": 6,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO14",
+      "n": 8,
+      "name": "BCM 14",
+      "f": [
+        "uart:TXD0"
+      ],
+      "note": "UART chính, bật trong raspi-config"
+    },
+    {
+      "l": "GPIO15",
+      "n": 10,
+      "name": "BCM 15",
+      "f": [
+        "uart:RXD0"
+      ],
+      "note": "UART chính, bật trong raspi-config"
+    },
+    {
+      "l": "GPIO18",
+      "n": 12,
+      "name": "BCM 18",
+      "f": [
+        "pwm:PWM0",
+        "other:PCM_CLK",
+        "spi:SPI1_CE0"
+      ]
+    },
+    {
+      "l": "GND",
+      "n": 14,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO23",
+      "n": 16,
+      "name": "BCM 23"
+    },
+    {
+      "l": "GPIO24",
+      "n": 18,
+      "name": "BCM 24"
+    },
+    {
+      "l": "GND",
+      "n": 20,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO25",
+      "n": 22,
+      "name": "BCM 25"
+    },
+    {
+      "l": "GPIO8",
+      "n": 24,
+      "name": "BCM 8",
+      "f": [
+        "spi:SPI0_CE0"
+      ]
+    },
+    {
+      "l": "GPIO7",
+      "n": 26,
+      "name": "BCM 7",
+      "f": [
+        "spi:SPI0_CE1"
+      ]
+    },
+    {
+      "l": "GPIO1",
+      "n": 28,
+      "name": "BCM 1",
+      "f": [
+        "i2c:ID_SC (EEPROM HAT)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Dành cho EEPROM nhận dạng HAT, không nên dùng"
+    },
+    {
+      "l": "GND",
+      "n": 30,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO12",
+      "n": 32,
+      "name": "BCM 12",
+      "f": [
+        "pwm:PWM0"
+      ]
+    },
+    {
+      "l": "GND",
+      "n": 34,
+      "k": "gnd"
+    },
+    {
+      "l": "GPIO16",
+      "n": 36,
+      "name": "BCM 16",
+      "f": [
+        "spi:SPI1_CE2"
+      ]
+    },
+    {
+      "l": "GPIO20",
+      "n": 38,
+      "name": "BCM 20",
+      "f": [
+        "spi:SPI1_MOSI",
+        "other:PCM_DIN"
+      ]
+    },
+    {
+      "l": "GPIO21",
+      "n": 40,
+      "name": "BCM 21",
+      "f": [
+        "spi:SPI1_SCLK",
+        "other:PCM_DOUT"
+      ]
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V, các chân KHÔNG chịu được 5V. Cấp 5V vào GPIO có thể làm hỏng Raspberry Pi.",
+    "Tên GPIO trong bảng là số BCM (dùng trong gpiozero, RPi.GPIO chế độ BCM, libgpiod). Số chân vật lý ghi ở cột \"Số\".",
+    "Raspberry Pi không có ADC: muốn đọc analog cần thêm chip như ADS1115 hoặc MCP3008.",
+    "Bật I2C, SPI, UART trong raspi-config. Pi 4 và Pi 5 có thêm UART, I2C, SPI phụ qua dtoverlay."
+  ]
+}

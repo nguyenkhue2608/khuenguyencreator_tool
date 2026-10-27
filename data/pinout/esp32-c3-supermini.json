@@ -1,0 +1,211 @@
+{
+  "id": "esp32-c3-supermini",
+  "name": "ESP32-C3 SuperMini",
+  "mcu": "ESP32-C3FH4",
+  "family": "ESP32",
+  "style": "black",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, cổng USB-C ở phía trên. Số GPIO in ở mặt dưới board; một số bản clone sắp xếp khác, hãy đối chiếu chữ in",
+  "shape": {
+    "w": 18,
+    "h": 22.6,
+    "rowGap": 15.24,
+    "start": 2.5,
+    "r": 1,
+    "parts": [
+      {
+        "type": "usb",
+        "x": 5,
+        "y": -1.4,
+        "w": 8,
+        "h": 6.6
+      },
+      {
+        "type": "button",
+        "x": 3.2,
+        "y": 6.4,
+        "w": 2.8,
+        "h": 2.8,
+        "label": "BOOT"
+      },
+      {
+        "type": "button",
+        "x": 12,
+        "y": 6.4,
+        "w": 2.8,
+        "h": 2.8,
+        "label": "RST"
+      },
+      {
+        "type": "chip",
+        "x": 6.5,
+        "y": 11,
+        "w": 5,
+        "h": 5,
+        "pins": 5,
+        "label": "C3",
+        "fs": 9
+      },
+      {
+        "type": "led",
+        "x": 13.6,
+        "y": 13,
+        "w": 1.6,
+        "h": 0.9,
+        "color": "#2f7bff"
+      },
+      {
+        "type": "smd",
+        "x": 5.6,
+        "y": 18.6,
+        "w": 6.8,
+        "h": 2.4,
+        "fill": "#d9d2bd"
+      },
+      {
+        "type": "text",
+        "x": 9,
+        "y": 22.3,
+        "fs": 6.5,
+        "label": "ANT"
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nguồn 5V từ USB-C, hoặc cấp 5V vào"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "3.3",
+      "k": "power",
+      "note": "Ngõ ra 3.3V từ LDO"
+    },
+    {
+      "l": "4",
+      "name": "GPIO4",
+      "f": [
+        "spi:SCK",
+        "adc:ADC1_CH4",
+        "other:MTMS (JTAG)"
+      ]
+    },
+    {
+      "l": "3",
+      "name": "GPIO3",
+      "f": [
+        "adc:ADC1_CH3"
+      ]
+    },
+    {
+      "l": "2",
+      "name": "GPIO2",
+      "f": [
+        "adc:ADC1_CH2"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping: phải HIGH hoặc để trống khi khởi động"
+    },
+    {
+      "l": "1",
+      "name": "GPIO1",
+      "f": [
+        "adc:ADC1_CH1",
+        "other:XTAL_32K_N"
+      ]
+    },
+    {
+      "l": "0",
+      "name": "GPIO0",
+      "f": [
+        "adc:ADC1_CH0",
+        "other:XTAL_32K_P"
+      ]
+    }
+  ],
+  "right": [
+    {
+      "l": "5",
+      "name": "GPIO5",
+      "f": [
+        "spi:MISO",
+        "adc:ADC2_CH0",
+        "other:MTDI (JTAG)"
+      ],
+      "note": "ADC2 không đọc được khi đang dùng WiFi"
+    },
+    {
+      "l": "6",
+      "name": "GPIO6",
+      "f": [
+        "spi:MOSI",
+        "other:MTCK (JTAG)"
+      ]
+    },
+    {
+      "l": "7",
+      "name": "GPIO7",
+      "f": [
+        "spi:SS",
+        "other:MTDO (JTAG)"
+      ]
+    },
+    {
+      "l": "8",
+      "name": "GPIO8",
+      "f": [
+        "i2c:SDA",
+        "other:LED onboard"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping, nối LED xanh (sáng khi LOW). Phải HIGH khi nạp code qua UART"
+    },
+    {
+      "l": "9",
+      "name": "GPIO9",
+      "f": [
+        "i2c:SCL",
+        "other:BOOT (nút)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping nối nút BOOT: giữ LOW khi khởi động để vào chế độ nạp"
+    },
+    {
+      "l": "10",
+      "name": "GPIO10"
+    },
+    {
+      "l": "20",
+      "name": "GPIO20",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "UART0, xuất log khi khởi động"
+    },
+    {
+      "l": "21",
+      "name": "GPIO21",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "UART0, xuất log khi khởi động"
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V, các chân không chịu được 5V.",
+    "Mọi GPIO đều xuất PWM (LEDC 6 kênh) và có ngắt. I2C, SPI gán được sang chân khác; bảng trên là chân mặc định của Arduino core.",
+    "Nạp code qua USB-C dùng USB-Serial/JTAG tích hợp (GPIO18, GPIO19, không đưa ra header). Nếu không nhận cổng: giữ BOOT, nhấn RST rồi thả.",
+    "Anten gốm nhỏ: tránh đặt kim loại hoặc dây dẫn sát đầu anten để WiFi ổn định."
+  ]
+}

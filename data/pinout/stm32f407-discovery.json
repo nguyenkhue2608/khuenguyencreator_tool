@@ -1,0 +1,1014 @@
+{
+  "id": "stm32f407-discovery",
+  "name": "STM32F407 Discovery",
+  "mcu": "STM32F407VGT6",
+  "family": "STM32",
+  "style": "discovery",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, cổng mini USB (ST-LINK) ở phía trên. Header P1 bên trái, P2 bên phải, chân 1 ở góc trên. Số chân là số trên header P1/P2",
+  "shape": {
+    "w": 66,
+    "h": 97,
+    "rowGap": 0,
+    "r": 2,
+    "numbers": false,
+    "parts": [
+      {
+        "type": "usb",
+        "x": 29,
+        "y": -2.2,
+        "w": 8,
+        "h": 7
+      },
+      {
+        "type": "chip",
+        "x": 23,
+        "y": 8,
+        "w": 7,
+        "h": 7,
+        "pins": 8,
+        "label": "ST-LINK",
+        "fs": 6.5
+      },
+      {
+        "type": "chip",
+        "x": 26,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "pins": 14,
+        "label": "STM32\nF407VGT6",
+        "fs": 9
+      },
+      {
+        "type": "button",
+        "x": 18,
+        "y": 82.5,
+        "w": 6,
+        "h": 6,
+        "label": "USER"
+      },
+      {
+        "type": "button",
+        "x": 42,
+        "y": 82.5,
+        "w": 6,
+        "h": 6,
+        "label": "RESET"
+      },
+      {
+        "type": "usb",
+        "x": 22,
+        "y": 92,
+        "w": 7.5,
+        "h": 5.6
+      },
+      {
+        "type": "jack",
+        "x": 37,
+        "y": 88.5,
+        "w": 7,
+        "h": 9.5
+      },
+      {
+        "type": "text",
+        "x": 7.3,
+        "y": 15.5,
+        "fs": 10,
+        "label": "P1",
+        "weight": 700
+      },
+      {
+        "type": "text",
+        "x": 61.7,
+        "y": 15.5,
+        "fs": 10,
+        "label": "P2",
+        "weight": 700
+      }
+    ]
+  },
+  "groups": [
+    {
+      "x": 3.0,
+      "y": 18,
+      "dir": "down",
+      "labels": "left",
+      "pins": [
+        {
+          "l": "GND",
+          "n": 1,
+          "k": "gnd"
+        },
+        {
+          "l": "VDD",
+          "n": 3,
+          "k": "power",
+          "note": "Nguồn 3V của board"
+        },
+        {
+          "l": "GND",
+          "n": 5,
+          "k": "gnd"
+        },
+        {
+          "l": "PC1",
+          "n": 7,
+          "name": "PC1",
+          "f": [
+            "adc:ADC123_IN11"
+          ]
+        },
+        {
+          "l": "PC3",
+          "n": 9,
+          "name": "PC3",
+          "f": [
+            "adc:ADC123_IN13",
+            "spi:SPI2_MOSI"
+          ],
+          "note": "Nối micro MP45DT02 (DOUT)"
+        },
+        {
+          "l": "PA1",
+          "n": 11,
+          "name": "PA1",
+          "f": [
+            "adc:ADC123_IN1",
+            "pwm:TIM2_CH2",
+            "pwm:TIM5_CH2",
+            "uart:UART4_RX"
+          ]
+        },
+        {
+          "l": "PA3",
+          "n": 13,
+          "name": "PA3",
+          "f": [
+            "uart:USART2_RX",
+            "adc:ADC123_IN3",
+            "pwm:TIM2_CH4",
+            "pwm:TIM9_CH2"
+          ]
+        },
+        {
+          "l": "PA5",
+          "n": 15,
+          "name": "PA5",
+          "f": [
+            "spi:SPI1_SCK",
+            "dac:DAC_OUT2",
+            "adc:ADC12_IN5",
+            "pwm:TIM2_CH1"
+          ],
+          "note": "Nối cảm biến gia tốc (SPI1_SCK)"
+        },
+        {
+          "l": "PA7",
+          "n": 17,
+          "name": "PA7",
+          "f": [
+            "spi:SPI1_MOSI",
+            "adc:ADC12_IN7",
+            "pwm:TIM3_CH2",
+            "pwm:TIM14_CH1"
+          ],
+          "note": "Nối cảm biến gia tốc (SPI1_MOSI)"
+        },
+        {
+          "l": "PC5",
+          "n": 19,
+          "name": "PC5",
+          "f": [
+            "adc:ADC12_IN15"
+          ]
+        },
+        {
+          "l": "PB1",
+          "n": 21,
+          "name": "PB1",
+          "f": [
+            "adc:ADC12_IN9",
+            "pwm:TIM3_CH4",
+            "pwm:TIM1_CH3N"
+          ]
+        },
+        {
+          "l": "GND",
+          "n": 23,
+          "k": "gnd"
+        },
+        {
+          "l": "PE7",
+          "n": 25,
+          "name": "PE7",
+          "f": [
+            "pwm:TIM1_ETR"
+          ]
+        },
+        {
+          "l": "PE9",
+          "n": 27,
+          "name": "PE9",
+          "f": [
+            "pwm:TIM1_CH1"
+          ]
+        },
+        {
+          "l": "PE11",
+          "n": 29,
+          "name": "PE11",
+          "f": [
+            "pwm:TIM1_CH2"
+          ]
+        },
+        {
+          "l": "PE13",
+          "n": 31,
+          "name": "PE13",
+          "f": [
+            "pwm:TIM1_CH3"
+          ]
+        },
+        {
+          "l": "PE15",
+          "n": 33,
+          "name": "PE15",
+          "f": [
+            "pwm:TIM1_BKIN"
+          ]
+        },
+        {
+          "l": "PB11",
+          "n": 35,
+          "name": "PB11",
+          "f": [
+            "i2c:I2C2_SDA",
+            "uart:USART3_RX",
+            "pwm:TIM2_CH4"
+          ]
+        },
+        {
+          "l": "PB13",
+          "n": 37,
+          "name": "PB13",
+          "f": [
+            "spi:SPI2_SCK",
+            "usb:CAN2_TX",
+            "pwm:TIM1_CH1N"
+          ]
+        },
+        {
+          "l": "PB15",
+          "n": 39,
+          "name": "PB15",
+          "f": [
+            "spi:SPI2_MOSI",
+            "pwm:TIM1_CH3N",
+            "pwm:TIM12_CH2"
+          ]
+        },
+        {
+          "l": "PD9",
+          "n": 41,
+          "name": "PD9",
+          "f": [
+            "uart:USART3_RX"
+          ]
+        },
+        {
+          "l": "PD11",
+          "n": 43,
+          "name": "PD11",
+          "f": [
+            "uart:USART3_CTS"
+          ]
+        },
+        {
+          "l": "PD13",
+          "n": 45,
+          "name": "PD13",
+          "f": [
+            "pwm:TIM4_CH2",
+            "other:LED cam LD3"
+          ],
+          "note": "Nối LED cam LD3 (sáng khi HIGH)"
+        },
+        {
+          "l": "PD15",
+          "n": 47,
+          "name": "PD15",
+          "f": [
+            "pwm:TIM4_CH4",
+            "other:LED xanh dương LD6"
+          ],
+          "note": "Nối LED xanh dương LD6 (sáng khi HIGH)"
+        },
+        {
+          "l": "GND",
+          "n": 49,
+          "k": "gnd"
+        }
+      ]
+    },
+    {
+      "x": 5.54,
+      "y": 18,
+      "dir": "down",
+      "labels": "right",
+      "align": "pad",
+      "pins": [
+        {
+          "l": "GND",
+          "n": 2,
+          "k": "gnd"
+        },
+        {
+          "l": "VDD",
+          "n": 4,
+          "k": "power",
+          "note": "Nguồn 3V của board"
+        },
+        {
+          "l": "NRST",
+          "n": 6,
+          "k": "sys",
+          "f": [
+            "other:RESET"
+          ],
+          "note": "Nối nút RESET (đen)"
+        },
+        {
+          "l": "PC0",
+          "n": 8,
+          "name": "PC0",
+          "f": [
+            "adc:ADC123_IN10"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Điều khiển công tắc nguồn USB OTG. Nên tránh dùng"
+        },
+        {
+          "l": "PC2",
+          "n": 10,
+          "name": "PC2",
+          "f": [
+            "adc:ADC123_IN12",
+            "spi:SPI2_MISO"
+          ]
+        },
+        {
+          "l": "PA0",
+          "n": 12,
+          "name": "PA0",
+          "f": [
+            "adc:ADC123_IN0",
+            "pwm:TIM2_CH1",
+            "pwm:TIM5_CH1",
+            "uart:UART4_TX",
+            "other:WKUP"
+          ],
+          "note": "Nối nút USER (B1) màu xanh, nhấn = HIGH"
+        },
+        {
+          "l": "PA2",
+          "n": 14,
+          "name": "PA2",
+          "f": [
+            "uart:USART2_TX",
+            "adc:ADC123_IN2",
+            "pwm:TIM2_CH3",
+            "pwm:TIM9_CH1"
+          ]
+        },
+        {
+          "l": "PA4",
+          "n": 16,
+          "name": "PA4",
+          "f": [
+            "dac:DAC_OUT1",
+            "spi:SPI1_NSS",
+            "adc:ADC12_IN4",
+            "spi:I2S3_WS"
+          ],
+          "note": "Nối chip âm thanh CS43L22 (I2S3_WS)"
+        },
+        {
+          "l": "PA6",
+          "n": 18,
+          "name": "PA6",
+          "f": [
+            "spi:SPI1_MISO",
+            "adc:ADC12_IN6",
+            "pwm:TIM3_CH1",
+            "pwm:TIM13_CH1"
+          ],
+          "note": "Nối cảm biến gia tốc (SPI1_MISO)"
+        },
+        {
+          "l": "PC4",
+          "n": 20,
+          "name": "PC4",
+          "f": [
+            "adc:ADC12_IN14"
+          ]
+        },
+        {
+          "l": "PB0",
+          "n": 22,
+          "name": "PB0",
+          "f": [
+            "adc:ADC12_IN8",
+            "pwm:TIM3_CH3",
+            "pwm:TIM1_CH2N"
+          ]
+        },
+        {
+          "l": "PB2",
+          "n": 24,
+          "name": "PB2",
+          "f": [
+            "other:BOOT1"
+          ]
+        },
+        {
+          "l": "PE8",
+          "n": 26,
+          "name": "PE8",
+          "f": [
+            "pwm:TIM1_CH1N"
+          ]
+        },
+        {
+          "l": "PE10",
+          "n": 28,
+          "name": "PE10",
+          "f": [
+            "pwm:TIM1_CH2N"
+          ]
+        },
+        {
+          "l": "PE12",
+          "n": 30,
+          "name": "PE12",
+          "f": [
+            "pwm:TIM1_CH3N"
+          ]
+        },
+        {
+          "l": "PE14",
+          "n": 32,
+          "name": "PE14",
+          "f": [
+            "pwm:TIM1_CH4"
+          ]
+        },
+        {
+          "l": "PB10",
+          "n": 34,
+          "name": "PB10",
+          "f": [
+            "i2c:I2C2_SCL",
+            "uart:USART3_TX",
+            "spi:SPI2_SCK",
+            "pwm:TIM2_CH3"
+          ],
+          "note": "Nối micro MP45DT02 (CLK)"
+        },
+        {
+          "l": "PB12",
+          "n": 36,
+          "name": "PB12",
+          "f": [
+            "spi:SPI2_NSS",
+            "usb:CAN2_RX",
+            "pwm:TIM1_BKIN"
+          ]
+        },
+        {
+          "l": "PB14",
+          "n": 38,
+          "name": "PB14",
+          "f": [
+            "spi:SPI2_MISO",
+            "pwm:TIM1_CH2N",
+            "pwm:TIM12_CH1"
+          ]
+        },
+        {
+          "l": "PD8",
+          "n": 40,
+          "name": "PD8",
+          "f": [
+            "uart:USART3_TX"
+          ]
+        },
+        {
+          "l": "PD10",
+          "n": 42,
+          "name": "PD10",
+          "f": [
+            "uart:USART3_CK"
+          ]
+        },
+        {
+          "l": "PD12",
+          "n": 44,
+          "name": "PD12",
+          "f": [
+            "pwm:TIM4_CH1",
+            "other:LED xanh lá LD4"
+          ],
+          "note": "Nối LED xanh lá LD4 (sáng khi HIGH)"
+        },
+        {
+          "l": "PD14",
+          "n": 46,
+          "name": "PD14",
+          "f": [
+            "pwm:TIM4_CH3",
+            "other:LED đỏ LD5"
+          ],
+          "note": "Nối LED đỏ LD5 (sáng khi HIGH)"
+        },
+        {
+          "l": "NC",
+          "n": 48,
+          "k": "nc",
+          "note": "Không kết nối"
+        },
+        {
+          "l": "GND",
+          "n": 50,
+          "k": "gnd"
+        }
+      ]
+    },
+    {
+      "x": 60.46,
+      "y": 18,
+      "dir": "down",
+      "labels": "left",
+      "align": "pad",
+      "pins": [
+        {
+          "l": "GND",
+          "n": 1,
+          "k": "gnd"
+        },
+        {
+          "l": "5V",
+          "n": 3,
+          "k": "power"
+        },
+        {
+          "l": "3V",
+          "n": 5,
+          "k": "power",
+          "note": "Nguồn 3V của board"
+        },
+        {
+          "l": "PH0",
+          "n": 7,
+          "name": "PH0",
+          "f": [
+            "other:OSC_IN"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối thạch anh 8 MHz"
+        },
+        {
+          "l": "PC14",
+          "n": 9,
+          "name": "PC14",
+          "f": [
+            "other:OSC32_IN"
+          ]
+        },
+        {
+          "l": "PE6",
+          "n": 11,
+          "name": "PE6",
+          "f": [
+            "pwm:TIM9_CH2"
+          ]
+        },
+        {
+          "l": "PE4",
+          "n": 13,
+          "name": "PE4"
+        },
+        {
+          "l": "PE2",
+          "n": 15,
+          "name": "PE2",
+          "f": [
+            "other:TRACECLK"
+          ]
+        },
+        {
+          "l": "PE0",
+          "n": 17,
+          "name": "PE0",
+          "f": [
+            "pwm:TIM4_ETR"
+          ],
+          "note": "Nối ngắt INT1 của cảm biến gia tốc"
+        },
+        {
+          "l": "PB8",
+          "n": 19,
+          "name": "PB8",
+          "f": [
+            "i2c:I2C1_SCL",
+            "pwm:TIM4_CH3",
+            "pwm:TIM10_CH1",
+            "usb:CAN1_RX"
+          ]
+        },
+        {
+          "l": "BOOT0",
+          "n": 21,
+          "k": "sys",
+          "note": "Chọn chế độ khởi động, mặc định kéo xuống GND"
+        },
+        {
+          "l": "PB6",
+          "n": 23,
+          "name": "PB6",
+          "f": [
+            "i2c:I2C1_SCL",
+            "uart:USART1_TX",
+            "pwm:TIM4_CH1",
+            "usb:CAN2_TX"
+          ],
+          "note": "Nối CS43L22 (I2C1_SCL)"
+        },
+        {
+          "l": "PB4",
+          "n": 25,
+          "name": "PB4",
+          "f": [
+            "other:NJTRST",
+            "pwm:TIM3_CH1",
+            "spi:SPI1_MISO",
+            "spi:SPI3_MISO"
+          ]
+        },
+        {
+          "l": "PD7",
+          "n": 27,
+          "name": "PD7",
+          "f": [
+            "uart:USART2_CK"
+          ]
+        },
+        {
+          "l": "PD5",
+          "n": 29,
+          "name": "PD5",
+          "f": [
+            "uart:USART2_TX"
+          ],
+          "note": "Báo quá dòng USB OTG"
+        },
+        {
+          "l": "PD3",
+          "n": 31,
+          "name": "PD3",
+          "f": [
+            "uart:USART2_CTS"
+          ]
+        },
+        {
+          "l": "PD1",
+          "n": 33,
+          "name": "PD1",
+          "f": [
+            "usb:CAN1_TX"
+          ]
+        },
+        {
+          "l": "PC12",
+          "n": 35,
+          "name": "PC12",
+          "f": [
+            "uart:UART5_TX",
+            "spi:SPI3_MOSI"
+          ],
+          "note": "Nối CS43L22 (I2S3_SD)"
+        },
+        {
+          "l": "PC10",
+          "n": 37,
+          "name": "PC10",
+          "f": [
+            "uart:UART4_TX",
+            "spi:SPI3_SCK",
+            "uart:USART3_TX"
+          ],
+          "note": "Nối CS43L22 (I2S3_CK)"
+        },
+        {
+          "l": "PA14",
+          "n": 39,
+          "name": "PA14",
+          "f": [
+            "other:SWCLK"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối ST-LINK (SWCLK). Không dùng làm GPIO nếu muốn nạp và debug"
+        },
+        {
+          "l": "PA10",
+          "n": 41,
+          "name": "PA10",
+          "f": [
+            "uart:USART1_RX",
+            "pwm:TIM1_CH3",
+            "usb:OTG_FS_ID"
+          ],
+          "note": "Nối chân ID của cổng micro USB OTG"
+        },
+        {
+          "l": "PA8",
+          "n": 43,
+          "name": "PA8",
+          "f": [
+            "pwm:TIM1_CH1",
+            "i2c:I2C3_SCL",
+            "other:MCO1"
+          ]
+        },
+        {
+          "l": "PC8",
+          "n": 45,
+          "name": "PC8",
+          "f": [
+            "pwm:TIM3_CH3",
+            "pwm:TIM8_CH3",
+            "other:SDIO_D0"
+          ]
+        },
+        {
+          "l": "PC6",
+          "n": 47,
+          "name": "PC6",
+          "f": [
+            "uart:USART6_TX",
+            "pwm:TIM3_CH1",
+            "pwm:TIM8_CH1"
+          ]
+        },
+        {
+          "l": "GND",
+          "n": 49,
+          "k": "gnd"
+        }
+      ]
+    },
+    {
+      "x": 63.0,
+      "y": 18,
+      "dir": "down",
+      "labels": "right",
+      "pins": [
+        {
+          "l": "GND",
+          "n": 2,
+          "k": "gnd"
+        },
+        {
+          "l": "5V",
+          "n": 4,
+          "k": "power"
+        },
+        {
+          "l": "3V",
+          "n": 6,
+          "k": "power",
+          "note": "Nguồn 3V của board"
+        },
+        {
+          "l": "PH1",
+          "n": 8,
+          "name": "PH1",
+          "f": [
+            "other:OSC_OUT"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối thạch anh 8 MHz"
+        },
+        {
+          "l": "PC15",
+          "n": 10,
+          "name": "PC15",
+          "f": [
+            "other:OSC32_OUT"
+          ]
+        },
+        {
+          "l": "PC13",
+          "n": 12,
+          "name": "PC13",
+          "f": [
+            "other:TAMPER / RTC"
+          ]
+        },
+        {
+          "l": "PE5",
+          "n": 14,
+          "name": "PE5",
+          "f": [
+            "pwm:TIM9_CH1"
+          ]
+        },
+        {
+          "l": "PE3",
+          "n": 16,
+          "name": "PE3",
+          "t": [
+            "warn"
+          ],
+          "note": "Nối chân CS của cảm biến gia tốc"
+        },
+        {
+          "l": "PE1",
+          "n": 18,
+          "name": "PE1",
+          "note": "Nối ngắt INT2 của cảm biến gia tốc"
+        },
+        {
+          "l": "PB9",
+          "n": 20,
+          "name": "PB9",
+          "f": [
+            "i2c:I2C1_SDA",
+            "pwm:TIM4_CH4",
+            "pwm:TIM11_CH1",
+            "usb:CAN1_TX"
+          ],
+          "note": "Nối CS43L22 (I2C1_SDA)"
+        },
+        {
+          "l": "VDD",
+          "n": 22,
+          "k": "power",
+          "note": "Nguồn 3V của board"
+        },
+        {
+          "l": "PB7",
+          "n": 24,
+          "name": "PB7",
+          "f": [
+            "i2c:I2C1_SDA",
+            "uart:USART1_RX",
+            "pwm:TIM4_CH2"
+          ]
+        },
+        {
+          "l": "PB5",
+          "n": 26,
+          "name": "PB5",
+          "f": [
+            "pwm:TIM3_CH2",
+            "spi:SPI1_MOSI",
+            "spi:SPI3_MOSI",
+            "usb:CAN2_RX"
+          ]
+        },
+        {
+          "l": "PB3",
+          "n": 28,
+          "name": "PB3",
+          "f": [
+            "other:JTDO / SWO",
+            "pwm:TIM2_CH2",
+            "spi:SPI1_SCK",
+            "spi:SPI3_SCK"
+          ],
+          "note": "Nối ST-LINK (SWO)"
+        },
+        {
+          "l": "PD6",
+          "n": 30,
+          "name": "PD6",
+          "f": [
+            "uart:USART2_RX"
+          ]
+        },
+        {
+          "l": "PD4",
+          "n": 32,
+          "name": "PD4",
+          "f": [
+            "uart:USART2_RTS"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối chân RESET của CS43L22"
+        },
+        {
+          "l": "PD2",
+          "n": 34,
+          "name": "PD2",
+          "f": [
+            "uart:UART5_RX"
+          ]
+        },
+        {
+          "l": "PD0",
+          "n": 36,
+          "name": "PD0",
+          "f": [
+            "usb:CAN1_RX"
+          ]
+        },
+        {
+          "l": "PC11",
+          "n": 38,
+          "name": "PC11",
+          "f": [
+            "uart:UART4_RX",
+            "spi:SPI3_MISO",
+            "uart:USART3_RX"
+          ]
+        },
+        {
+          "l": "PA15",
+          "n": 40,
+          "name": "PA15",
+          "f": [
+            "other:JTDI",
+            "pwm:TIM2_CH1",
+            "spi:SPI3_NSS"
+          ]
+        },
+        {
+          "l": "PA13",
+          "n": 42,
+          "name": "PA13",
+          "f": [
+            "other:SWDIO"
+          ],
+          "t": [
+            "warn"
+          ],
+          "note": "Nối ST-LINK (SWDIO). Không dùng làm GPIO nếu muốn nạp và debug"
+        },
+        {
+          "l": "PA9",
+          "n": 44,
+          "name": "PA9",
+          "f": [
+            "uart:USART1_TX",
+            "pwm:TIM1_CH2",
+            "usb:OTG_FS_VBUS"
+          ],
+          "note": "Nối VBUS của cổng micro USB OTG"
+        },
+        {
+          "l": "PC9",
+          "n": 46,
+          "name": "PC9",
+          "f": [
+            "pwm:TIM3_CH4",
+            "pwm:TIM8_CH4",
+            "i2c:I2C3_SDA"
+          ]
+        },
+        {
+          "l": "PC7",
+          "n": 48,
+          "name": "PC7",
+          "f": [
+            "uart:USART6_RX",
+            "pwm:TIM3_CH2",
+            "pwm:TIM8_CH2"
+          ],
+          "note": "Nối CS43L22 (I2S3_MCK)"
+        },
+        {
+          "l": "GND",
+          "n": 50,
+          "k": "gnd"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V. Phần lớn chân chịu được 5V khi làm ngõ vào digital (FT), trừ khi đang dùng chức năng analog.",
+    "Nhiều chân đã nối linh kiện trên board: LED PD12–PD15, nút USER ở PA0, cảm biến gia tốc ở PA5–PA7 và PE3, chip âm thanh CS43L22 ở PA4, PB6, PB9, PC7, PC10, PC12, PD4. Nếu dùng các chân này cho việc khác, hãy chú ý xung đột.",
+    "Nạp và debug qua ST-LINK/V2 tích hợp, cổng mini USB phía trên. Cổng micro USB phía dưới là USB OTG của STM32F407.",
+    "Board có các bản MB997B/C/D/E khác nhau ở cảm biến gia tốc (LIS302DL, LIS3DSH, LIS3DH) nhưng giữ nguyên sơ đồ chân P1, P2."
+  ]
+}

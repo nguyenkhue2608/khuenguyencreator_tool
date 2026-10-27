@@ -1,0 +1,464 @@
+{
+  "id": "stm32-black-pill",
+  "name": "STM32F411CE Black Pill",
+  "mcu": "STM32F411CEU6",
+  "family": "STM32",
+  "style": "black",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, cổng USB-C ở phía dưới, header SWD ở phía trên (bản WeAct V2/V3). Bản F401CC có cùng sơ đồ chân",
+  "shape": {
+    "w": 20.8,
+    "h": 52.8,
+    "rowGap": 15.24,
+    "start": 2.27,
+    "r": 0.8,
+    "parts": [
+      {
+        "type": "header",
+        "x": 6.59,
+        "y": 1.1,
+        "cols": 4,
+        "rows": 1
+      },
+      {
+        "type": "text",
+        "x": 10.4,
+        "y": 3.3,
+        "fs": 6.5,
+        "label": "3V3 IO CLK GND"
+      },
+      {
+        "type": "chip",
+        "x": 6.9,
+        "y": 14.5,
+        "w": 7,
+        "h": 7,
+        "pins": 12,
+        "label": "STM32\nF411CEU6",
+        "fs": 7
+      },
+      {
+        "type": "crystal",
+        "x": 7.9,
+        "y": 28.5,
+        "w": 5,
+        "h": 2.2,
+        "label": "25M"
+      },
+      {
+        "type": "button",
+        "x": 4.6,
+        "y": 36,
+        "w": 3.4,
+        "h": 3.4,
+        "label": "BOOT0"
+      },
+      {
+        "type": "button",
+        "x": 8.7,
+        "y": 36,
+        "w": 3.4,
+        "h": 3.4,
+        "label": "KEY"
+      },
+      {
+        "type": "button",
+        "x": 12.8,
+        "y": 36,
+        "w": 3.4,
+        "h": 3.4,
+        "label": "NRST"
+      },
+      {
+        "type": "led",
+        "x": 6,
+        "y": 44.2,
+        "w": 1.8,
+        "h": 1,
+        "color": "#2f7bff"
+      },
+      {
+        "type": "led",
+        "x": 13,
+        "y": 44.2,
+        "w": 1.8,
+        "h": 1,
+        "color": "#e53935"
+      },
+      {
+        "type": "text",
+        "x": 6.9,
+        "y": 46.8,
+        "fs": 6.5,
+        "label": "C13"
+      },
+      {
+        "type": "usb",
+        "x": 6.4,
+        "y": 48.2,
+        "w": 8,
+        "h": 5.8
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "VB",
+      "name": "VBAT",
+      "k": "power",
+      "note": "Nguồn pin dự phòng cho RTC"
+    },
+    {
+      "l": "C13",
+      "name": "PC13",
+      "f": [
+        "other:TAMPER / RTC"
+      ],
+      "note": "Nối LED xanh trên board (sáng khi LOW). Dòng ra yếu, tối đa khoảng 3 mA"
+    },
+    {
+      "l": "C14",
+      "name": "PC14",
+      "f": [
+        "other:OSC32_IN"
+      ],
+      "note": "Nối thạch anh 32.768 kHz trên board"
+    },
+    {
+      "l": "C15",
+      "name": "PC15",
+      "f": [
+        "other:OSC32_OUT"
+      ],
+      "note": "Nối thạch anh 32.768 kHz trên board"
+    },
+    {
+      "l": "R",
+      "name": "NRST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Kéo LOW để reset"
+    },
+    {
+      "l": "A0",
+      "name": "PA0",
+      "f": [
+        "adc:ADC1_IN0",
+        "pwm:TIM2_CH1",
+        "pwm:TIM5_CH1",
+        "uart:USART2_CTS",
+        "other:WKUP"
+      ],
+      "note": "Nối nút KEY trên board (nhấn = LOW)"
+    },
+    {
+      "l": "A1",
+      "name": "PA1",
+      "f": [
+        "adc:ADC1_IN1",
+        "pwm:TIM2_CH2",
+        "pwm:TIM5_CH2",
+        "uart:USART2_RTS"
+      ]
+    },
+    {
+      "l": "A2",
+      "name": "PA2",
+      "f": [
+        "uart:USART2_TX",
+        "adc:ADC1_IN2",
+        "pwm:TIM2_CH3",
+        "pwm:TIM5_CH3",
+        "pwm:TIM9_CH1"
+      ]
+    },
+    {
+      "l": "A3",
+      "name": "PA3",
+      "f": [
+        "uart:USART2_RX",
+        "adc:ADC1_IN3",
+        "pwm:TIM2_CH4",
+        "pwm:TIM5_CH4",
+        "pwm:TIM9_CH2"
+      ]
+    },
+    {
+      "l": "A4",
+      "name": "PA4",
+      "f": [
+        "spi:SPI1_NSS",
+        "adc:ADC1_IN4",
+        "spi:SPI3_NSS"
+      ]
+    },
+    {
+      "l": "A5",
+      "name": "PA5",
+      "f": [
+        "spi:SPI1_SCK",
+        "adc:ADC1_IN5",
+        "pwm:TIM2_CH1"
+      ]
+    },
+    {
+      "l": "A6",
+      "name": "PA6",
+      "f": [
+        "spi:SPI1_MISO",
+        "adc:ADC1_IN6",
+        "pwm:TIM3_CH1",
+        "pwm:TIM1_BKIN"
+      ]
+    },
+    {
+      "l": "A7",
+      "name": "PA7",
+      "f": [
+        "spi:SPI1_MOSI",
+        "adc:ADC1_IN7",
+        "pwm:TIM3_CH2",
+        "pwm:TIM1_CH1N"
+      ]
+    },
+    {
+      "l": "B0",
+      "name": "PB0",
+      "f": [
+        "adc:ADC1_IN8",
+        "pwm:TIM3_CH3",
+        "pwm:TIM1_CH2N"
+      ]
+    },
+    {
+      "l": "B1",
+      "name": "PB1",
+      "f": [
+        "adc:ADC1_IN9",
+        "pwm:TIM3_CH4",
+        "pwm:TIM1_CH3N"
+      ]
+    },
+    {
+      "l": "B2",
+      "name": "PB2",
+      "f": [
+        "other:BOOT1"
+      ],
+      "note": "Chân BOOT1, có điện trở kéo xuống trên board"
+    },
+    {
+      "l": "B10",
+      "name": "PB10",
+      "f": [
+        "i2c:I2C2_SCL",
+        "spi:SPI2_SCK",
+        "pwm:TIM2_CH3"
+      ]
+    },
+    {
+      "l": "3.3",
+      "k": "power"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nối thẳng 5V của cổng USB-C"
+    }
+  ],
+  "right": [
+    {
+      "l": "3.3",
+      "k": "power"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nối thẳng 5V của cổng USB-C"
+    },
+    {
+      "l": "B9",
+      "name": "PB9",
+      "f": [
+        "i2c:I2C1_SDA",
+        "pwm:TIM4_CH4",
+        "pwm:TIM11_CH1",
+        "spi:SPI2_NSS"
+      ]
+    },
+    {
+      "l": "B8",
+      "name": "PB8",
+      "f": [
+        "i2c:I2C1_SCL",
+        "pwm:TIM4_CH3",
+        "pwm:TIM10_CH1"
+      ]
+    },
+    {
+      "l": "B7",
+      "name": "PB7",
+      "f": [
+        "i2c:I2C1_SDA",
+        "uart:USART1_RX",
+        "pwm:TIM4_CH2"
+      ]
+    },
+    {
+      "l": "B6",
+      "name": "PB6",
+      "f": [
+        "i2c:I2C1_SCL",
+        "uart:USART1_TX",
+        "pwm:TIM4_CH1"
+      ]
+    },
+    {
+      "l": "B5",
+      "name": "PB5",
+      "f": [
+        "pwm:TIM3_CH2",
+        "spi:SPI1_MOSI",
+        "spi:SPI3_MOSI",
+        "i2c:I2C1_SMBA"
+      ]
+    },
+    {
+      "l": "B4",
+      "name": "PB4",
+      "f": [
+        "other:NJTRST",
+        "pwm:TIM3_CH1",
+        "spi:SPI1_MISO",
+        "spi:SPI3_MISO"
+      ],
+      "note": "Mặc định là chân JTAG. Chọn Debug: Serial Wire trong CubeMX để dùng làm GPIO"
+    },
+    {
+      "l": "B3",
+      "name": "PB3",
+      "f": [
+        "other:JTDO / SWO",
+        "pwm:TIM2_CH2",
+        "spi:SPI1_SCK",
+        "spi:SPI3_SCK"
+      ],
+      "note": "Mặc định là chân JTAG. Chọn Debug: Serial Wire trong CubeMX để dùng làm GPIO"
+    },
+    {
+      "l": "A15",
+      "name": "PA15",
+      "f": [
+        "other:JTDI",
+        "pwm:TIM2_CH1",
+        "spi:SPI1_NSS",
+        "spi:SPI3_NSS"
+      ],
+      "note": "Mặc định là chân JTAG. Chọn Debug: Serial Wire trong CubeMX để dùng làm GPIO"
+    },
+    {
+      "l": "A12",
+      "name": "PA12",
+      "f": [
+        "usb:USB_DP",
+        "pwm:TIM1_ETR",
+        "uart:USART6_RX",
+        "uart:USART1_RTS"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối USB D+. Không dùng làm GPIO nếu cắm USB"
+    },
+    {
+      "l": "A11",
+      "name": "PA11",
+      "f": [
+        "usb:USB_DM",
+        "pwm:TIM1_CH4",
+        "uart:USART6_TX",
+        "uart:USART1_CTS"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối USB D−. Không dùng làm GPIO nếu cắm USB"
+    },
+    {
+      "l": "A10",
+      "name": "PA10",
+      "f": [
+        "uart:USART1_RX",
+        "pwm:TIM1_CH3",
+        "usb:OTG_FS_ID"
+      ]
+    },
+    {
+      "l": "A9",
+      "name": "PA9",
+      "f": [
+        "uart:USART1_TX",
+        "pwm:TIM1_CH2",
+        "usb:OTG_FS_VBUS"
+      ]
+    },
+    {
+      "l": "A8",
+      "name": "PA8",
+      "f": [
+        "pwm:TIM1_CH1",
+        "i2c:I2C3_SCL",
+        "other:MCO1",
+        "uart:USART1_CK"
+      ]
+    },
+    {
+      "l": "B15",
+      "name": "PB15",
+      "f": [
+        "spi:SPI2_MOSI",
+        "pwm:TIM1_CH3N"
+      ]
+    },
+    {
+      "l": "B14",
+      "name": "PB14",
+      "f": [
+        "spi:SPI2_MISO",
+        "pwm:TIM1_CH2N"
+      ]
+    },
+    {
+      "l": "B13",
+      "name": "PB13",
+      "f": [
+        "spi:SPI2_SCK",
+        "pwm:TIM1_CH1N"
+      ]
+    },
+    {
+      "l": "B12",
+      "name": "PB12",
+      "f": [
+        "spi:SPI2_NSS",
+        "pwm:TIM1_BKIN"
+      ]
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V. Hầu hết chân chịu được 5V khi làm ngõ vào digital (FT), trừ khi đang dùng chức năng analog. Xem bảng chân trong datasheet để chắc chắn.",
+    "Nạp code: giữ BOOT0, nhấn NRST rồi thả để vào bootloader USB DFU, hoặc dùng ST-Link qua header SWD.",
+    "Các chân có nhiều chức năng thay thế (AF). Bảng trên liệt kê chức năng hay dùng; CubeMX cho biết đầy đủ khi bạn bấm vào chân.",
+    "Khác Blue Pill: không có PB11, thêm PB2 và nút KEY ở PA0."
+  ]
+}

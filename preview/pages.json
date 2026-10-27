@@ -17,8 +17,8 @@
   },
   "pinout": {
     "title": "Pinout Viewer",
-    "h1": "Sơ đồ chân ESP32, STM32, Arduino, 8051",
-    "intro": "Chọn board để xem sơ đồ chân, lọc theo chức năng ADC, PWM, UART, I2C, SPI và bấm vào từng chân để xem chi tiết cùng các lưu ý khi đấu nối.",
+    "h1": "Sơ đồ chân ESP32, STM32, Arduino, Raspberry Pi, 8051",
+    "intro": "Chọn board để xem sơ đồ chân vẽ theo hình dạng thật, lọc theo chức năng ADC, PWM, UART, I2C, SPI và bấm vào từng chân để xem chi tiết cùng các lưu ý khi đấu nối.",
     "data": "pinout"
   }
 }

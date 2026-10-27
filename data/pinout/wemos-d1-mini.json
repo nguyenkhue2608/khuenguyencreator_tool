@@ -1,0 +1,206 @@
+{
+  "id": "wemos-d1-mini",
+  "name": "Wemos D1 mini",
+  "mcu": "ESP-12F (ESP8266)",
+  "family": "ESP32",
+  "style": "esp",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, anten ở phía trên, cổng USB ở phía dưới",
+  "shape": {
+    "w": 25.6,
+    "h": 34.2,
+    "rowGap": 22.86,
+    "start": 13.6,
+    "r": 1.2,
+    "parts": [
+      {
+        "type": "module",
+        "x": 4.8,
+        "y": 0,
+        "w": 16,
+        "h": 24,
+        "fill": "#1c2733"
+      },
+      {
+        "type": "antenna",
+        "x": 5.6,
+        "y": 0.8,
+        "w": 14.4,
+        "h": 5.4
+      },
+      {
+        "type": "shield",
+        "x": 5.6,
+        "y": 8,
+        "w": 14.4,
+        "h": 15,
+        "label": "ESP-12F"
+      },
+      {
+        "type": "chip",
+        "x": 14.5,
+        "y": 25,
+        "w": 4.6,
+        "h": 3.6,
+        "pins": 5,
+        "label": "CH340",
+        "fs": 6
+      },
+      {
+        "type": "button",
+        "x": 3.4,
+        "y": 25.2,
+        "w": 4,
+        "h": 4,
+        "label": "RST"
+      },
+      {
+        "type": "usb",
+        "x": 9.05,
+        "y": 29.6,
+        "w": 7.5,
+        "h": 5.6
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "RST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Kéo LOW để reset. Nối với D0 để thoát deep sleep"
+    },
+    {
+      "l": "A0",
+      "name": "ADC0",
+      "f": [
+        "adc:ADC0 (TOUT)"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Đọc 0–3.3V nhờ cầu chia áp trên board. ADC 10-bit"
+    },
+    {
+      "l": "D0",
+      "name": "GPIO16",
+      "f": [
+        "other:WAKE"
+      ],
+      "note": "Nối RST để thoát deep sleep. Không có PWM, I2C và ngắt"
+    },
+    {
+      "l": "D5",
+      "name": "GPIO14",
+      "f": [
+        "spi:HSPI_CLK"
+      ]
+    },
+    {
+      "l": "D6",
+      "name": "GPIO12",
+      "f": [
+        "spi:HSPI_MISO"
+      ]
+    },
+    {
+      "l": "D7",
+      "name": "GPIO13",
+      "f": [
+        "spi:HSPI_MOSI",
+        "uart:RXD2 (Serial.swap)"
+      ]
+    },
+    {
+      "l": "D8",
+      "name": "GPIO15",
+      "f": [
+        "spi:HSPI_CS",
+        "uart:TXD2 (Serial.swap)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải LOW khi khởi động, có điện trở kéo xuống trên board"
+    },
+    {
+      "l": "3V3",
+      "k": "power",
+      "note": "Ngõ ra 3.3V, tối đa khoảng 500 mA"
+    }
+  ],
+  "right": [
+    {
+      "l": "TX",
+      "name": "GPIO1",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "Nối chip CH340, xuất log khi khởi động"
+    },
+    {
+      "l": "RX",
+      "name": "GPIO3",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "Nối chip CH340"
+    },
+    {
+      "l": "D1",
+      "name": "GPIO5",
+      "f": [
+        "i2c:SCL"
+      ],
+      "note": "SCL mặc định của thư viện Wire"
+    },
+    {
+      "l": "D2",
+      "name": "GPIO4",
+      "f": [
+        "i2c:SDA"
+      ],
+      "note": "SDA mặc định của thư viện Wire"
+    },
+    {
+      "l": "D3",
+      "name": "GPIO0",
+      "f": [
+        "other:FLASH"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải HIGH khi khởi động (LOW = vào chế độ nạp). Có điện trở kéo lên"
+    },
+    {
+      "l": "D4",
+      "name": "GPIO2",
+      "f": [
+        "uart:U1_TXD",
+        "other:LED onboard"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải HIGH khi khởi động. Nối LED xanh trên module (sáng khi LOW)"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nguồn 5V từ USB, hoặc cấp 5V vào"
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V, các chân không chịu được 5V.",
+    "Cùng chip ESP8266 với NodeMCU nên chức năng chân giống nhau: D3, D4 phải HIGH và D8 phải LOW khi khởi động.",
+    "PWM (analogWrite) là PWM phần mềm, dùng được trên D1–D8. Ngắt có trên mọi chân trừ D0.",
+    "Muốn dùng deep sleep, nối D0 với RST để chip tự thức dậy."
+  ]
+}

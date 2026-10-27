@@ -93,4 +93,6 @@ kn-tools/
 
 - Mỗi board là một file `data/pinout/<id>.json` (định dạng ghi ở đầu `assets/tools/pinout/tool.js`). Thêm board: tạo file JSON rồi đặt `"ready": true` cho board đó trong `data/pinout/boards.json`.
 - Trang chung: `[kn_tool slug="pinout"]`. Trang riêng cho từng board (tốt cho SEO): `[kn_tool slug="pinout" board="esp32-devkit-v1"]`.
-- Đã có: ESP32 DevKit V1 (30 chân), ESP8266 NodeMCU, STM32 Blue Pill, Arduino Uno, Arduino Nano, AT89S52.
+- Đã có 19 board (xem `data/pinout/boards.json`). Board phức tạp sinh từ script `data/pinout/_gen_*.py`; sửa script rồi chạy lại thay vì sửa JSON tay.
+- Board có header đôi hoặc header nằm ngang dùng `groups` thay cho `left`/`right` (xem chú thích trong `tool.js`).
+- Chưa làm: kit NuTiny N76E885 (chưa có tài liệu header chính hãng).

@@ -1,0 +1,230 @@
+{
+  "id": "esp32-cam",
+  "name": "ESP32-CAM (AI-Thinker)",
+  "mcu": "ESP32-S",
+  "family": "ESP32",
+  "style": "black",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt có vỏ kim loại module, anten ở phía trên, nút RST ở góc dưới bên trái. Camera và khe thẻ nhớ ở mặt còn lại",
+  "shape": {
+    "w": 27,
+    "h": 40.5,
+    "rowGap": 22.86,
+    "start": 17.9,
+    "r": 2.5,
+    "parts": [
+      {
+        "type": "module",
+        "x": 4.6,
+        "y": 0.4,
+        "w": 17.8,
+        "h": 25.6
+      },
+      {
+        "type": "antenna",
+        "x": 6.2,
+        "y": 1.0,
+        "w": 14.6,
+        "h": 4.4
+      },
+      {
+        "type": "shield",
+        "x": 5.1,
+        "y": 6.6,
+        "w": 16.8,
+        "h": 18.8,
+        "label": "Ai-Thinker\nESP32-CAM",
+        "fs": 10
+      },
+      {
+        "type": "smd",
+        "x": 5.2,
+        "y": 27.2,
+        "w": 3.2,
+        "h": 2.6,
+        "fill": "#c98a2b"
+      },
+      {
+        "type": "led",
+        "x": 9.8,
+        "y": 27.6,
+        "w": 1.8,
+        "h": 1,
+        "color": "#e53935"
+      },
+      {
+        "type": "reg",
+        "x": 9.2,
+        "y": 31,
+        "w": 6,
+        "h": 7,
+        "label": "LDO"
+      },
+      {
+        "type": "chip",
+        "x": 17,
+        "y": 30.4,
+        "w": 4.6,
+        "h": 5.2,
+        "pins": 4,
+        "label": "PSRAM",
+        "fs": 6
+      },
+      {
+        "type": "button",
+        "x": 4.6,
+        "y": 35.2,
+        "w": 3.4,
+        "h": 3.4,
+        "label": "RST"
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "IO4",
+      "name": "GPIO4",
+      "f": [
+        "other:Đèn flash",
+        "other:HS2_DATA1 (thẻ nhớ)",
+        "adc:ADC2_CH0",
+        "touch:TOUCH0"
+      ],
+      "note": "Nối đèn flash LED trắng công suất lớn. Cũng là chân DATA1 của thẻ nhớ nên đèn có thể nháy khi đọc thẻ"
+    },
+    {
+      "l": "IO2",
+      "name": "GPIO2",
+      "f": [
+        "other:HS2_DATA0 (thẻ nhớ)",
+        "adc:ADC2_CH2",
+        "touch:TOUCH2"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping và DATA0 của thẻ nhớ. Phải LOW hoặc để trống khi nạp code"
+    },
+    {
+      "l": "IO14",
+      "name": "GPIO14",
+      "f": [
+        "other:HS2_CLK (thẻ nhớ)",
+        "adc:ADC2_CH6",
+        "touch:TOUCH6"
+      ],
+      "note": "Dùng cho thẻ nhớ microSD. Rảnh nếu không dùng thẻ"
+    },
+    {
+      "l": "IO15",
+      "name": "GPIO15",
+      "f": [
+        "other:HS2_CMD (thẻ nhớ)",
+        "adc:ADC2_CH3",
+        "touch:TOUCH3"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping và CMD của thẻ nhớ"
+    },
+    {
+      "l": "IO13",
+      "name": "GPIO13",
+      "f": [
+        "other:HS2_DATA3 (thẻ nhớ)",
+        "adc:ADC2_CH4",
+        "touch:TOUCH4"
+      ],
+      "note": "Dùng cho thẻ nhớ microSD. Rảnh nếu dùng thẻ ở chế độ 1-bit"
+    },
+    {
+      "l": "IO12",
+      "name": "GPIO12",
+      "f": [
+        "other:HS2_DATA2 (thẻ nhớ)",
+        "adc:ADC2_CH5",
+        "touch:TOUCH5"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping: phải LOW khi khởi động. Rảnh nếu dùng thẻ ở chế độ 1-bit"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nguồn vào 5V, nên dùng nguồn từ 1A trở lên vì camera và WiFi ngốn dòng"
+    }
+  ],
+  "right": [
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "U0T",
+      "name": "GPIO1",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "Nối RX của mạch nạp USB-Serial"
+    },
+    {
+      "l": "U0R",
+      "name": "GPIO3",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "Nối TX của mạch nạp USB-Serial"
+    },
+    {
+      "l": "VCC",
+      "k": "power",
+      "note": "Ngõ ra 3.3V (hoặc 5V tùy jumper trên board), không phải chân cấp nguồn vào"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "IO0",
+      "name": "GPIO0",
+      "f": [
+        "other:BOOT",
+        "other:CSI_MCLK (camera)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối GND rồi reset để vào chế độ nạp. Khi chạy chương trình để trống vì chân này cấp xung clock cho camera"
+    },
+    {
+      "l": "IO16",
+      "name": "GPIO16",
+      "f": [
+        "uart:U2_RXD",
+        "other:PSRAM CS"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối chân CS của PSRAM trên nhiều bản ESP32-CAM, không nên dùng làm GPIO"
+    },
+    {
+      "l": "3V3",
+      "k": "power",
+      "note": "Nguồn 3.3V. Nên cấp 5V vào chân 5V thay vì cấp 3.3V vì board dễ thiếu dòng"
+    }
+  ],
+  "notes": [
+    "Board không có cổng USB: nạp code qua mạch USB-Serial (U0T, U0R, GND) hoặc đế ESP32-CAM-MB. Nối IO0 xuống GND rồi nhấn RST để vào chế độ nạp.",
+    "Khi dùng thẻ nhớ ở chế độ 4-bit, các chân IO2, IO4, IO12, IO13, IO14, IO15 đều bị chiếm. Ở chế độ 1-bit, IO4, IO12, IO13 rảnh.",
+    "LED đỏ trên board nối GPIO33 (sáng khi LOW), không đưa ra header.",
+    "ADC2 không đọc được khi đang dùng WiFi, mà ESP32-CAM thường luôn bật WiFi để gửi ảnh."
+  ]
+}

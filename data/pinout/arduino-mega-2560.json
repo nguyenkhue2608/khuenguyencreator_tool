@@ -1,0 +1,776 @@
+{
+  "id": "arduino-mega-2560",
+  "name": "Arduino Mega 2560",
+  "mcu": "ATmega2560",
+  "family": "Arduino",
+  "style": "arduino",
+  "logic": "5V",
+  "orientation": "Nhìn từ mặt trên, cổng USB và jack nguồn ở phía trên, header đôi D22–D53 ở cạnh dưới",
+  "shape": {
+    "w": 53.34,
+    "h": 101.6,
+    "rowGap": 0,
+    "r": 1,
+    "numbers": false,
+    "parts": [
+      {
+        "type": "hole",
+        "x": 2.5,
+        "y": 14,
+        "r": 1.6
+      },
+      {
+        "type": "hole",
+        "x": 50.7,
+        "y": 15.3,
+        "r": 1.6
+      },
+      {
+        "type": "hole",
+        "x": 7.6,
+        "y": 66.1,
+        "r": 1.6
+      },
+      {
+        "type": "hole",
+        "x": 35.5,
+        "y": 66.1,
+        "r": 1.6
+      },
+      {
+        "type": "hole",
+        "x": 50.7,
+        "y": 90.2,
+        "r": 1.6
+      },
+      {
+        "type": "jack",
+        "x": 3.3,
+        "y": -1.8,
+        "w": 9,
+        "h": 13.7
+      },
+      {
+        "type": "usbb",
+        "x": 34.5,
+        "y": -6.3,
+        "w": 12,
+        "h": 16
+      },
+      {
+        "type": "cap",
+        "x": 17.5,
+        "y": 6.5,
+        "r": 3
+      },
+      {
+        "type": "cap",
+        "x": 25,
+        "y": 6.5,
+        "r": 3
+      },
+      {
+        "type": "reg",
+        "x": 5,
+        "y": 15.5,
+        "w": 6.5,
+        "h": 7,
+        "label": "REG"
+      },
+      {
+        "type": "button",
+        "x": 44.3,
+        "y": 11,
+        "w": 5.5,
+        "h": 5.5,
+        "label": "RESET"
+      },
+      {
+        "type": "chip",
+        "x": 29,
+        "y": 13.5,
+        "w": 5,
+        "h": 5,
+        "pins": 8,
+        "label": "16U2",
+        "fs": 7
+      },
+      {
+        "type": "led",
+        "x": 41.5,
+        "y": 23,
+        "w": 1.8,
+        "h": 1,
+        "color": "#ffb300"
+      },
+      {
+        "type": "led",
+        "x": 41.5,
+        "y": 25.5,
+        "w": 1.8,
+        "h": 1,
+        "color": "#ffb300"
+      },
+      {
+        "type": "led",
+        "x": 41.5,
+        "y": 28,
+        "w": 1.8,
+        "h": 1,
+        "color": "#ffb300"
+      },
+      {
+        "type": "led",
+        "x": 41.5,
+        "y": 33,
+        "w": 1.8,
+        "h": 1,
+        "color": "#3ddc84"
+      },
+      {
+        "type": "text",
+        "x": 38.7,
+        "y": 24,
+        "fs": 6.5,
+        "label": "L"
+      },
+      {
+        "type": "text",
+        "x": 38.7,
+        "y": 26.5,
+        "fs": 6.5,
+        "label": "TX"
+      },
+      {
+        "type": "text",
+        "x": 38.7,
+        "y": 29,
+        "fs": 6.5,
+        "label": "RX"
+      },
+      {
+        "type": "text",
+        "x": 38.7,
+        "y": 34,
+        "fs": 6.5,
+        "label": "ON"
+      },
+      {
+        "type": "text",
+        "x": 27,
+        "y": 37,
+        "fs": 16,
+        "label": "MEGA 2560",
+        "weight": 800
+      },
+      {
+        "type": "chip",
+        "x": 19.5,
+        "y": 45,
+        "w": 14,
+        "h": 14,
+        "pins": 14,
+        "rot": 45,
+        "label": "ATMEGA\n2560",
+        "fs": 9
+      },
+      {
+        "type": "header",
+        "x": 39.4,
+        "y": 62,
+        "cols": 2,
+        "rows": 3
+      },
+      {
+        "type": "text",
+        "x": 40.7,
+        "y": 60.3,
+        "fs": 6.5,
+        "label": "ICSP"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "x": 2.54,
+      "y": 27.94,
+      "dir": "down",
+      "labels": "left",
+      "pins": [
+        {
+          "l": "NC",
+          "k": "nc"
+        },
+        {
+          "l": "IOREF",
+          "k": "power",
+          "note": "Báo mức logic của board (5V) cho shield"
+        },
+        {
+          "l": "RESET",
+          "k": "sys",
+          "f": [
+            "other:RESET"
+          ],
+          "note": "Kéo LOW để reset"
+        },
+        {
+          "l": "3.3V",
+          "k": "power",
+          "note": "Ngõ ra 3.3V, tối đa 50 mA"
+        },
+        {
+          "l": "5V",
+          "k": "power"
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        },
+        {
+          "l": "VIN",
+          "k": "power",
+          "note": "Nguồn vào 7–12V, nối chung với jack DC"
+        },
+        {
+          "gap": true
+        },
+        {
+          "l": "A0",
+          "name": "PF0",
+          "f": [
+            "adc:ADC0"
+          ]
+        },
+        {
+          "l": "A1",
+          "name": "PF1",
+          "f": [
+            "adc:ADC1"
+          ]
+        },
+        {
+          "l": "A2",
+          "name": "PF2",
+          "f": [
+            "adc:ADC2"
+          ]
+        },
+        {
+          "l": "A3",
+          "name": "PF3",
+          "f": [
+            "adc:ADC3"
+          ]
+        },
+        {
+          "l": "A4",
+          "name": "PF4",
+          "f": [
+            "adc:ADC4"
+          ]
+        },
+        {
+          "l": "A5",
+          "name": "PF5",
+          "f": [
+            "adc:ADC5"
+          ]
+        },
+        {
+          "l": "A6",
+          "name": "PF6",
+          "f": [
+            "adc:ADC6"
+          ]
+        },
+        {
+          "l": "A7",
+          "name": "PF7",
+          "f": [
+            "adc:ADC7"
+          ]
+        },
+        {
+          "gap": true
+        },
+        {
+          "l": "A8",
+          "name": "PK0",
+          "f": [
+            "adc:ADC8",
+            "int:PCINT16"
+          ]
+        },
+        {
+          "l": "A9",
+          "name": "PK1",
+          "f": [
+            "adc:ADC9",
+            "int:PCINT17"
+          ]
+        },
+        {
+          "l": "A10",
+          "name": "PK2",
+          "f": [
+            "adc:ADC10",
+            "int:PCINT18"
+          ]
+        },
+        {
+          "l": "A11",
+          "name": "PK3",
+          "f": [
+            "adc:ADC11",
+            "int:PCINT19"
+          ]
+        },
+        {
+          "l": "A12",
+          "name": "PK4",
+          "f": [
+            "adc:ADC12",
+            "int:PCINT20"
+          ]
+        },
+        {
+          "l": "A13",
+          "name": "PK5",
+          "f": [
+            "adc:ADC13",
+            "int:PCINT21"
+          ]
+        },
+        {
+          "l": "A14",
+          "name": "PK6",
+          "f": [
+            "adc:ADC14",
+            "int:PCINT22"
+          ]
+        },
+        {
+          "l": "A15",
+          "name": "PK7",
+          "f": [
+            "adc:ADC15",
+            "int:PCINT23"
+          ]
+        }
+      ]
+    },
+    {
+      "x": 50.8,
+      "y": 18.8,
+      "dir": "down",
+      "labels": "right",
+      "pins": [
+        {
+          "l": "SCL",
+          "name": "PD0",
+          "f": [
+            "i2c:SCL"
+          ],
+          "note": "Nối chung với D21"
+        },
+        {
+          "l": "SDA",
+          "name": "PD1",
+          "f": [
+            "i2c:SDA"
+          ],
+          "note": "Nối chung với D20"
+        },
+        {
+          "l": "AREF",
+          "k": "sys",
+          "f": [
+            "adc:AREF"
+          ],
+          "note": "Điện áp tham chiếu ngoài cho ADC"
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        },
+        {
+          "l": "D13",
+          "name": "PB7",
+          "f": [
+            "pwm:PWM (OC0A)",
+            "other:LED_BUILTIN",
+            "int:PCINT7"
+          ],
+          "note": "Nối LED L trên board"
+        },
+        {
+          "l": "D12",
+          "name": "PB6",
+          "f": [
+            "pwm:PWM (OC1B)",
+            "int:PCINT6"
+          ]
+        },
+        {
+          "l": "D11",
+          "name": "PB5",
+          "f": [
+            "pwm:PWM (OC1A)",
+            "int:PCINT5"
+          ]
+        },
+        {
+          "l": "D10",
+          "name": "PB4",
+          "f": [
+            "pwm:PWM (OC2A)",
+            "int:PCINT4"
+          ]
+        },
+        {
+          "l": "D9",
+          "name": "PH6",
+          "f": [
+            "pwm:PWM (OC2B)"
+          ]
+        },
+        {
+          "l": "D8",
+          "name": "PH5",
+          "f": [
+            "pwm:PWM (OC4C)"
+          ]
+        },
+        {
+          "gap": 1.524
+        },
+        {
+          "l": "D7",
+          "name": "PH4",
+          "f": [
+            "pwm:PWM (OC4B)"
+          ]
+        },
+        {
+          "l": "D6",
+          "name": "PH3",
+          "f": [
+            "pwm:PWM (OC4A)"
+          ]
+        },
+        {
+          "l": "D5",
+          "name": "PE3",
+          "f": [
+            "pwm:PWM (OC3A)"
+          ]
+        },
+        {
+          "l": "D4",
+          "name": "PG5",
+          "f": [
+            "pwm:PWM (OC0B)"
+          ]
+        },
+        {
+          "l": "D3",
+          "name": "PE5",
+          "f": [
+            "pwm:PWM (OC3C)",
+            "int:INT5"
+          ]
+        },
+        {
+          "l": "D2",
+          "name": "PE4",
+          "f": [
+            "pwm:PWM (OC3B)",
+            "int:INT4"
+          ]
+        },
+        {
+          "l": "D1",
+          "name": "PE1",
+          "f": [
+            "uart:TX0"
+          ],
+          "note": "Nối chip USB-Serial (16U2). Tránh dùng khi đang nạp code hoặc mở Serial Monitor"
+        },
+        {
+          "l": "D0",
+          "name": "PE0",
+          "f": [
+            "uart:RX0"
+          ],
+          "note": "Nối chip USB-Serial (16U2). Tránh dùng khi đang nạp code hoặc mở Serial Monitor"
+        },
+        {
+          "gap": true
+        },
+        {
+          "l": "D14",
+          "name": "PJ1",
+          "f": [
+            "uart:TX3",
+            "int:PCINT10"
+          ]
+        },
+        {
+          "l": "D15",
+          "name": "PJ0",
+          "f": [
+            "uart:RX3",
+            "int:PCINT9"
+          ]
+        },
+        {
+          "l": "D16",
+          "name": "PH1",
+          "f": [
+            "uart:TX2"
+          ]
+        },
+        {
+          "l": "D17",
+          "name": "PH0",
+          "f": [
+            "uart:RX2"
+          ]
+        },
+        {
+          "l": "D18",
+          "name": "PD3",
+          "f": [
+            "uart:TX1",
+            "int:INT3"
+          ]
+        },
+        {
+          "l": "D19",
+          "name": "PD2",
+          "f": [
+            "uart:RX1",
+            "int:INT2"
+          ]
+        },
+        {
+          "l": "D20",
+          "name": "PD1",
+          "f": [
+            "i2c:SDA",
+            "int:INT1"
+          ],
+          "note": "Có điện trở kéo lên 10 kΩ trên board"
+        },
+        {
+          "l": "D21",
+          "name": "PD0",
+          "f": [
+            "i2c:SCL",
+            "int:INT0"
+          ],
+          "note": "Có điện trở kéo lên 10 kΩ trên board"
+        }
+      ]
+    },
+    {
+      "x": 47.0,
+      "y": 96.52,
+      "dir": "left",
+      "labels": "top",
+      "align": "pad",
+      "pins": [
+        {
+          "l": "5V",
+          "k": "power"
+        },
+        {
+          "l": "D22",
+          "name": "PA0"
+        },
+        {
+          "l": "D24",
+          "name": "PA2"
+        },
+        {
+          "l": "D26",
+          "name": "PA4"
+        },
+        {
+          "l": "D28",
+          "name": "PA6"
+        },
+        {
+          "l": "D30",
+          "name": "PC7"
+        },
+        {
+          "l": "D32",
+          "name": "PC5"
+        },
+        {
+          "l": "D34",
+          "name": "PC3"
+        },
+        {
+          "l": "D36",
+          "name": "PC1"
+        },
+        {
+          "l": "D38",
+          "name": "PD7"
+        },
+        {
+          "l": "D40",
+          "name": "PG1"
+        },
+        {
+          "l": "D42",
+          "name": "PL7"
+        },
+        {
+          "l": "D44",
+          "name": "PL5",
+          "f": [
+            "pwm:PWM (OC5C)"
+          ]
+        },
+        {
+          "l": "D46",
+          "name": "PL3",
+          "f": [
+            "pwm:PWM (OC5A)"
+          ]
+        },
+        {
+          "l": "D48",
+          "name": "PL1"
+        },
+        {
+          "l": "D50",
+          "name": "PB3",
+          "f": [
+            "spi:MISO",
+            "int:PCINT3"
+          ]
+        },
+        {
+          "l": "D52",
+          "name": "PB1",
+          "f": [
+            "spi:SCK",
+            "int:PCINT1"
+          ]
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        }
+      ]
+    },
+    {
+      "x": 47.0,
+      "y": 99.06,
+      "dir": "left",
+      "labels": "bottom",
+      "pins": [
+        {
+          "l": "5V",
+          "k": "power"
+        },
+        {
+          "l": "D23",
+          "name": "PA1"
+        },
+        {
+          "l": "D25",
+          "name": "PA3"
+        },
+        {
+          "l": "D27",
+          "name": "PA5"
+        },
+        {
+          "l": "D29",
+          "name": "PA7"
+        },
+        {
+          "l": "D31",
+          "name": "PC6"
+        },
+        {
+          "l": "D33",
+          "name": "PC4"
+        },
+        {
+          "l": "D35",
+          "name": "PC2"
+        },
+        {
+          "l": "D37",
+          "name": "PC0"
+        },
+        {
+          "l": "D39",
+          "name": "PG2"
+        },
+        {
+          "l": "D41",
+          "name": "PG0"
+        },
+        {
+          "l": "D43",
+          "name": "PL6"
+        },
+        {
+          "l": "D45",
+          "name": "PL4",
+          "f": [
+            "pwm:PWM (OC5B)"
+          ]
+        },
+        {
+          "l": "D47",
+          "name": "PL2"
+        },
+        {
+          "l": "D49",
+          "name": "PL0"
+        },
+        {
+          "l": "D51",
+          "name": "PB2",
+          "f": [
+            "spi:MOSI",
+            "int:PCINT2"
+          ]
+        },
+        {
+          "l": "D53",
+          "name": "PB0",
+          "f": [
+            "spi:SS",
+            "int:PCINT0"
+          ],
+          "note": "Phải để OUTPUT khi Mega làm SPI master, kể cả khi không dùng làm chân SS"
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Mức logic 5V. Dòng mỗi chân nên giữ dưới 20 mA.",
+    "PWM (analogWrite) có ở D2–D13 và D44–D46. Ngắt ngoài attachInterrupt() ở D2, D3, D18, D19, D20, D21.",
+    "4 cổng UART phần cứng: Serial (D0, D1), Serial1 (D18, D19), Serial2 (D16, D17), Serial3 (D14, D15).",
+    "SPI ở D50–D53 và header ICSP, không phải D10–D13 như Uno. I2C ở D20, D21 (cũng đưa ra chân SDA, SCL).",
+    "ADC 10-bit, 16 kênh A0–A15."
+  ]
+}

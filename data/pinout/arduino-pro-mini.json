@@ -1,0 +1,328 @@
+{
+  "id": "arduino-pro-mini",
+  "name": "Arduino Pro Mini",
+  "mcu": "ATmega328P",
+  "family": "Arduino",
+  "style": "stm32",
+  "logic": "5V hoặc 3.3V",
+  "orientation": "Nhìn từ mặt trên, header FTDI (6 chân) ở phía trên. Các lỗ A4, A5, A6, A7 nằm bên trong board, vị trí khác nhau tùy bản nên chỉ ghi trong bảng",
+  "shape": {
+    "w": 18,
+    "h": 33,
+    "rowGap": 15.24,
+    "start": 3.81,
+    "r": 0.6,
+    "parts": [
+      {
+        "type": "header",
+        "x": 2.65,
+        "y": 1.27,
+        "cols": 6,
+        "rows": 1
+      },
+      {
+        "type": "text",
+        "x": 9,
+        "y": 3.6,
+        "fs": 6,
+        "label": "FTDI"
+      },
+      {
+        "type": "chip",
+        "x": 5.5,
+        "y": 10.5,
+        "w": 7,
+        "h": 7,
+        "pins": 8,
+        "rot": 45,
+        "label": "ATMEGA\n328P",
+        "fs": 7
+      },
+      {
+        "type": "crystal",
+        "x": 6.5,
+        "y": 21,
+        "w": 5,
+        "h": 2,
+        "label": ""
+      },
+      {
+        "type": "button",
+        "x": 6.5,
+        "y": 25.5,
+        "w": 5,
+        "h": 3.4,
+        "label": "RESET"
+      },
+      {
+        "type": "led",
+        "x": 5.2,
+        "y": 7,
+        "w": 1.6,
+        "h": 0.9,
+        "color": "#e53935"
+      },
+      {
+        "type": "led",
+        "x": 11.2,
+        "y": 7,
+        "w": 1.6,
+        "h": 0.9,
+        "color": "#3ddc84"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "x": 1.38,
+      "y": 3.81,
+      "dir": "down",
+      "labels": "left",
+      "pins": [
+        {
+          "l": "TXO",
+          "name": "PD1",
+          "f": [
+            "uart:TX",
+            "int:PCINT17"
+          ],
+          "note": "D1, nối TX của mạch nạp FTDI"
+        },
+        {
+          "l": "RXI",
+          "name": "PD0",
+          "f": [
+            "uart:RX",
+            "int:PCINT16"
+          ],
+          "note": "D0, nối RX của mạch nạp FTDI"
+        },
+        {
+          "l": "RST",
+          "k": "sys",
+          "f": [
+            "other:RESET"
+          ]
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        },
+        {
+          "l": "2",
+          "name": "PD2",
+          "f": [
+            "int:INT0",
+            "int:PCINT18"
+          ]
+        },
+        {
+          "l": "3",
+          "name": "PD3",
+          "f": [
+            "pwm:PWM (OC2B)",
+            "int:INT1"
+          ]
+        },
+        {
+          "l": "4",
+          "name": "PD4",
+          "f": [
+            "pwm:T0",
+            "int:PCINT20"
+          ]
+        },
+        {
+          "l": "5",
+          "name": "PD5",
+          "f": [
+            "pwm:PWM (OC0B)",
+            "pwm:T1"
+          ]
+        },
+        {
+          "l": "6",
+          "name": "PD6",
+          "f": [
+            "pwm:PWM (OC0A)",
+            "other:AIN0"
+          ]
+        },
+        {
+          "l": "7",
+          "name": "PD7",
+          "f": [
+            "other:AIN1",
+            "int:PCINT23"
+          ]
+        },
+        {
+          "l": "8",
+          "name": "PB0",
+          "f": [
+            "pwm:ICP1",
+            "int:PCINT0"
+          ]
+        },
+        {
+          "l": "9",
+          "name": "PB1",
+          "f": [
+            "pwm:PWM (OC1A)",
+            "int:PCINT1"
+          ]
+        }
+      ]
+    },
+    {
+      "x": 16.62,
+      "y": 3.81,
+      "dir": "down",
+      "labels": "right",
+      "pins": [
+        {
+          "l": "RAW",
+          "k": "power",
+          "note": "Nguồn vào chưa ổn áp: tối đa 12V (bản 5V) hoặc 6V (bản 3.3V)"
+        },
+        {
+          "l": "GND",
+          "k": "gnd"
+        },
+        {
+          "l": "RST",
+          "k": "sys",
+          "f": [
+            "other:RESET"
+          ]
+        },
+        {
+          "l": "VCC",
+          "k": "power",
+          "note": "Nguồn đã ổn áp 5V hoặc 3.3V tùy bản"
+        },
+        {
+          "l": "A3",
+          "name": "PC3",
+          "f": [
+            "adc:ADC3"
+          ]
+        },
+        {
+          "l": "A2",
+          "name": "PC2",
+          "f": [
+            "adc:ADC2"
+          ]
+        },
+        {
+          "l": "A1",
+          "name": "PC1",
+          "f": [
+            "adc:ADC1"
+          ]
+        },
+        {
+          "l": "A0",
+          "name": "PC0",
+          "f": [
+            "adc:ADC0"
+          ]
+        },
+        {
+          "l": "13",
+          "name": "PB5",
+          "f": [
+            "spi:SCK",
+            "other:LED_BUILTIN"
+          ]
+        },
+        {
+          "l": "12",
+          "name": "PB4",
+          "f": [
+            "spi:MISO",
+            "int:PCINT4"
+          ]
+        },
+        {
+          "l": "11",
+          "name": "PB3",
+          "f": [
+            "pwm:PWM (OC2A)",
+            "spi:MOSI"
+          ]
+        },
+        {
+          "l": "10",
+          "name": "PB2",
+          "f": [
+            "pwm:PWM (OC1B)",
+            "spi:SS"
+          ]
+        }
+      ]
+    },
+    {
+      "hidden": true,
+      "x": 0,
+      "y": 0,
+      "dir": "down",
+      "labels": "left",
+      "pins": [
+        {
+          "l": "A4",
+          "name": "PC4",
+          "f": [
+            "adc:ADC4",
+            "i2c:SDA"
+          ]
+        },
+        {
+          "l": "A5",
+          "name": "PC5",
+          "f": [
+            "adc:ADC5",
+            "i2c:SCL"
+          ]
+        },
+        {
+          "l": "A6",
+          "name": "ADC6",
+          "f": [
+            "adc:ADC6"
+          ],
+          "t": [
+            "in"
+          ],
+          "note": "Chỉ đọc analog"
+        },
+        {
+          "l": "A7",
+          "name": "ADC7",
+          "f": [
+            "adc:ADC7"
+          ],
+          "t": [
+            "in"
+          ],
+          "note": "Chỉ đọc analog"
+        },
+        {
+          "l": "DTR",
+          "k": "sys",
+          "f": [
+            "other:Reset tự động khi nạp"
+          ],
+          "note": "Chân GRN/DTR trên header FTDI, nối qua tụ tới RESET"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Có hai bản: 5V / 16 MHz và 3.3V / 8 MHz. Chọn đúng board trong Arduino IDE, nếu không code chạy sai tốc độ.",
+    "Không có cổng USB: nạp code qua mạch USB-Serial (FTDI, CP2102, CH340) cắm vào header 6 chân. Thứ tự in trên board, thường là GND, GND, VCC, RXI, TXO, DTR (hoặc BLK … GRN).",
+    "A4 (SDA), A5 (SCL), A6, A7 là các lỗ bên trong board, cần hàn thêm header nếu dùng.",
+    "PWM ở D3, D5, D6, D9, D10, D11. Ngắt ngoài ở D2, D3."
+  ]
+}

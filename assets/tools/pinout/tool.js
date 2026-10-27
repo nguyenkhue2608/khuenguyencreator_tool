@@ -33,7 +33,12 @@
 		arduino: { fill: '#0e7a87', ink: '#e6f6f8' },
 		esp: { fill: '#1d262e', ink: '#e8eef2' },
 		stm32: { fill: '#1f4fa0', ink: '#e8efff' },
-		dip: { fill: '#23272b', ink: '#d9dde1' }
+		dip: { fill: '#23272b', ink: '#d9dde1' },
+		black: { fill: '#1b1c1f', ink: '#e2e5e8' },
+		pico: { fill: '#1f8a4c', ink: '#e9f7ee' },
+		nucleo: { fill: '#eef0ec', ink: '#3a4045' },
+		discovery: { fill: '#2c3036', ink: '#e6e9ec' },
+		header: { fill: '#1b1d20', ink: '#cfd3d8' }
 	};
 
 	var ROW = 26, FS = 11, MAX_CHIPS = 2;
@@ -190,100 +195,112 @@
 		return o;
 	}
 
+	/* Nhóm chân. Board đơn giản chỉ cần left/right (hai cột dọc theo shape.rowGap).
+	 * Board phức tạp khai báo groups: [{ x, y: tâm chân đầu (mm), dir: down|up|right|left,
+	 *   labels: left|right|top|bottom (hướng đặt nhãn), align: edge (nhãn ra ngoài mép board, mặc định) | pad (nhãn ngay cạnh chân,
+	 *   dùng cho hàng trong của header đôi), hidden: true (chỉ có trong bảng), pins: [...] }]. */
+	function groupsOf(board) {
+		if (board.groups) return board.groups;
+		var sh = board.shape || defaultShape(board), inset = (sh.w - sh.rowGap) / 2;
+		return [
+			{ x: inset, y: sh.startLeft != null ? sh.startLeft : sh.start, dir: 'down', labels: 'left', pins: board.left },
+			{ x: inset + sh.rowGap, y: sh.startRight != null ? sh.startRight : sh.start, dir: 'down', labels: 'right', pins: board.right }
+		];
+	}
+	function pinsOf(board) {
+		var out = [];
+		groupsOf(board).forEach(function (g) { g.pins.forEach(function (p) { if (!p.gap) out.push(p); }); });
+		return out;
+	}
+
+	function partBox(t) {
+		if (t.type === 'text') return null;
+		if (t.r && !t.w) return [t.x - t.r, t.y - t.r, t.x + t.r, t.y + t.r];
+		if (t.type === 'header') return [t.x - 1.3, t.y - 1.3, t.x + (t.cols - 1) * PITCH + 1.3, t.y + (t.rows - 1) * PITCH + 1.3];
+		var pad = t.type === 'chip' ? 0.5 : 0;
+		return [t.x - pad, t.y - pad, t.x + t.w + pad, t.y + t.h + pad + (t.type === 'button' ? 1.4 : 0)];
+	}
+
 	function boardSVG(board, cat) {
 		var style = STYLES[board.style] || STYLES.esp;
 		var sh = board.shape || defaultShape(board);
-		var maxLbl = 44;
-		['left', 'right'].forEach(function (side) {
-			board[side].forEach(function (p) { if (!p.gap) maxLbl = Math.max(maxLbl, lblW(p.l)); });
-		});
+		var groups = groupsOf(board);
+		var maxLbl = 44, GAP = 16, M = 10;
+		groups.forEach(function (g) { g.pins.forEach(function (p) { if (!p.gap) maxLbl = Math.max(maxLbl, lblW(p.l)); }); });
 
-		function sideWidth(side) {
-			var w = 0;
-			board[side].forEach(function (p) {
-				if (p.gap) return;
-				var s = shownFns(p, cat), cw = 0;
-				s.list.forEach(function (f) { cw += chipW(f.text) + 4; });
-				if (s.extra) cw += chipW('+' + s.extra) + 4;
-				w = Math.max(w, maxLbl + (cw ? 8 + cw : 0));
-			});
-			return w;
+		/* Khung bao: bắt đầu từ thân mạch và linh kiện */
+		var bb = [0, 0, sh.w * K, sh.h * K];
+		function grow(x0, y0, x1, y1) {
+			bb[0] = Math.min(bb[0], x0, x1); bb[1] = Math.min(bb[1], y0, y1);
+			bb[2] = Math.max(bb[2], x0, x1); bb[3] = Math.max(bb[3], y0, y1);
 		}
+		(sh.parts || []).forEach(function (t) { var b = partBox(t); if (b) grow(b[0] * K, b[1] * K, b[2] * K, b[3] * K); });
 
-		/* Vùng linh kiện thò ra ngoài mạch (USB, jack) */
-		var minY = 0, maxY = sh.h;
-		(sh.parts || []).forEach(function (t) {
-			var top = t.r && !t.h ? t.y - t.r : t.y, bot = t.r && !t.h ? t.y + t.r : t.y + (t.h || 0);
-			minY = Math.min(minY, top);
-			maxY = Math.max(maxY, bot);
-		});
-
-		var M = 8, GAP = 16;
-		var padInset = (sh.w - sh.rowGap) / 2; /* âm khi chân nằm ngoài thân (IC DIP) */
-		var leftW = sideWidth('left'), rightW = sideWidth('right');
-		var leftEdge = Math.min(0, padInset) * K, rightEdge = Math.max(sh.w, sh.w - padInset) * K;
-		var bx = M + leftW + GAP - leftEdge;
-		var by = 12 + (-minY) * K;
-		var W = Math.round(bx + rightEdge + GAP + rightW + M);
-		var H = Math.round(by + maxY * K + (board.style === 'dip' ? 12 : 18));
-
-		var X = function (v) { return bx + v * K; };
-		var Y = function (v) { return by + v * K; };
+		var body = sh.poly ?
+			'<polygon points="' + sh.poly.map(function (pt) { return (pt[0] * K).toFixed(1) + ',' + (pt[1] * K).toFixed(1); }).join(' ') + '" style="fill:' + style.fill + '"/>' :
+			'<rect x="0" y="0" width="' + (sh.w * K).toFixed(1) + '" height="' + (sh.h * K).toFixed(1) + '" rx="' + ((sh.r || 0.8) * K).toFixed(1) + '" style="fill:' + style.fill + '"/>';
+		var I = function (v) { return v; };
 		var S = function (v) { return v * K; };
-
-		var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="max-width:' + W + 'px;min-width:' + Math.min(W, 600) + 'px" role="img" aria-label="Sơ đồ chân ' + esc(board.name) + '">';
-
-		/* Thân mạch */
-		if (sh.poly) {
-			s += '<polygon points="' + sh.poly.map(function (pt) { return X(pt[0]).toFixed(1) + ',' + Y(pt[1]).toFixed(1); }).join(' ') + '" style="fill:' + style.fill + '"/>';
-		} else {
-			s += '<rect x="' + X(0) + '" y="' + Y(0) + '" width="' + S(sh.w) + '" height="' + S(sh.h) + '" rx="' + S(sh.r || 0.8) + '" style="fill:' + style.fill + '"/>';
-		}
-		(sh.parts || []).forEach(function (t) { s += partSVG(t, X, Y, S, style); });
+		var partsSVG = (sh.parts || []).map(function (t) { return partSVG(t, S, S, S, style); }).join('');
 
 		/* Chân */
-		var padL = X(padInset), padR = X(padInset + sh.rowGap);
-		var idx = 0;
-		['left', 'right'].forEach(function (side) {
-			var left = side === 'left';
-			var yMM = side === 'left' ? (sh.startLeft != null ? sh.startLeft : sh.start) : (sh.startRight != null ? sh.startRight : sh.start);
-			board[side].forEach(function (p) {
-				if (p.gap) { yMM += p.gap === true ? PITCH : p.gap; return; }
-				var y = Y(yMM), k = KINDS[kindOf(p)], sv = shownFns(p, cat);
-				var pad = left ? padL : padR;
-				var lx = left ? Math.min(X(0), pad) - GAP - maxLbl : Math.max(X(sh.w), pad) + GAP;
-				yMM += PITCH;
+		var pinsSVG = '', idx = 0;
+		groups.forEach(function (g) {
+			var dx = g.dir === 'right' ? PITCH : g.dir === 'left' ? -PITCH : 0;
+			var dy = g.dir === 'down' ? PITCH : g.dir === 'up' ? -PITCH : 0;
+			var mx = g.x, my = g.y;
+			var sign = g.labels === 'right' || g.labels === 'bottom' ? 1 : -1;
+			var rot = g.labels === 'top' || g.labels === 'bottom';
+			g.pins.forEach(function (p) {
+				if (p.gap) { var e = p.gap === true ? PITCH : p.gap; mx += dx / PITCH * e; my += dy / PITCH * e; return; }
+				if (g.hidden) { idx++; mx += dx; my += dy; return; }
+				var px = mx * K, py = my * K;
+				mx += dx; my += dy;
 
-				var chips = '', cursor = left ? lx - 8 : lx + maxLbl + 8, far = cursor;
+				/* Khoảng từ chân tới mép board theo hướng đặt nhãn (để các nhãn thẳng hàng ngoài mép) */
+				var outward = g.labels === 'left' ? px : g.labels === 'right' ? sh.w * K - px : g.labels === 'top' ? py : sh.h * K - py;
+				var off = g.align === 'pad' ? 12 : Math.max(0, outward) + GAP;
+				var inward = Math.max(0, -outward); /* chân nằm ngoài thân (IC DIP): độ dài chân kim loại */
+
+				var k = KINDS[kindOf(p)], sv = shownFns(p, cat);
+				var lx = sign > 0 ? off : -(off + maxLbl);
+				var chips = '', cursor = sign > 0 ? off + maxLbl + 8 : -(off + maxLbl + 8), far = cursor;
 				sv.list.concat(sv.extra ? [{ cat: 'more', text: '+' + sv.extra }] : []).forEach(function (f) {
-					var w = chipW(f.text), x = left ? cursor - w : cursor;
+					var w = chipW(f.text), x = sign > 0 ? cursor : cursor - w;
 					var color = f.cat === 'more' ? '#9aa3ab' : CATS[f.cat].color;
-					chips += '<rect x="' + x + '" y="' + (y - 8.5) + '" width="' + w + '" height="17" rx="3" style="fill:' + color + '"/>' +
-						'<text x="' + (x + w / 2) + '" y="' + (y + 3.8) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:' + FS + 'px;fill:#fff">' + esc(f.text) + '</text>';
-					cursor = left ? x - 4 : x + w + 4;
+					chips += '<rect x="' + x.toFixed(1) + '" y="-8.5" width="' + w + '" height="17" rx="3" style="fill:' + color + '"/>' +
+						'<text x="' + (x + w / 2).toFixed(1) + '" y="3.8" text-anchor="middle" style="font-family:var(--kn-mono);font-size:' + FS + 'px;fill:#fff">' + esc(f.text) + '</text>';
+					cursor = sign > 0 ? x + w + 4 : x - 4;
 					far = cursor;
 				});
+				var a = sign > 0 ? -10 : far - 4, b = sign > 0 ? far + 4 : 10;
 
-				var hx = left ? Math.min(far, lx) - 4 : pad - 10;
-				var hw = left ? (pad + 10) - hx : (Math.max(far, lx + maxLbl) + 4) - hx;
 				var padSVG = sh.legs ?
-					'<rect x="' + (left ? pad - 6 : X(sh.w)) + '" y="' + (y - 3) + '" width="' + (left ? X(0) - pad + 6 : pad - X(sh.w) + 6) + '" height="6" rx="1" style="fill:#b5bcc3;stroke:#7d858c;stroke-width:.8"/>' :
-					'<circle cx="' + pad + '" cy="' + y + '" r="5.5" style="fill:#d4a017;stroke:#7a5f08;stroke-width:1"/><circle cx="' + pad + '" cy="' + y + '" r="2" style="fill:#5c4706"/>';
-				var numX = left ? Math.max(X(0) + 4, pad + 10) : Math.min(X(sh.w) - 4, pad - 10);
+					'<rect x="' + (sign > 0 ? -inward - 1 : -5) + '" y="-3" width="' + (inward + 6) + '" height="6" rx="1" style="fill:#b5bcc3;stroke:#7d858c;stroke-width:.8"/>' :
+					'<circle r="5.5" style="fill:#d4a017;stroke:#7a5f08;stroke-width:1"/><circle r="2" style="fill:#5c4706"/>';
+				var num = p.n && sh.numbers !== false ? '<text x="' + (sign > 0 ? -(inward + 9) : inward + 9) + '" y="3.5"' + (sign > 0 ? ' text-anchor="end"' : '') +
+					' style="font-family:var(--kn-mono);font-size:9.5px;fill:' + style.ink + ';opacity:.8">' + p.n + '</text>' : '';
 
-				s += '<g class="kn-pin__p" data-i="' + idx + '" tabindex="0" role="button" aria-label="' + esc(p.l + (p.name ? ' ' + p.name : '')) + '">' +
-					'<rect class="kn-pin__hl" x="' + hx.toFixed(1) + '" y="' + (y - ROW / 2 + 1).toFixed(1) + '" width="' + hw.toFixed(1) + '" height="' + (ROW - 2) + '" rx="4"/>' +
-					'<line x1="' + (left ? lx + maxLbl : lx) + '" y1="' + y + '" x2="' + pad + '" y2="' + y + '" style="stroke:#b8a14a;stroke-width:1.5"/>' +
-					padSVG +
-					(p.n ? '<text x="' + numX.toFixed(1) + '" y="' + (y + 3.5).toFixed(1) + '"' + (left ? '' : ' text-anchor="end"') + ' style="font-family:var(--kn-mono);font-size:9.5px;fill:' + style.ink + ';opacity:.75">' + p.n + '</text>' : '') +
-					'<rect class="kn-pin__lbl" x="' + lx.toFixed(1) + '" y="' + (y - 9.5).toFixed(1) + '" width="' + maxLbl + '" height="19" rx="3" style="fill:' + k.fill + ';stroke:' + k.stroke + '"/>' +
-					'<text x="' + (lx + maxLbl / 2).toFixed(1) + '" y="' + (y + 4.2).toFixed(1) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:12px;font-weight:700;fill:' + k.ink + '">' + esc(p.l) + '</text>' +
-					((p.t || []).indexOf('warn') >= 0 ? '<circle cx="' + (left ? lx + 2 : lx + maxLbl - 2).toFixed(1) + '" cy="' + (y - 9).toFixed(1) + '" r="4" style="fill:#f59e0b;stroke:#fff;stroke-width:1"/>' : '') +
+				pinsSVG += '<g class="kn-pin__p" data-i="' + idx + '" tabindex="0" role="button" aria-label="' + esc(p.l + (p.name ? ' ' + p.name : '')) + '"' +
+					' transform="translate(' + px.toFixed(1) + ' ' + py.toFixed(1) + ')' + (rot ? ' rotate(90)' : '') + '">' +
+					'<rect class="kn-pin__hl" x="' + a.toFixed(1) + '" y="' + (-ROW / 2 + 1) + '" width="' + (b - a).toFixed(1) + '" height="' + (ROW - 2) + '" rx="4"/>' +
+					'<line x1="0" y1="0" x2="' + (sign * off) + '" y2="0" style="stroke:#b8a14a;stroke-width:1.5"/>' +
+					padSVG + num +
+					'<rect class="kn-pin__lbl" x="' + lx.toFixed(1) + '" y="-9.5" width="' + maxLbl + '" height="19" rx="3" style="fill:' + k.fill + ';stroke:' + k.stroke + '"/>' +
+					'<text x="' + (lx + maxLbl / 2).toFixed(1) + '" y="4.2" text-anchor="middle" style="font-family:var(--kn-mono);font-size:12px;font-weight:700;fill:' + k.ink + '">' + esc(p.l) + '</text>' +
+					((p.t || []).indexOf('warn') >= 0 ? '<circle cx="' + (sign > 0 ? lx + maxLbl - 2 : lx + 2).toFixed(1) + '" cy="-9" r="4" style="fill:#f59e0b;stroke:#fff;stroke-width:1"/>' : '') +
 					chips + '</g>';
+
+				if (rot) grow(px - 13, py + a, px + 13, py + b);
+				else grow(px + a, py - 13, px + b, py + 13);
 				idx++;
 			});
 		});
-		return s + '</svg>';
+
+		var vx = Math.floor(bb[0] - M), vy = Math.floor(bb[1] - M);
+		var W = Math.ceil(bb[2] - bb[0] + 2 * M), H = Math.ceil(bb[3] - bb[1] + 2 * M);
+		return '<svg viewBox="' + vx + ' ' + vy + ' ' + W + ' ' + H + '" data-w="' + W + '" style="max-width:' + W + 'px;min-width:' + Math.min(W, 600) + 'px" role="img" aria-label="Sơ đồ chân ' + esc(board.name) + '">' +
+			body + partsSVG + pinsSVG + '</svg>';
 	}
 
 	/* ---------- Giao diện ---------- */
@@ -316,7 +333,7 @@
 			x('svg').innerHTML = '<p class="kn-pin__hint">Đang tải sơ đồ…</p>';
 			return loadJSON(id + '.json').then(function (b) {
 				state.board = b;
-				state.pins = b.left.concat(b.right).filter(function (p) { return !p.gap; });
+				state.pins = pinsOf(b);
 				state.cat = null;
 				state.sel = null;
 				renderFilters();
@@ -354,7 +371,7 @@
 			x('svg').innerHTML = boardSVG(state.board, state.cat);
 			/* Board rộng (Uno) cần cả chiều ngang: đưa khung chi tiết xuống dưới sơ đồ */
 			var svg = x('svg').querySelector('svg');
-			root.querySelector('.kn-pin__main').classList.toggle('is-wide', !!svg && svg.viewBox.baseVal.width > 780);
+			root.querySelector('.kn-pin__main').classList.toggle('is-wide', !!svg && Number(svg.getAttribute('data-w')) > 780);
 		}
 
 		function renderNotes() {

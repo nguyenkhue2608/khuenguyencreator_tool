@@ -1,0 +1,247 @@
+{
+  "id": "stm8s103f3",
+  "name": "STM8S103F3 board",
+  "mcu": "STM8S103F3P6",
+  "family": "STM8",
+  "style": "stm32",
+  "logic": "3.3V / 5V",
+  "orientation": "Nhìn từ mặt trên, header SWIM ở phía trên, cổng micro USB (chỉ cấp nguồn) ở phía dưới. Các board xanh giá rẻ có thể đảo vị trí hai hàng, hãy đối chiếu chữ in trên board",
+  "shape": {
+    "w": 18.3,
+    "h": 30.5,
+    "rowGap": 15.24,
+    "start": 3.8,
+    "r": 0.8,
+    "parts": [
+      {
+        "type": "header",
+        "x": 5.34,
+        "y": 1.3,
+        "cols": 4,
+        "rows": 1
+      },
+      {
+        "type": "text",
+        "x": 9.15,
+        "y": 3.4,
+        "fs": 6,
+        "label": "3V3 SWIM GND RST"
+      },
+      {
+        "type": "chip",
+        "x": 6.4,
+        "y": 8.5,
+        "w": 5.5,
+        "h": 7.8,
+        "pins": 10,
+        "label": "STM8S\n103F3",
+        "fs": 7
+      },
+      {
+        "type": "button",
+        "x": 6.65,
+        "y": 19,
+        "w": 5,
+        "h": 3.6,
+        "label": "RESET"
+      },
+      {
+        "type": "led",
+        "x": 5,
+        "y": 25.2,
+        "w": 1.6,
+        "h": 0.9,
+        "color": "#3ddc84"
+      },
+      {
+        "type": "led",
+        "x": 11.7,
+        "y": 25.2,
+        "w": 1.6,
+        "h": 0.9,
+        "color": "#e53935"
+      },
+      {
+        "type": "usb",
+        "x": 5.4,
+        "y": 26.4,
+        "w": 7.5,
+        "h": 5.4
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "D4",
+      "name": "PD4",
+      "f": [
+        "pwm:TIM2_CH1",
+        "uart:UART1_CK",
+        "other:BEEP"
+      ]
+    },
+    {
+      "l": "D5",
+      "name": "PD5",
+      "f": [
+        "uart:UART1_TX",
+        "adc:AIN5"
+      ]
+    },
+    {
+      "l": "D6",
+      "name": "PD6",
+      "f": [
+        "uart:UART1_RX",
+        "adc:AIN6"
+      ]
+    },
+    {
+      "l": "RST",
+      "name": "NRST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Kéo LOW để reset"
+    },
+    {
+      "l": "A1",
+      "name": "PA1",
+      "f": [
+        "other:OSCIN"
+      ],
+      "note": "Chân thạch anh ngoài; board không gắn thạch anh nên dùng làm GPIO được"
+    },
+    {
+      "l": "A2",
+      "name": "PA2",
+      "f": [
+        "other:OSCOUT"
+      ],
+      "note": "Chân thạch anh ngoài; board không gắn thạch anh nên dùng làm GPIO được"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "5V từ cổng USB"
+    },
+    {
+      "l": "3V3",
+      "k": "power",
+      "note": "Ngõ ra 3.3V từ LDO"
+    },
+    {
+      "l": "A3",
+      "name": "PA3",
+      "f": [
+        "pwm:TIM2_CH3",
+        "spi:SPI_NSS"
+      ]
+    }
+  ],
+  "right": [
+    {
+      "l": "D3",
+      "name": "PD3",
+      "f": [
+        "adc:AIN4",
+        "pwm:TIM2_CH2",
+        "adc:ADC_ETR"
+      ]
+    },
+    {
+      "l": "D2",
+      "name": "PD2",
+      "f": [
+        "adc:AIN3",
+        "pwm:TIM2_CH3 (remap)"
+      ]
+    },
+    {
+      "l": "D1",
+      "name": "PD1",
+      "f": [
+        "other:SWIM"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân SWIM dùng để nạp code bằng ST-Link. Dùng làm GPIO thì không nạp lại được trừ khi reset giữ chip"
+    },
+    {
+      "l": "C7",
+      "name": "PC7",
+      "f": [
+        "spi:SPI_MISO",
+        "pwm:TIM1_CH2"
+      ]
+    },
+    {
+      "l": "C6",
+      "name": "PC6",
+      "f": [
+        "spi:SPI_MOSI",
+        "pwm:TIM1_CH1"
+      ]
+    },
+    {
+      "l": "C5",
+      "name": "PC5",
+      "f": [
+        "spi:SPI_SCK",
+        "pwm:TIM2_CH1 (remap)"
+      ]
+    },
+    {
+      "l": "C4",
+      "name": "PC4",
+      "f": [
+        "pwm:TIM1_CH4",
+        "adc:AIN2",
+        "other:CLK_CCO"
+      ]
+    },
+    {
+      "l": "C3",
+      "name": "PC3",
+      "f": [
+        "pwm:TIM1_CH3",
+        "int:TLI"
+      ]
+    },
+    {
+      "l": "B4",
+      "name": "PB4",
+      "f": [
+        "i2c:I2C_SCL"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Cực máng hở thật (true open-drain): không xuất được mức HIGH, cần điện trở kéo lên"
+    },
+    {
+      "l": "B5",
+      "name": "PB5",
+      "f": [
+        "i2c:I2C_SDA",
+        "other:LED test"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Cực máng hở thật, nối LED test trên board (sáng khi LOW). Cần điện trở kéo lên khi dùng I2C"
+    }
+  ],
+  "notes": [
+    "Chip chạy được ở 3.3V hoặc 5V; trên board mức logic là 3.3V khi cấp qua USB (qua LDO).",
+    "Nạp code bằng ST-Link V2 qua header SWIM (3V3, SWIM, GND, RST). Cổng micro USB chỉ dùng để cấp nguồn.",
+    "PB4, PB5 là cực máng hở thật: không xuất được mức HIGH, phải có điện trở kéo lên (kể cả khi dùng I2C).",
+    "ADC 10-bit có ở các kênh AIN2 (PC4), AIN3 (PD2), AIN4 (PD3), AIN5 (PD5), AIN6 (PD6)."
+  ]
+}

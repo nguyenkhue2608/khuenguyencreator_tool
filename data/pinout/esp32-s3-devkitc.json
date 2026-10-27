@@ -1,0 +1,441 @@
+{
+  "id": "esp32-s3-devkitc",
+  "name": "ESP32-S3-DevKitC-1",
+  "mcu": "ESP32-S3-WROOM-1",
+  "family": "ESP32",
+  "style": "esp",
+  "logic": "3.3V",
+  "orientation": "Nhìn từ mặt trên, anten ở phía trên, hai cổng USB ở phía dưới. Nhãn là số GPIO in trên board",
+  "shape": {
+    "w": 25.4,
+    "h": 62.7,
+    "rowGap": 22.86,
+    "start": 5.08,
+    "r": 1.2,
+    "parts": [
+      {
+        "type": "module",
+        "x": 3.7,
+        "y": 0,
+        "w": 18,
+        "h": 25.5
+      },
+      {
+        "type": "antenna",
+        "x": 4.6,
+        "y": 0.8,
+        "w": 16.2,
+        "h": 5
+      },
+      {
+        "type": "shield",
+        "x": 4.7,
+        "y": 7,
+        "w": 16,
+        "h": 17.5,
+        "label": "ESP32-S3\nWROOM-1",
+        "fs": 10
+      },
+      {
+        "type": "reg",
+        "x": 4.2,
+        "y": 29,
+        "w": 6.5,
+        "h": 7,
+        "label": "LDO"
+      },
+      {
+        "type": "chip",
+        "x": 14.6,
+        "y": 30.5,
+        "w": 5,
+        "h": 5,
+        "pins": 6,
+        "label": "USB-\nUART",
+        "fs": 6.5
+      },
+      {
+        "type": "led",
+        "x": 11.2,
+        "y": 39,
+        "w": 3,
+        "h": 3,
+        "color": "#f2f2f2"
+      },
+      {
+        "type": "text",
+        "x": 12.7,
+        "y": 44.6,
+        "fs": 7,
+        "label": "RGB"
+      },
+      {
+        "type": "button",
+        "x": 3.6,
+        "y": 47.5,
+        "w": 5,
+        "h": 5,
+        "label": "BOOT"
+      },
+      {
+        "type": "button",
+        "x": 16.8,
+        "y": 47.5,
+        "w": 5,
+        "h": 5,
+        "label": "RST"
+      },
+      {
+        "type": "usb",
+        "x": 3.4,
+        "y": 57.6,
+        "w": 8.6,
+        "h": 5.8
+      },
+      {
+        "type": "usb",
+        "x": 13.4,
+        "y": 57.6,
+        "w": 8.6,
+        "h": 5.8
+      }
+    ]
+  },
+  "left": [
+    {
+      "l": "3V3",
+      "k": "power"
+    },
+    {
+      "l": "3V3",
+      "k": "power"
+    },
+    {
+      "l": "RST",
+      "k": "sys",
+      "f": [
+        "other:CHIP_PU / RESET"
+      ],
+      "note": "Kéo LOW để reset"
+    },
+    {
+      "l": "4",
+      "name": "GPIO4",
+      "f": [
+        "adc:ADC1_CH3",
+        "touch:TOUCH4"
+      ]
+    },
+    {
+      "l": "5",
+      "name": "GPIO5",
+      "f": [
+        "adc:ADC1_CH4",
+        "touch:TOUCH5"
+      ]
+    },
+    {
+      "l": "6",
+      "name": "GPIO6",
+      "f": [
+        "adc:ADC1_CH5",
+        "touch:TOUCH6"
+      ]
+    },
+    {
+      "l": "7",
+      "name": "GPIO7",
+      "f": [
+        "adc:ADC1_CH6",
+        "touch:TOUCH7"
+      ]
+    },
+    {
+      "l": "15",
+      "name": "GPIO15",
+      "f": [
+        "adc:ADC2_CH4",
+        "other:XTAL_32K_P"
+      ]
+    },
+    {
+      "l": "16",
+      "name": "GPIO16",
+      "f": [
+        "adc:ADC2_CH5",
+        "other:XTAL_32K_N"
+      ]
+    },
+    {
+      "l": "17",
+      "name": "GPIO17",
+      "f": [
+        "uart:U1_TXD",
+        "adc:ADC2_CH6"
+      ]
+    },
+    {
+      "l": "18",
+      "name": "GPIO18",
+      "f": [
+        "uart:U1_RXD",
+        "adc:ADC2_CH7"
+      ]
+    },
+    {
+      "l": "8",
+      "name": "GPIO8",
+      "f": [
+        "i2c:SDA (Wire)",
+        "adc:ADC1_CH7",
+        "touch:TOUCH8"
+      ]
+    },
+    {
+      "l": "3",
+      "name": "GPIO3",
+      "f": [
+        "adc:ADC1_CH2",
+        "touch:TOUCH3"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping (chọn nguồn JTAG). Tránh kéo mức cố định khi khởi động"
+    },
+    {
+      "l": "46",
+      "name": "GPIO46",
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping (chế độ boot, log ROM). Phải LOW khi khởi động"
+    },
+    {
+      "l": "9",
+      "name": "GPIO9",
+      "f": [
+        "i2c:SCL (Wire)",
+        "adc:ADC1_CH8",
+        "touch:TOUCH9"
+      ]
+    },
+    {
+      "l": "10",
+      "name": "GPIO10",
+      "f": [
+        "spi:FSPI_CS (SS)",
+        "adc:ADC1_CH9",
+        "touch:TOUCH10"
+      ]
+    },
+    {
+      "l": "11",
+      "name": "GPIO11",
+      "f": [
+        "spi:FSPI_MOSI",
+        "adc:ADC2_CH0",
+        "touch:TOUCH11"
+      ]
+    },
+    {
+      "l": "12",
+      "name": "GPIO12",
+      "f": [
+        "spi:FSPI_SCK",
+        "adc:ADC2_CH1",
+        "touch:TOUCH12"
+      ]
+    },
+    {
+      "l": "13",
+      "name": "GPIO13",
+      "f": [
+        "spi:FSPI_MISO",
+        "adc:ADC2_CH2",
+        "touch:TOUCH13"
+      ]
+    },
+    {
+      "l": "14",
+      "name": "GPIO14",
+      "f": [
+        "adc:ADC2_CH3",
+        "touch:TOUCH14"
+      ]
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nguồn 5V từ cổng USB, hoặc cấp 5V vào"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    }
+  ],
+  "right": [
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "TX",
+      "name": "GPIO43",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "Nối chip USB-UART (cổng UART trên board), xuất log khi khởi động"
+    },
+    {
+      "l": "RX",
+      "name": "GPIO44",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "Nối chip USB-UART (cổng UART trên board), xuất log khi khởi động"
+    },
+    {
+      "l": "1",
+      "name": "GPIO1",
+      "f": [
+        "adc:ADC1_CH0",
+        "touch:TOUCH1"
+      ]
+    },
+    {
+      "l": "2",
+      "name": "GPIO2",
+      "f": [
+        "adc:ADC1_CH1",
+        "touch:TOUCH2"
+      ]
+    },
+    {
+      "l": "42",
+      "name": "GPIO42",
+      "f": [
+        "other:MTMS (JTAG)"
+      ]
+    },
+    {
+      "l": "41",
+      "name": "GPIO41",
+      "f": [
+        "other:MTDI (JTAG)"
+      ]
+    },
+    {
+      "l": "40",
+      "name": "GPIO40",
+      "f": [
+        "other:MTDO (JTAG)"
+      ]
+    },
+    {
+      "l": "39",
+      "name": "GPIO39",
+      "f": [
+        "other:MTCK (JTAG)"
+      ]
+    },
+    {
+      "l": "38",
+      "name": "GPIO38",
+      "f": [
+        "other:RGB LED (v1.1)"
+      ]
+    },
+    {
+      "l": "37",
+      "name": "GPIO37",
+      "t": [
+        "warn"
+      ],
+      "note": "Module có PSRAM Octal (N8R8, N16R8…) dùng chân này cho PSRAM, không dùng làm GPIO"
+    },
+    {
+      "l": "36",
+      "name": "GPIO36",
+      "t": [
+        "warn"
+      ],
+      "note": "Module có PSRAM Octal (N8R8, N16R8…) dùng chân này cho PSRAM, không dùng làm GPIO"
+    },
+    {
+      "l": "35",
+      "name": "GPIO35",
+      "t": [
+        "warn"
+      ],
+      "note": "Module có PSRAM Octal (N8R8, N16R8…) dùng chân này cho PSRAM, không dùng làm GPIO"
+    },
+    {
+      "l": "0",
+      "name": "GPIO0",
+      "f": [
+        "other:BOOT (nút)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping nối nút BOOT: giữ LOW khi khởi động để vào chế độ nạp"
+    },
+    {
+      "l": "45",
+      "name": "GPIO45",
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping (chọn điện áp flash). Phải LOW khi khởi động"
+    },
+    {
+      "l": "48",
+      "name": "GPIO48",
+      "f": [
+        "other:RGB LED (v1.0)"
+      ]
+    },
+    {
+      "l": "47",
+      "name": "GPIO47"
+    },
+    {
+      "l": "21",
+      "name": "GPIO21"
+    },
+    {
+      "l": "20",
+      "name": "GPIO20",
+      "f": [
+        "usb:USB_D+",
+        "adc:ADC2_CH9"
+      ],
+      "note": "USB native của ESP32-S3 (cổng USB thứ hai trên board)"
+    },
+    {
+      "l": "19",
+      "name": "GPIO19",
+      "f": [
+        "usb:USB_D−",
+        "adc:ADC2_CH8"
+      ],
+      "note": "USB native của ESP32-S3 (cổng USB thứ hai trên board)"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    }
+  ],
+  "notes": [
+    "Mức logic 3.3V, các chân không chịu được 5V.",
+    "Mọi GPIO đều xuất PWM được (LEDC 8 kênh) và có ngắt. I2C, SPI, UART gán được sang chân bất kỳ qua GPIO matrix; bảng trên là chân mặc định của Arduino core.",
+    "ADC1 ở GPIO1–10, ADC2 ở GPIO11–20. ADC2 không ổn định khi đang dùng WiFi.",
+    "Chân strapping: GPIO0, GPIO3, GPIO45, GPIO46. GPIO35–37 bị PSRAM Octal chiếm trên module N8R8 / N16R8.",
+    "RGB LED (WS2812) nối GPIO48 trên bản v1.0, GPIO38 trên bản v1.1."
+  ]
+}
