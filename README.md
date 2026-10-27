@@ -18,6 +18,8 @@ kn-tools/
 │   ├── common/kn-tools.css   # style chung, scope dưới .kn-tool
 │   └── tools/<slug>/         # tool.js (+ tool.css) của từng tool
 ├── data/pinout/              # dữ liệu board cho Pinout viewer
+├── content/<slug>.html       # bài giải thích đặt dưới tool trên Page WordPress
+├── preview/                  # trang xem trước độc lập (mô phỏng Flatsome)
 └── build.sh                  # đóng gói dist/kn-tools.zip
 ```
 
@@ -81,3 +83,7 @@ kn-tools/
 2. Tạo `assets/tools/<slug>/tool.js`: tìm `#kn-tool-<slug>` rồi render giao diện vào đó.
 3. Tạo Page con của `/tools/` với slug `<slug>`, nội dung `[kn_tool slug="<slug>"]` + bài giải thích.
 4. `./build.sh` → upload `dist/kn-tools.zip`.
+
+## Xem trước giao diện
+
+`python3 preview/build.py <slug>` tạo `dist/preview/<slug>.html`, một file HTML đã inline CSS/JS, mở thẳng bằng trình duyệt để xem tool cùng bài giải thích mà không cần WordPress. Thông tin tiêu đề trang nằm trong `preview/pages.json`.

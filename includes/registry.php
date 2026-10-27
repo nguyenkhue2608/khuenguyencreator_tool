@@ -33,7 +33,7 @@ function kn_tools_registry() {
 		'opamp-gain'             => array( 'group' => 'phan-cung', 'title' => 'Hệ số khuếch đại Op-amp', 'status' => 'planned' ),
 
 		// 2. MCU
-		'stm32-timer-pwm'        => array( 'group' => 'mcu', 'title' => 'STM32 Timer / PWM calculator', 'status' => 'planned' ),
+		'stm32-timer-pwm'        => array( 'group' => 'mcu', 'title' => 'STM32 Timer / PWM calculator', 'status' => 'live' ),
 		'pinout'                 => array( 'group' => 'mcu', 'title' => 'Pinout viewer', 'status' => 'planned' ),
 
 		// 3. Dữ liệu / giao thức

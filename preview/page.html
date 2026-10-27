@@ -1,0 +1,68 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700;800&display=swap">
+<style>
+/* Trang preview mô phỏng một Page của khuenguyencreator.com (Flatsome, nền sáng).
+   Cố ý chỉ có giao diện sáng giống site thật. Layout: thanh header -> breadcrumb -> cột nội dung 1080px. */
+:root {
+	--site-bg: #ffffff;
+	--site-ink: #1c2a27;
+	--site-muted: #5d6b67;
+	--site-line: #e3e9e7;
+	--site-header: #00935b;
+	--site-header-ink: #ffffff;
+	--site-link: #00704a;
+	--site-code-bg: #f2f5f4;
+	--font-body: "Mulish", "Segoe UI", Roboto, Arial, sans-serif;
+	color-scheme: light;
+}
+body { background: var(--site-bg); color: var(--site-ink); font-family: var(--font-body); font-size: 16px; line-height: 1.65; }
+a { color: var(--site-link); }
+.site-header { background: var(--site-header); color: var(--site-header-ink); }
+.site-header__inner, .page {
+	max-width: 1080px;
+	margin: 0 auto;
+	padding-left: max(16px, env(safe-area-inset-left, 0px));
+	padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 14px; }
+.site-header__brand { font-weight: 800; font-size: 18px; letter-spacing: .01em; }
+.site-header__nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; font-weight: 700; }
+.site-header__nav span { opacity: .85; }
+.site-header__nav .is-current { opacity: 1; border-bottom: 2px solid var(--site-header-ink); }
+.page { padding-block: 24px 64px; }
+.crumbs { font-size: 13px; color: var(--site-muted); margin-bottom: 8px; }
+.page h1 { font-size: clamp(24px, 4vw, 32px); line-height: 1.25; font-weight: 800; margin: 0 0 10px; text-wrap: balance; }
+.page .intro { color: var(--site-muted); max-width: 70ch; margin: 0 0 24px; }
+.article { max-width: 760px; }
+.article h2 { font-size: 22px; line-height: 1.3; margin: 32px 0 10px; text-wrap: balance; }
+.article p, .article ul { margin: 0 0 14px; }
+.article pre { background: var(--site-code-bg); padding: 12px 14px; border-radius: 6px; overflow-x: auto; font-size: 14px; }
+.article code { background: var(--site-code-bg); padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+.preview-note { font-size: 12px; color: var(--site-muted); border-top: 1px solid var(--site-line); margin-top: 40px; padding-top: 12px; }
+</style>
+<style>
+{{CSS}}
+</style>
+
+<header class="site-header">
+	<div class="site-header__inner">
+		<span class="site-header__brand">Khuê Nguyễn Creator</span>
+		<nav class="site-header__nav"><span>Học lập trình MCU</span><span>Điện tử &amp; Phần cứng</span><span>Lập trình IoT</span><span class="is-current">Công cụ</span></nav>
+	</div>
+</header>
+<main class="page">
+	<div class="crumbs">Trang chủ › Công cụ › {{TITLE}}</div>
+	<h1>{{H1}}</h1>
+	<p class="intro">{{INTRO}}</p>
+	<div class="kn-tool" id="kn-tool-{{SLUG}}" data-tool="{{SLUG}}"></div>
+	<div class="article">
+{{CONTENT}}
+	</div>
+	<p class="preview-note">Bản xem trước của plugin KN Tools. Header và font mô phỏng theme Flatsome của site, không phải trang thật.</p>
+</main>
+<script>
+window.KN_TOOLS = { dataUrl: "" };
+{{JS}}
+</script>

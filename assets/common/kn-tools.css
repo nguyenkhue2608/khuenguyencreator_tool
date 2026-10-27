@@ -1,26 +1,75 @@
-/* Mọi style đều nằm dưới .kn-tool / .kn-tools-hub để không đụng CSS của Flatsome. */
+/* Mọi style đều nằm dưới .kn-tool / .kn-tools-hub để không đụng CSS của Flatsome.
+   Font kế thừa từ theme (Mulish); chỉ số liệu và code dùng font monospace. */
+.kn-tool,
+.kn-tools-hub {
+	--kn-accent: #00935b;      /* primary color của khuenguyencreator.com (Flatsome) */
+	--kn-accent-ink: #00704a;  /* accent đậm cho chữ trên nền sáng */
+	--kn-accent-soft: #e6f4ee;
+	--kn-ink: #1c2a27;
+	--kn-muted: #5d6b67;
+	--kn-line: #d8e1de;
+	--kn-panel: #f5f8f7;
+	--kn-paper: #ffffff;
+	--kn-warn: #a35f00;
+	--kn-warn-soft: #fff4e0;
+	--kn-error: #b42318;
+	--kn-error-soft: #fdecea;
+	--kn-mono: ui-monospace, "SFMono-Regular", Consolas, Menlo, monospace;
+}
+
 .kn-tool {
-	--kn-border: #dfe3e8;
-	--kn-bg: #f7f9fb;
-	--kn-accent: #446084; /* màu primary mặc định của Flatsome, đổi theo theme */
-	border: 1px solid var(--kn-border);
-	border-radius: 8px;
-	background: var(--kn-bg);
-	padding: 20px;
-	margin: 0 0 30px;
+	color: var(--kn-ink);
+	background: var(--kn-paper);
+	border: 1px solid var(--kn-line);
+	border-radius: 10px;
+	margin: 0 0 32px;
+	overflow: hidden;
 }
 
-.kn-tool label { display: block; font-weight: 600; margin-bottom: 4px; }
+.kn-tool *,
+.kn-tool *::before,
+.kn-tool *::after { box-sizing: border-box; }
+
+/* Flatsome đặt margin-bottom cho input/select/button; reset trong tool. */
 .kn-tool input,
-.kn-tool select { margin-bottom: 12px; }
-.kn-tool .kn-result {
-	background: #fff;
-	border-left: 4px solid var(--kn-accent);
-	padding: 12px 16px;
-	font-family: Consolas, Menlo, monospace;
+.kn-tool select,
+.kn-tool button { margin: 0; font-family: inherit; }
+
+.kn-tool input[type="number"],
+.kn-tool input[type="text"],
+.kn-tool select {
+	width: 100%;
+	height: 40px;
+	padding: 0 10px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-size: 15px;
+	box-shadow: none;
 }
 
+.kn-tool input:focus,
+.kn-tool select:focus,
+.kn-tool button:focus-visible {
+	outline: 2px solid var(--kn-accent);
+	outline-offset: 1px;
+	border-color: var(--kn-accent);
+}
+
+.kn-tool .kn-mono { font-family: var(--kn-mono); font-variant-numeric: tabular-nums; }
+
+/* ---- Hub ---- */
 .kn-tools-hub__list { list-style: none; margin-left: 0; }
 .kn-tools-hub__list li { margin-bottom: 6px; }
-.kn-tools-hub__list .is-planned { color: #999; }
-.kn-tools-hub__list .is-planned span { font-size: 12px; background: #eee; border-radius: 4px; padding: 1px 6px; }
+.kn-tools-hub__list .is-planned { color: var(--kn-muted); }
+.kn-tools-hub__list .is-planned span {
+	font-size: 12px;
+	background: var(--kn-panel);
+	border: 1px solid var(--kn-line);
+	border-radius: 4px;
+	padding: 1px 6px;
+}
+
+/* Flatsome/tool CSS có thể đặt display cho phần tử; giữ [hidden] luôn ẩn. */
+.kn-tool [hidden] { display: none !important; }
