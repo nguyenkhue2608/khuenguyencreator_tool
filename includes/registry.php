@@ -36,7 +36,7 @@ function kn_tools_registry() {
 		// 2. MCU
 		'stm32-timer-interrupt'  => array( 'group' => 'mcu', 'title' => 'STM32: tính thời gian ngắt Timer', 'status' => 'live', 'deps' => array( 'stm32-clock' ) ),
 		'stm32-pwm'              => array( 'group' => 'mcu', 'title' => 'STM32: tính tần số và duty PWM', 'status' => 'live', 'deps' => array( 'stm32-clock' ) ),
-		'pinout'                 => array( 'group' => 'mcu', 'title' => 'Pinout viewer', 'status' => 'planned' ),
+		'pinout'                 => array( 'group' => 'mcu', 'title' => 'Pinout viewer', 'status' => 'live' ),
 
 		// 3. Dữ liệu / giao thức
 		'crc'                    => array( 'group' => 'du-lieu', 'title' => 'CRC & Checksum', 'status' => 'planned' ),

@@ -3,12 +3,22 @@
     "title": "STM32 Timer Interrupt Calculator",
     "h1": "Tính thời gian ngắt Timer STM32",
     "intro": "Chọn chip và timer, nhập thời gian muốn ngắt, công cụ trả về Prescaler và Counter Period để điền vào STM32CubeMX, kèm clock tree từ SYSCLK tới timer.",
-    "deps": ["stm32-clock"]
+    "deps": [
+      "stm32-clock"
+    ]
   },
   "stm32-pwm": {
     "title": "STM32 PWM Calculator",
     "h1": "Tính tần số và duty PWM STM32",
     "intro": "Chọn chip và timer, nhập tần số PWM và duty, công cụ trả về Prescaler, Counter Period và Pulse để điền vào STM32CubeMX, kèm clock tree từ SYSCLK tới timer.",
-    "deps": ["stm32-clock"]
+    "deps": [
+      "stm32-clock"
+    ]
+  },
+  "pinout": {
+    "title": "Pinout Viewer",
+    "h1": "Sơ đồ chân ESP32, STM32, Arduino, 8051",
+    "intro": "Chọn board để xem sơ đồ chân, lọc theo chức năng ADC, PWM, UART, I2C, SPI và bấm vào từng chân để xem chi tiết cùng các lưu ý khi đấu nối.",
+    "data": "pinout"
   }
 }

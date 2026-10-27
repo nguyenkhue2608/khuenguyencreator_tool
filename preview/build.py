@@ -20,6 +20,10 @@ def build(slug):
     deps = meta.get("deps", [])
     css = "\n".join([read("assets/common/kn-tools.css")] + [read(f"assets/common/{d}.css") for d in deps] + [read(f"assets/tools/{slug}/tool.css")])
     js = "\n".join([read(f"assets/common/{d}.js") for d in deps] + [read(f"assets/tools/{slug}/tool.js")])
+    if meta.get("data"):
+        files = sorted((ROOT / "data" / meta["data"]).glob("*.json"))
+        bundle = {f.name: json.loads(f.read_text(encoding="utf-8")) for f in files}
+        js = "window.KN_PINOUT_DATA = " + json.dumps(bundle, ensure_ascii=False) + ";\n" + js
     content = "\n".join(l for l in read(f"content/{slug}.html").splitlines() if not l.startswith("<!--"))
     html = read("preview/page.html")
     for key, val in {

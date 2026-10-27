@@ -1,0 +1,24 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/pinout/ (và các trang con theo board). Dán vào Flatsome (element Text) hoặc trình soạn thảo WordPress. -->
+<h2>Cách đọc sơ đồ chân</h2>
+<p>Mỗi chân trên sơ đồ có ba phần. <strong>Ô nhãn</strong> sát board là chữ in trên mạch, ví dụ <code>D2</code> hay <code>A9</code>. Cột <strong>Chân chip</strong> trong bảng là tên chân thật của vi điều khiển, ví dụ <code>GPIO2</code> hay <code>PA9</code>, đây là tên bạn dùng trong code và trong STM32CubeMX. Các <strong>ô màu</strong> bên ngoài là chức năng của chân, mỗi màu ứng với một nhóm: ADC, PWM / Timer, UART, I2C, SPI…</p>
+<p>Ô nhãn màu đỏ là chân nguồn, màu đen là GND, màu xám là chân hệ thống như RESET hay thạch anh. Chân có chấm vàng là chân cần lưu ý, thường là chân ảnh hưởng tới việc khởi động.</p>
+
+<h2>Lọc nhanh theo chức năng</h2>
+<p>Muốn biết board có những chân UART nào, bấm nút <em>UART</em> ở thanh lọc: các chân khác sẽ mờ đi. Ô tìm kiếm nhận cả nhãn, tên chân và tên chức năng, ví dụ gõ <code>ADC1</code> để xem các chân ADC1 của ESP32 hay <code>TIM2</code> để xem các kênh của Timer 2 trên Blue Pill.</p>
+
+<h2>Những lỗi đấu nối hay gặp</h2>
+<ul>
+	<li><strong>ESP32:</strong> nối cảm biến kéo GPIO12 lên HIGH làm chip không khởi động. GPIO34–39 chỉ là ngõ vào. ADC2 không đọc được khi đang bật WiFi.</li>
+	<li><strong>ESP8266:</strong> D3, D4 phải ở mức HIGH và D8 ở mức LOW lúc khởi động. Nối relay hay nút nhấn kéo ngược mức ở các chân này sẽ làm board không chạy.</li>
+	<li><strong>STM32 Blue Pill:</strong> PA11, PA12 đã nối với cổng USB. PB3, PB4, PA15 mặc định là chân JTAG, phải chọn <em>Debug: Serial Wire</em> trong CubeMX mới dùng làm GPIO được.</li>
+	<li><strong>Arduino:</strong> D0, D1 dùng chung với cổng nạp, cắm module vào hai chân này có thể làm nạp code thất bại.</li>
+	<li><strong>8051:</strong> quên nối chân EA lên VCC hoặc quên điện trở kéo lên cho Port 0.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-esp32-tu-a-toi-z/">Lập trình ESP32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-8051-tu-a-toi-z-voi-at89s52/">Lập trình 8051 từ A tới Z với AT89S52</a></li>
+	<li><a href="https://khuenguyencreator.com/bai-1-huong-dan-cai-dat-arduino-ide-va-cach-them-thu-vien/">Hướng dẫn cài đặt Arduino IDE</a></li>
+</ul>

@@ -41,7 +41,7 @@ kn-tools/
 ├── 2. Cấu hình MCU
 │   ├── STM32: thời gian ngắt Timer       stm32-timer-interrupt
 │   ├── STM32: tần số và duty PWM         stm32-pwm
-│   └── Pinout viewer                     pinout   (board: data/pinout/boards.json)
+│   └── Pinout viewer                     pinout   (board: data/pinout/boards.json, mỗi board một file JSON)
 ├── 3. Xử lý dữ liệu / giao thức
 │   ├── CRC & Checksum                    crc
 │   ├── Hex ↔ Dec ↔ Bin + Bitfield        hex-dec-bin
@@ -88,3 +88,9 @@ kn-tools/
 ## Xem trước giao diện
 
 `python3 preview/build.py <slug>` tạo `dist/preview/<slug>.html`, một file HTML đã inline CSS/JS, mở thẳng bằng trình duyệt để xem tool cùng bài giải thích mà không cần WordPress. Thông tin tiêu đề trang nằm trong `preview/pages.json`.
+
+## Pinout viewer
+
+- Mỗi board là một file `data/pinout/<id>.json` (định dạng ghi ở đầu `assets/tools/pinout/tool.js`). Thêm board: tạo file JSON rồi đặt `"ready": true` cho board đó trong `data/pinout/boards.json`.
+- Trang chung: `[kn_tool slug="pinout"]`. Trang riêng cho từng board (tốt cho SEO): `[kn_tool slug="pinout" board="esp32-devkit-v1"]`.
+- Đã có: ESP32 DevKit V1 (30 chân), ESP8266 NodeMCU, STM32 Blue Pill, Arduino Uno, Arduino Nano, AT89S52.

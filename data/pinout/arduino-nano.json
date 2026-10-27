@@ -1,0 +1,49 @@
+{
+  "id": "arduino-nano",
+  "name": "Arduino Nano",
+  "mcu": "ATmega328P",
+  "family": "Arduino",
+  "style": "arduino",
+  "logic": "5V",
+  "orientation": "Nhìn từ mặt trên, cổng USB ở phía trên. Đối chiếu thêm chữ in trên board vì một số bản clone đảo mặt",
+  "connector": "usb-top",
+  "left": [
+    { "n": 15, "l": "D12", "name": "PB4", "f": ["spi:MISO", "int:PCINT4"] },
+    { "n": 14, "l": "D11", "name": "PB3", "f": ["pwm:PWM (OC2A)", "spi:MOSI", "int:PCINT3"] },
+    { "n": 13, "l": "D10", "name": "PB2", "f": ["pwm:PWM (OC1B)", "spi:SS", "int:PCINT2"] },
+    { "n": 12, "l": "D9", "name": "PB1", "f": ["pwm:PWM (OC1A)", "int:PCINT1"] },
+    { "n": 11, "l": "D8", "name": "PB0", "f": ["pwm:ICP1", "other:CLKO", "int:PCINT0"] },
+    { "n": 10, "l": "D7", "name": "PD7", "f": ["other:AIN1", "int:PCINT23"] },
+    { "n": 9, "l": "D6", "name": "PD6", "f": ["pwm:PWM (OC0A)", "other:AIN0", "int:PCINT22"], "note": "PWM khoảng 980 Hz" },
+    { "n": 8, "l": "D5", "name": "PD5", "f": ["pwm:PWM (OC0B)", "pwm:T1", "int:PCINT21"], "note": "PWM khoảng 980 Hz" },
+    { "n": 7, "l": "D4", "name": "PD4", "f": ["pwm:T0", "uart:XCK", "int:PCINT20"] },
+    { "n": 6, "l": "D3", "name": "PD3", "f": ["pwm:PWM (OC2B)", "int:INT1", "int:PCINT19"] },
+    { "n": 5, "l": "D2", "name": "PD2", "f": ["int:INT0", "int:PCINT18"] },
+    { "n": 4, "l": "GND", "k": "gnd" },
+    { "n": 3, "l": "RST", "k": "sys", "f": ["other:RESET"], "note": "Kéo xuống LOW để reset" },
+    { "n": 2, "l": "RX0", "name": "PD0", "f": ["uart:RX", "int:PCINT16"], "note": "D0. Nối chip USB-Serial, tránh dùng khi đang nạp code" },
+    { "n": 1, "l": "TX1", "name": "PD1", "f": ["uart:TX", "int:PCINT17"], "note": "D1. Nối chip USB-Serial, tránh dùng khi đang nạp code" }
+  ],
+  "right": [
+    { "n": 16, "l": "D13", "name": "PB5", "f": ["spi:SCK", "other:LED_BUILTIN", "int:PCINT5"], "note": "Nối LED L trên board" },
+    { "n": 17, "l": "3V3", "k": "power", "note": "Ngõ ra 3.3V, dòng nhỏ (lấy từ chip USB-Serial hoặc LDO tùy bản)" },
+    { "n": 18, "l": "AREF", "k": "sys", "f": ["adc:AREF"], "note": "Điện áp tham chiếu ngoài cho ADC" },
+    { "n": 19, "l": "A0", "name": "PC0", "f": ["adc:ADC0", "int:PCINT8"] },
+    { "n": 20, "l": "A1", "name": "PC1", "f": ["adc:ADC1", "int:PCINT9"] },
+    { "n": 21, "l": "A2", "name": "PC2", "f": ["adc:ADC2", "int:PCINT10"] },
+    { "n": 22, "l": "A3", "name": "PC3", "f": ["adc:ADC3", "int:PCINT11"] },
+    { "n": 23, "l": "A4", "name": "PC4", "f": ["adc:ADC4", "i2c:SDA", "int:PCINT12"] },
+    { "n": 24, "l": "A5", "name": "PC5", "f": ["adc:ADC5", "i2c:SCL", "int:PCINT13"] },
+    { "n": 25, "l": "A6", "name": "ADC6", "f": ["adc:ADC6"], "t": ["in"], "note": "Chỉ đọc analog, không dùng được như chân digital" },
+    { "n": 26, "l": "A7", "name": "ADC7", "f": ["adc:ADC7"], "t": ["in"], "note": "Chỉ đọc analog, không dùng được như chân digital" },
+    { "n": 27, "l": "5V", "k": "power", "note": "Ngõ ra 5V khi cấp qua USB/VIN, hoặc ngõ vào 5V ổn định" },
+    { "n": 28, "l": "RST", "k": "sys", "f": ["other:RESET"] },
+    { "n": 29, "l": "GND", "k": "gnd" },
+    { "n": 30, "l": "VIN", "k": "power", "note": "Nguồn vào 7–12V" }
+  ],
+  "notes": [
+    "Cùng vi điều khiển ATmega328P với Uno nên chức năng các chân giống nhau, có thêm A6 và A7 chỉ đọc analog.",
+    "PWM (analogWrite) có ở D3, D5, D6, D9, D10, D11. Ngắt ngoài attachInterrupt() ở D2 và D3.",
+    "Mức logic 5V, dòng mỗi chân nên giữ dưới 20 mA."
+  ]
+}

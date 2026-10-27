@@ -1,6 +1,7 @@
 <?php
 /**
- * [kn_tool slug="stm32-timer-pwm"]  -> render một tool, chỉ load JS/CSS của tool đó.
+ * [kn_tool slug="stm32-pwm"]        -> render một tool, chỉ load JS/CSS của tool đó.
+ * [kn_tool slug="pinout" board="esp32-devkit-v1"] -> Pinout viewer mở sẵn một board (trang riêng cho từng board).
  * [kn_tools_hub]                    -> danh sách tool theo nhóm (trang /tools/).
  */
 
@@ -18,7 +19,7 @@ function kn_tools_enqueue_common() {
 }
 
 function kn_tools_render_tool( $atts ) {
-	$atts  = shortcode_atts( array( 'slug' => '' ), $atts, 'kn_tool' );
+	$atts  = shortcode_atts( array( 'slug' => '', 'board' => '' ), $atts, 'kn_tool' );
 	$slug  = sanitize_key( $atts['slug'] );
 	$tools = kn_tools_registry();
 
@@ -50,7 +51,9 @@ function kn_tools_render_tool( $atts ) {
 		wp_localize_script( 'kn-tool-' . $slug, 'KN_TOOLS', array( 'dataUrl' => KN_TOOLS_URL . 'data/' ) );
 	}
 
-	return '<div class="kn-tool" id="kn-tool-' . esc_attr( $slug ) . '" data-tool="' . esc_attr( $slug ) . '">'
+	$extra = $atts['board'] ? ' data-board="' . esc_attr( sanitize_key( $atts['board'] ) ) . '"' : '';
+
+	return '<div class="kn-tool" id="kn-tool-' . esc_attr( $slug ) . '" data-tool="' . esc_attr( $slug ) . '"' . $extra . '>'
 		. '<noscript>Công cụ này cần bật JavaScript.</noscript></div>';
 }
 

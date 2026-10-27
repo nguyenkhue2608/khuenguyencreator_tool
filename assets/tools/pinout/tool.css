@@ -1,0 +1,148 @@
+/* Pinout viewer. Layout: thanh chọn board + tìm -> bộ lọc chức năng -> [sơ đồ | chi tiết chân] -> lưu ý -> bảng chân. */
+
+.kn-pin__bar {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 12px;
+	padding: 20px 20px 0;
+}
+.kn-pin__field { display: grid; gap: 6px; min-width: 0; }
+.kn-pin__field > label { font-size: 13px; font-weight: 700; margin: 0; color: var(--kn-ink); }
+
+.kn-pin__filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	padding: 14px 20px;
+	border-bottom: 1px solid var(--kn-line);
+}
+.kn-pin__filters button {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	height: 30px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 999px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	line-height: 1;
+	min-height: 0;
+	cursor: pointer;
+}
+.kn-pin__filters button:hover { border-color: var(--kn-accent); }
+.kn-pin__filters button[aria-pressed="true"] { background: var(--kn-ink); border-color: var(--kn-ink); color: var(--kn-paper); }
+.kn-pin__count { font-size: 13px; color: var(--kn-muted); margin-left: 4px; }
+.kn-pin__dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+
+.kn-pin__main {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 300px;
+	gap: 20px;
+	padding: 20px;
+	align-items: start;
+}
+
+.kn-pin__diagram { overflow-x: auto; min-width: 0; }
+.kn-pin__diagram svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+.kn-pin__p { cursor: pointer; outline: none; transition: opacity .15s; }
+.kn-pin__hl { fill: var(--kn-accent-soft); opacity: 0; }
+.kn-pin__p:hover .kn-pin__hl,
+.kn-pin__p:focus-visible .kn-pin__hl { opacity: .7; }
+.kn-pin__p.is-sel .kn-pin__hl { opacity: 1; }
+.kn-pin__p.is-sel .kn-pin__lbl { stroke: var(--kn-accent) !important; stroke-width: 2.5; }
+.kn-pin__p.is-dim { opacity: .18; }
+.kn-pin__p.is-sel { opacity: 1; }
+
+.kn-pin__detail {
+	border: 1px solid var(--kn-line);
+	border-radius: 8px;
+	padding: 16px;
+	background: var(--kn-panel);
+	display: grid;
+	gap: 12px;
+	min-width: 0;
+}
+.kn-pin__h { margin: 0 0 8px; font-size: 16px; }
+.kn-pin__detail .kn-pin__h { margin: 0; }
+.kn-pin__hint { font-size: 13px; color: var(--kn-muted); margin: 0; line-height: 1.5; }
+.kn-pin__msg { font-size: 14px; line-height: 1.5; margin: 0; padding: 10px 12px; border-radius: 6px; background: var(--kn-paper); border: 1px solid var(--kn-line); }
+.kn-pin__msg.is-warn { background: var(--kn-warn-soft); border-color: transparent; color: var(--kn-warn); }
+
+.kn-pin__dl { margin: 0; display: grid; gap: 0; }
+.kn-pin__dl > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--kn-line); font-size: 14px; }
+.kn-pin__dl dt { margin: 0; color: var(--kn-muted); font-weight: 400; display: flex; align-items: center; gap: 6px; }
+.kn-pin__dl dd { margin: 0; font-family: var(--kn-mono); font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+
+.kn-pin__d-head { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 15px; font-weight: 700; }
+.kn-pin__lbl-h {
+	display: inline-block;
+	min-width: 44px;
+	padding: 2px 8px;
+	border: 1px solid;
+	border-radius: 4px;
+	font-family: var(--kn-mono);
+	font-size: 13px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.kn-pin__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.kn-pin__tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--kn-accent-soft); color: var(--kn-accent-ink); white-space: nowrap; }
+.kn-pin__tag.is-in { background: #ede9fe; color: #5b21b6; }
+.kn-pin__tag.is-warn { background: var(--kn-warn-soft); color: var(--kn-warn); }
+
+.kn-pin__legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12px; color: var(--kn-muted); }
+.kn-pin__legend span { display: inline-flex; align-items: center; gap: 6px; }
+.kn-pin__legend i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; border: 1px solid; }
+.kn-pin__legend i.is-warn { width: 9px; height: 9px; border-radius: 50%; background: #f59e0b; border-color: #f59e0b; }
+
+.kn-pin__link {
+	justify-self: start;
+	border: none;
+	background: none;
+	padding: 0;
+	height: auto;
+	min-height: 0;
+	line-height: 1.4;
+	color: var(--kn-accent-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	cursor: pointer;
+}
+
+.kn-pin__more { border-top: 1px solid var(--kn-line); padding: 20px; display: grid; gap: 24px; }
+.kn-pin__notes { margin: 0 0 0 18px; padding: 0; font-size: 14px; line-height: 1.6; }
+.kn-pin__notes li { margin-bottom: 4px; }
+
+.kn-pin__chip { display: inline-block; padding: 1px 6px; margin: 1px 0; border-radius: 3px; color: #fff; font-family: var(--kn-mono); font-size: 12px; white-space: nowrap; }
+
+.kn-pin__table-wrap { overflow-x: auto; }
+.kn-pin__table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 0; }
+.kn-pin__table th,
+.kn-pin__table td { padding: 8px 10px; border-bottom: 1px solid var(--kn-line); text-align: left; vertical-align: top; }
+.kn-pin__table th { font-size: 12px; color: var(--kn-muted); font-weight: 700; text-transform: none; letter-spacing: 0; white-space: nowrap; }
+.kn-pin__table td:nth-last-child(2) { min-width: 180px; }
+.kn-pin__table td:last-child { min-width: 220px; color: var(--kn-muted); font-size: 13px; }
+.kn-pin__table tbody tr { cursor: pointer; transition: opacity .15s; }
+.kn-pin__table tbody tr:hover { background: var(--kn-panel); }
+.kn-pin__table tbody tr.is-sel { background: var(--kn-accent-soft); }
+.kn-pin__table tbody tr.is-dim { opacity: .3; }
+.kn-pin__table tbody tr.is-sel { opacity: 1; }
+
+@media (max-width: 849px) {
+	.kn-pin__main { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+	.kn-pin__bar { grid-template-columns: minmax(0, 1fr); padding: 16px 16px 0; }
+	.kn-pin__filters,
+	.kn-pin__main,
+	.kn-pin__more { padding-left: 16px; padding-right: 16px; }
+}
