@@ -6,55 +6,521 @@
   "style": "stm32",
   "logic": "3.3V",
   "orientation": "Nhìn từ mặt trên, cổng USB ở phía dưới, header SWD (3.3, DIO, CLK, GND) ở phía trên",
-  "connector": "usb-bottom",
   "left": [
-    { "l": "VB", "name": "VBAT", "k": "power", "note": "Nguồn pin dự phòng cho RTC và thanh ghi backup" },
-    { "l": "C13", "name": "PC13", "f": ["other:LED onboard", "other:TAMPER-RTC"], "note": "Nối LED trên board (sáng khi LOW). Dòng ra yếu, tối đa khoảng 3 mA" },
-    { "l": "C14", "name": "PC14", "f": ["other:OSC32_IN"], "note": "Nối thạch anh 32.768 kHz trên board" },
-    { "l": "C15", "name": "PC15", "f": ["other:OSC32_OUT"], "note": "Nối thạch anh 32.768 kHz trên board" },
-    { "l": "A0", "name": "PA0", "f": ["adc:ADC12_IN0", "pwm:TIM2_CH1", "uart:USART2_CTS", "other:WKUP"] },
-    { "l": "A1", "name": "PA1", "f": ["adc:ADC12_IN1", "pwm:TIM2_CH2", "uart:USART2_RTS"] },
-    { "l": "A2", "name": "PA2", "f": ["uart:USART2_TX", "adc:ADC12_IN2", "pwm:TIM2_CH3"] },
-    { "l": "A3", "name": "PA3", "f": ["uart:USART2_RX", "adc:ADC12_IN3", "pwm:TIM2_CH4"] },
-    { "l": "A4", "name": "PA4", "f": ["spi:SPI1_NSS", "adc:ADC12_IN4", "uart:USART2_CK"] },
-    { "l": "A5", "name": "PA5", "f": ["spi:SPI1_SCK", "adc:ADC12_IN5"] },
-    { "l": "A6", "name": "PA6", "f": ["spi:SPI1_MISO", "adc:ADC12_IN6", "pwm:TIM3_CH1"] },
-    { "l": "A7", "name": "PA7", "f": ["spi:SPI1_MOSI", "adc:ADC12_IN7", "pwm:TIM3_CH2"] },
-    { "l": "B0", "name": "PB0", "f": ["adc:ADC12_IN8", "pwm:TIM3_CH3"] },
-    { "l": "B1", "name": "PB1", "f": ["adc:ADC12_IN9", "pwm:TIM3_CH4"] },
-    { "l": "B10", "name": "PB10", "f": ["i2c:I2C2_SCL", "uart:USART3_TX"], "t": ["5v"] },
-    { "l": "B11", "name": "PB11", "f": ["i2c:I2C2_SDA", "uart:USART3_RX"], "t": ["5v"] },
-    { "l": "R", "name": "NRST", "k": "sys", "f": ["other:RESET"], "note": "Kéo xuống LOW để reset" },
-    { "l": "3.3", "k": "power" },
-    { "l": "G", "k": "gnd" },
-    { "l": "G", "k": "gnd" }
+    {
+      "l": "VB",
+      "name": "VBAT",
+      "k": "power",
+      "note": "Nguồn pin dự phòng cho RTC và thanh ghi backup"
+    },
+    {
+      "l": "C13",
+      "name": "PC13",
+      "f": [
+        "other:LED onboard",
+        "other:TAMPER-RTC"
+      ],
+      "note": "Nối LED trên board (sáng khi LOW). Dòng ra yếu, tối đa khoảng 3 mA"
+    },
+    {
+      "l": "C14",
+      "name": "PC14",
+      "f": [
+        "other:OSC32_IN"
+      ],
+      "note": "Nối thạch anh 32.768 kHz trên board"
+    },
+    {
+      "l": "C15",
+      "name": "PC15",
+      "f": [
+        "other:OSC32_OUT"
+      ],
+      "note": "Nối thạch anh 32.768 kHz trên board"
+    },
+    {
+      "l": "A0",
+      "name": "PA0",
+      "f": [
+        "adc:ADC12_IN0",
+        "pwm:TIM2_CH1",
+        "uart:USART2_CTS",
+        "other:WKUP"
+      ]
+    },
+    {
+      "l": "A1",
+      "name": "PA1",
+      "f": [
+        "adc:ADC12_IN1",
+        "pwm:TIM2_CH2",
+        "uart:USART2_RTS"
+      ]
+    },
+    {
+      "l": "A2",
+      "name": "PA2",
+      "f": [
+        "uart:USART2_TX",
+        "adc:ADC12_IN2",
+        "pwm:TIM2_CH3"
+      ]
+    },
+    {
+      "l": "A3",
+      "name": "PA3",
+      "f": [
+        "uart:USART2_RX",
+        "adc:ADC12_IN3",
+        "pwm:TIM2_CH4"
+      ]
+    },
+    {
+      "l": "A4",
+      "name": "PA4",
+      "f": [
+        "spi:SPI1_NSS",
+        "adc:ADC12_IN4",
+        "uart:USART2_CK"
+      ]
+    },
+    {
+      "l": "A5",
+      "name": "PA5",
+      "f": [
+        "spi:SPI1_SCK",
+        "adc:ADC12_IN5"
+      ]
+    },
+    {
+      "l": "A6",
+      "name": "PA6",
+      "f": [
+        "spi:SPI1_MISO",
+        "adc:ADC12_IN6",
+        "pwm:TIM3_CH1"
+      ]
+    },
+    {
+      "l": "A7",
+      "name": "PA7",
+      "f": [
+        "spi:SPI1_MOSI",
+        "adc:ADC12_IN7",
+        "pwm:TIM3_CH2"
+      ]
+    },
+    {
+      "l": "B0",
+      "name": "PB0",
+      "f": [
+        "adc:ADC12_IN8",
+        "pwm:TIM3_CH3"
+      ]
+    },
+    {
+      "l": "B1",
+      "name": "PB1",
+      "f": [
+        "adc:ADC12_IN9",
+        "pwm:TIM3_CH4"
+      ]
+    },
+    {
+      "l": "B10",
+      "name": "PB10",
+      "f": [
+        "i2c:I2C2_SCL",
+        "uart:USART3_TX"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B11",
+      "name": "PB11",
+      "f": [
+        "i2c:I2C2_SDA",
+        "uart:USART3_RX"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "R",
+      "name": "NRST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Kéo xuống LOW để reset"
+    },
+    {
+      "l": "3.3",
+      "k": "power"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    }
   ],
   "right": [
-    { "l": "3.3", "k": "power" },
-    { "l": "G", "k": "gnd" },
-    { "l": "5V", "k": "power", "note": "Nối 5V của cổng USB. Cấp 5V vào đây thì LDO trên board hạ xuống 3.3V" },
-    { "l": "B9", "name": "PB9", "f": ["pwm:TIM4_CH4", "i2c:I2C1_SDA (remap)", "usb:CAN_TX (remap)"], "t": ["5v"] },
-    { "l": "B8", "name": "PB8", "f": ["pwm:TIM4_CH3", "i2c:I2C1_SCL (remap)", "usb:CAN_RX (remap)"], "t": ["5v"] },
-    { "l": "B7", "name": "PB7", "f": ["i2c:I2C1_SDA", "pwm:TIM4_CH2", "uart:USART1_RX (remap)"], "t": ["5v"] },
-    { "l": "B6", "name": "PB6", "f": ["i2c:I2C1_SCL", "pwm:TIM4_CH1", "uart:USART1_TX (remap)"], "t": ["5v"] },
-    { "l": "B5", "name": "PB5", "f": ["i2c:I2C1_SMBA", "pwm:TIM3_CH2 (remap)", "spi:SPI1_MOSI (remap)"] },
-    { "l": "B4", "name": "PB4", "f": ["other:NJTRST", "pwm:TIM3_CH1 (remap)", "spi:SPI1_MISO (remap)"], "t": ["5v"], "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX" },
-    { "l": "B3", "name": "PB3", "f": ["other:JTDO / SWO", "pwm:TIM2_CH2 (remap)", "spi:SPI1_SCK (remap)"], "t": ["5v"], "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX" },
-    { "l": "A15", "name": "PA15", "f": ["other:JTDI", "pwm:TIM2_CH1 (remap)", "spi:SPI1_NSS (remap)"], "t": ["5v"], "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX" },
-    { "l": "A12", "name": "PA12", "f": ["usb:USB_DP", "usb:CAN_TX", "pwm:TIM1_ETR", "uart:USART1_RTS"], "t": ["5v", "warn"], "note": "Nối USB D+ và điện trở kéo lên 1.5 kΩ trên board. Không dùng làm GPIO nếu cắm USB" },
-    { "l": "A11", "name": "PA11", "f": ["usb:USB_DM", "usb:CAN_RX", "pwm:TIM1_CH4", "uart:USART1_CTS"], "t": ["5v", "warn"], "note": "Nối USB D−. Không dùng làm GPIO nếu cắm USB" },
-    { "l": "A10", "name": "PA10", "f": ["uart:USART1_RX", "pwm:TIM1_CH3"], "t": ["5v"] },
-    { "l": "A9", "name": "PA9", "f": ["uart:USART1_TX", "pwm:TIM1_CH2"], "t": ["5v"] },
-    { "l": "A8", "name": "PA8", "f": ["pwm:TIM1_CH1", "other:MCO", "uart:USART1_CK"], "t": ["5v"] },
-    { "l": "B15", "name": "PB15", "f": ["spi:SPI2_MOSI", "pwm:TIM1_CH3N"], "t": ["5v"] },
-    { "l": "B14", "name": "PB14", "f": ["spi:SPI2_MISO", "pwm:TIM1_CH2N", "uart:USART3_RTS"], "t": ["5v"] },
-    { "l": "B13", "name": "PB13", "f": ["spi:SPI2_SCK", "pwm:TIM1_CH1N", "uart:USART3_CTS"], "t": ["5v"] },
-    { "l": "B12", "name": "PB12", "f": ["spi:SPI2_NSS", "pwm:TIM1_BKIN", "i2c:I2C2_SMBA", "uart:USART3_CK"], "t": ["5v"] }
+    {
+      "l": "3.3",
+      "k": "power"
+    },
+    {
+      "l": "G",
+      "k": "gnd"
+    },
+    {
+      "l": "5V",
+      "k": "power",
+      "note": "Nối 5V của cổng USB. Cấp 5V vào đây thì LDO trên board hạ xuống 3.3V"
+    },
+    {
+      "l": "B9",
+      "name": "PB9",
+      "f": [
+        "pwm:TIM4_CH4",
+        "i2c:I2C1_SDA (remap)",
+        "usb:CAN_TX (remap)"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B8",
+      "name": "PB8",
+      "f": [
+        "pwm:TIM4_CH3",
+        "i2c:I2C1_SCL (remap)",
+        "usb:CAN_RX (remap)"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B7",
+      "name": "PB7",
+      "f": [
+        "i2c:I2C1_SDA",
+        "pwm:TIM4_CH2",
+        "uart:USART1_RX (remap)"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B6",
+      "name": "PB6",
+      "f": [
+        "i2c:I2C1_SCL",
+        "pwm:TIM4_CH1",
+        "uart:USART1_TX (remap)"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B5",
+      "name": "PB5",
+      "f": [
+        "i2c:I2C1_SMBA",
+        "pwm:TIM3_CH2 (remap)",
+        "spi:SPI1_MOSI (remap)"
+      ]
+    },
+    {
+      "l": "B4",
+      "name": "PB4",
+      "f": [
+        "other:NJTRST",
+        "pwm:TIM3_CH1 (remap)",
+        "spi:SPI1_MISO (remap)"
+      ],
+      "t": [
+        "5v"
+      ],
+      "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX"
+    },
+    {
+      "l": "B3",
+      "name": "PB3",
+      "f": [
+        "other:JTDO / SWO",
+        "pwm:TIM2_CH2 (remap)",
+        "spi:SPI1_SCK (remap)"
+      ],
+      "t": [
+        "5v"
+      ],
+      "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX"
+    },
+    {
+      "l": "A15",
+      "name": "PA15",
+      "f": [
+        "other:JTDI",
+        "pwm:TIM2_CH1 (remap)",
+        "spi:SPI1_NSS (remap)"
+      ],
+      "t": [
+        "5v"
+      ],
+      "note": "Mặc định là chân JTAG. Muốn dùng làm GPIO thì chọn Debug: Serial Wire trong CubeMX"
+    },
+    {
+      "l": "A12",
+      "name": "PA12",
+      "f": [
+        "usb:USB_DP",
+        "usb:CAN_TX",
+        "pwm:TIM1_ETR",
+        "uart:USART1_RTS"
+      ],
+      "t": [
+        "5v",
+        "warn"
+      ],
+      "note": "Nối USB D+ và điện trở kéo lên 1.5 kΩ trên board. Không dùng làm GPIO nếu cắm USB"
+    },
+    {
+      "l": "A11",
+      "name": "PA11",
+      "f": [
+        "usb:USB_DM",
+        "usb:CAN_RX",
+        "pwm:TIM1_CH4",
+        "uart:USART1_CTS"
+      ],
+      "t": [
+        "5v",
+        "warn"
+      ],
+      "note": "Nối USB D−. Không dùng làm GPIO nếu cắm USB"
+    },
+    {
+      "l": "A10",
+      "name": "PA10",
+      "f": [
+        "uart:USART1_RX",
+        "pwm:TIM1_CH3"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "A9",
+      "name": "PA9",
+      "f": [
+        "uart:USART1_TX",
+        "pwm:TIM1_CH2"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "A8",
+      "name": "PA8",
+      "f": [
+        "pwm:TIM1_CH1",
+        "other:MCO",
+        "uart:USART1_CK"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B15",
+      "name": "PB15",
+      "f": [
+        "spi:SPI2_MOSI",
+        "pwm:TIM1_CH3N"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B14",
+      "name": "PB14",
+      "f": [
+        "spi:SPI2_MISO",
+        "pwm:TIM1_CH2N",
+        "uart:USART3_RTS"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B13",
+      "name": "PB13",
+      "f": [
+        "spi:SPI2_SCK",
+        "pwm:TIM1_CH1N",
+        "uart:USART3_CTS"
+      ],
+      "t": [
+        "5v"
+      ]
+    },
+    {
+      "l": "B12",
+      "name": "PB12",
+      "f": [
+        "spi:SPI2_NSS",
+        "pwm:TIM1_BKIN",
+        "i2c:I2C2_SMBA",
+        "uart:USART3_CK"
+      ],
+      "t": [
+        "5v"
+      ]
+    }
   ],
   "notes": [
     "Mức logic 3.3V. Các chân đánh dấu \"Chịu 5V\" (FT) nhận được tín hiệu 5V khi cấu hình là ngõ vào digital. Chân có chức năng ADC thì không chịu 5V.",
     "Chức năng ghi \"(remap)\" chỉ dùng được sau khi bật remap trong AFIO (CubeMX tự làm khi bạn chọn chân đó).",
     "PA13 (SWDIO) và PA14 (SWCLK) nằm ở header SWD phía trên, dùng để nạp và debug bằng ST-Link.",
     "Hai jumper BOOT0 và BOOT1 (PB2) chọn chế độ khởi động: cả hai về 0 để chạy chương trình trong flash."
-  ]
+  ],
+  "shape": {
+    "w": 22.86,
+    "h": 53.34,
+    "rowGap": 15.24,
+    "start": 2.54,
+    "r": 0.6,
+    "parts": [
+      {
+        "type": "header",
+        "x": 7.62,
+        "y": 1.2,
+        "cols": 4,
+        "rows": 1
+      },
+      {
+        "type": "text",
+        "x": 11.43,
+        "y": 3.5,
+        "fs": 7,
+        "label": "3.3  IO  CLK GND"
+      },
+      {
+        "type": "header",
+        "x": 8.89,
+        "y": 7.2,
+        "cols": 3,
+        "rows": 2,
+        "caps": [
+          [
+            0,
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            1,
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "x": 5.2,
+        "y": 7.6,
+        "fs": 7,
+        "label": "B0",
+        "anchor": "middle"
+      },
+      {
+        "type": "text",
+        "x": 5.2,
+        "y": 10.1,
+        "fs": 7,
+        "label": "B1",
+        "anchor": "middle"
+      },
+      {
+        "type": "button",
+        "x": 8.93,
+        "y": 13.2,
+        "w": 5,
+        "h": 4.2,
+        "label": "RESET"
+      },
+      {
+        "type": "chip",
+        "x": 7.93,
+        "y": 23.5,
+        "w": 7,
+        "h": 7,
+        "pins": 12,
+        "rot": 45,
+        "label": "STM32\nF103C8T6",
+        "fs": 7
+      },
+      {
+        "type": "crystal",
+        "x": 8.43,
+        "y": 35.5,
+        "w": 6,
+        "h": 2.6,
+        "label": "8M"
+      },
+      {
+        "type": "smd",
+        "x": 9.9,
+        "y": 39.8,
+        "w": 3,
+        "h": 1.6
+      },
+      {
+        "type": "led",
+        "x": 6.4,
+        "y": 43.2,
+        "w": 1.8,
+        "h": 1,
+        "color": "#3ddc84"
+      },
+      {
+        "type": "led",
+        "x": 14.6,
+        "y": 43.2,
+        "w": 1.8,
+        "h": 1,
+        "color": "#e53935"
+      },
+      {
+        "type": "text",
+        "x": 7.3,
+        "y": 46,
+        "fs": 7,
+        "label": "PC13"
+      },
+      {
+        "type": "usb",
+        "x": 7.68,
+        "y": 48.7,
+        "w": 7.5,
+        "h": 5.6
+      }
+    ]
+  }
 }

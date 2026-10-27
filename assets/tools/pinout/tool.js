@@ -73,16 +73,129 @@
 		return { list: all.slice(0, MAX_CHIPS), extra: Math.max(0, all.length - MAX_CHIPS) };
 	}
 
-	/* ---------- Sơ đồ SVG ---------- */
+	/* ---------- Sơ đồ SVG ----------
+	 * Board vẽ theo kích thước thật trong board.shape (đơn vị mm, gốc ở góc trên trái của mạch):
+	 *   w, h: kích thước mạch; rowGap: khoảng cách hai hàng chân; start | startLeft/startRight: tâm chân đầu tiên;
+	 *   poly: đường viền (nếu không phải hình chữ nhật); legs: true nếu là IC DIP (chân thò ra ngoài thân);
+	 *   parts: linh kiện trang trí (module, shield, antenna, chip, usb, usbb, jack, button, led, crystal,
+	 *          header, reg, cap, hole, smd, notch, dot, text, dipchip).
+	 * Khoảng cách chân 2.54 mm = ROW px nên nhãn mỗi chân luôn thẳng hàng với chân thật.
+	 */
+
+	var PITCH = 2.54, K = ROW / PITCH;
+
+	function defaultShape(board) {
+		var n = Math.max(board.left.length, board.right.length);
+		return { w: 18, h: n * PITCH + 6, rowGap: 15.24, start: 3, r: 1, parts: [] };
+	}
+
+	function partSVG(t, X, Y, S, style) {
+		var x = X(t.x || 0), y = Y(t.y || 0), w = S(t.w || 0), h = S(t.h || 0), o = '';
+		var mono = 'font-family:var(--kn-mono);';
+		function label(text, cx, cy, fs, color, extra) {
+			if (!text) return '';
+			var lines = String(text).split('\n'), lh = fs * 1.15, y0 = cy - (lines.length - 1) * lh / 2 + fs * 0.35;
+			return lines.map(function (ln, i) {
+				return '<text x="' + cx.toFixed(1) + '" y="' + (y0 + i * lh).toFixed(1) + '" text-anchor="middle" style="' + mono + 'font-size:' + fs + 'px;fill:' + color + ';' + (extra || '') + '">' + esc(ln) + '</text>';
+			}).join('');
+		}
+		switch (t.type) {
+			case 'module':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + S(0.4) + '" style="fill:' + (t.fill || '#161a1e') + '"/>';
+			case 'antenna':
+				var step = w / 9, d = 'M' + x.toFixed(1) + ' ' + (y + h).toFixed(1);
+				for (var i = 0; i < 9; i++) {
+					var xx = x + i * step;
+					d += ' V' + (i % 2 ? y + h : y).toFixed(1) + ' H' + (xx + step).toFixed(1);
+				}
+				return '<path d="' + d + '" style="fill:none;stroke:#c9a227;stroke-width:1.6"/>';
+			case 'shield':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + S(0.5) + '" style="fill:#c9ced3;stroke:#8d959c;stroke-width:1"/>' +
+					label(t.label, x + w / 2, y + h / 2, t.fs || 10, '#3b4248', 'font-weight:700');
+			case 'chip':
+				var cx = x + w / 2, cy = y + h / 2, n = t.pins || 0, ticks = '';
+				for (var j = 0; j < n; j++) {
+					var off = (j + 0.5) * w / n;
+					ticks += '<rect x="' + (x + off - 1).toFixed(1) + '" y="' + (y - 4) + '" width="2" height="4" style="fill:#a8afb6"/>' +
+						'<rect x="' + (x + off - 1).toFixed(1) + '" y="' + (y + h) + '" width="2" height="4" style="fill:#a8afb6"/>' +
+						'<rect x="' + (x - 4) + '" y="' + (y + off - 1).toFixed(1) + '" width="4" height="2" style="fill:#a8afb6"/>' +
+						'<rect x="' + (x + w) + '" y="' + (y + off - 1).toFixed(1) + '" width="4" height="2" style="fill:#a8afb6"/>';
+				}
+				return '<g' + (t.rot ? ' transform="rotate(' + t.rot + ' ' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ')"' : '') + '>' + ticks +
+					'<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#1b1c1f"/>' +
+					'<circle cx="' + (x + 6) + '" cy="' + (y + 6) + '" r="2" style="fill:#3a3c40"/></g>' +
+					label(t.label, cx, cy, t.fs || 8, '#c8cdd2');
+			case 'dipchip':
+				var legs = t.legs || 14, legW = 5, out = '';
+				for (var m = 0; m < legs; m++) {
+					var ly = y + S(PITCH / 2) + m * S(PITCH) - 2;
+					out += '<rect x="' + (x - legW) + '" y="' + ly.toFixed(1) + '" width="' + legW + '" height="4" style="fill:#b5bcc3"/>' +
+						'<rect x="' + (x + w) + '" y="' + ly.toFixed(1) + '" width="' + legW + '" height="4" style="fill:#b5bcc3"/>';
+				}
+				return out + '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#1b1c1f"/>' +
+					'<path d="M' + (x + w / 2 - 6) + ' ' + y + ' a6 6 0 0 0 12 0 Z" style="fill:' + style.fill + '"/>' +
+					'<text x="' + (x + w / 2) + '" y="' + (y + h / 2) + '" text-anchor="middle" transform="rotate(-90 ' + (x + w / 2) + ' ' + (y + h / 2) + ')" style="' + mono + 'font-size:10px;letter-spacing:.1em;fill:#c8cdd2" dy="3.5">' + esc(t.label || '') + '</text>';
+			case 'usb':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#c7ccd1;stroke:#7d858c;stroke-width:1"/>' +
+					'<rect x="' + (x + w * 0.18).toFixed(1) + '" y="' + (y + h * 0.3).toFixed(1) + '" width="' + (w * 0.64).toFixed(1) + '" height="' + (h * 0.32).toFixed(1) + '" rx="2" style="fill:#4b5258"/>';
+			case 'usbb':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#c7ccd1;stroke:#7d858c;stroke-width:1"/>' +
+					'<rect x="' + (x + w * 0.22).toFixed(1) + '" y="' + (y + h * 0.12).toFixed(1) + '" width="' + (w * 0.56).toFixed(1) + '" height="' + (h * 0.5).toFixed(1) + '" rx="3" style="fill:#4b5258"/>' +
+					label('USB', x + w / 2, y + h * 0.8, 9, '#4b5258', 'font-weight:700');
+			case 'jack':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#202326"/>' +
+					'<circle cx="' + (x + w / 2) + '" cy="' + (y + h * 0.35) + '" r="' + (w * 0.3) + '" style="fill:#3c4146"/>' +
+					'<circle cx="' + (x + w / 2) + '" cy="' + (y + h * 0.35) + '" r="' + (w * 0.1) + '" style="fill:#b5bcc3"/>';
+			case 'button':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" style="fill:#d6d9dc;stroke:#8d959c;stroke-width:1"/>' +
+					'<circle cx="' + (x + w / 2) + '" cy="' + (y + h / 2) + '" r="' + (Math.min(w, h) * 0.3) + '" style="fill:#2b2f33"/>' +
+					label(t.label, x + w / 2, y + h + 9, 8, style.ink);
+			case 'led':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="1" style="fill:' + (t.color || '#e53935') + ';stroke:#f4f4f4;stroke-width:.6"/>';
+			case 'crystal':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + (h / 2) + '" style="fill:#c7ccd1;stroke:#7d858c;stroke-width:1"/>' +
+					label(t.label, x + w / 2, y + h / 2, 8, '#3b4248', 'font-weight:700');
+			case 'reg':
+				return '<rect x="' + (x + w * 0.15) + '" y="' + y + '" width="' + (w * 0.7) + '" height="' + (h * 0.3) + '" style="fill:#b5bcc3"/>' +
+					'<rect x="' + x + '" y="' + (y + h * 0.3) + '" width="' + w + '" height="' + (h * 0.7) + '" rx="1.5" style="fill:#1b1c1f"/>' +
+					label(t.label, x + w / 2, y + h * 0.65, 7, '#c8cdd2');
+			case 'smd':
+				return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="1" style="fill:' + (t.fill || '#2b2f33') + '"/>';
+			case 'cap':
+				return '<circle cx="' + X(t.x) + '" cy="' + Y(t.y) + '" r="' + S(t.r) + '" style="fill:#2c3a4a;stroke:#9aa5b1;stroke-width:1.5"/>' +
+					'<path d="M' + (X(t.x) - S(t.r) * 0.7) + ' ' + Y(t.y) + ' h' + (S(t.r) * 1.4) + '" style="stroke:#9aa5b1;stroke-width:1.5"/>';
+			case 'hole':
+				return '<circle cx="' + X(t.x) + '" cy="' + Y(t.y) + '" r="' + S(t.r) + '" style="fill:var(--kn-paper);stroke:#c9a227;stroke-width:3"/>';
+			case 'notch':
+				return '<path d="M' + (X(t.x) - S(t.r)) + ' ' + Y(t.y) + ' a' + S(t.r) + ' ' + S(t.r) + ' 0 0 0 ' + S(t.r * 2) + ' 0 Z" style="fill:var(--kn-paper)"/>';
+			case 'dot':
+				return '<circle cx="' + X(t.x) + '" cy="' + Y(t.y) + '" r="' + S(t.r) + '" style="fill:#3a3e43"/>';
+			case 'header':
+				var cols = t.cols || 1, rows = t.rows || 1, hdr = '';
+				(t.caps || []).forEach(function (c) {
+					hdr += '<rect x="' + (X(t.x + c[0] * PITCH) - 10) + '" y="' + (Y(t.y + c[1] * PITCH) - 9) + '" width="' + (S((c[2] - 1) * PITCH) + 20) + '" height="18" rx="2" style="fill:#16181b"/>';
+				});
+				for (var r = 0; r < rows; r++) {
+					for (var c2 = 0; c2 < cols; c2++) {
+						hdr += '<circle cx="' + X(t.x + c2 * PITCH).toFixed(1) + '" cy="' + Y(t.y + r * PITCH).toFixed(1) + '" r="4.5" style="fill:#d4a017;stroke:#7a5f08;stroke-width:1"/>';
+					}
+				}
+				return hdr;
+			case 'text':
+				var anchor = t.anchor || 'middle';
+				return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" text-anchor="' + anchor + '"' +
+					(t.rot ? ' transform="rotate(' + t.rot + ' ' + x.toFixed(1) + ' ' + y.toFixed(1) + ')"' : '') +
+					' style="' + mono + 'font-size:' + (t.fs || 9) + 'px;font-weight:' + (t.weight || 400) + ';fill:' + (t.color || style.ink) + '">' + esc(t.label) + '</text>';
+		}
+		return o;
+	}
 
 	function boardSVG(board, cat) {
 		var style = STYLES[board.style] || STYLES.esp;
-		var pins = [];
+		var sh = board.shape || defaultShape(board);
 		var maxLbl = 44;
 		['left', 'right'].forEach(function (side) {
-			board[side].forEach(function (p) {
-				if (!p.gap) maxLbl = Math.max(maxLbl, lblW(p.l));
-			});
+			board[side].forEach(function (p) { if (!p.gap) maxLbl = Math.max(maxLbl, lblW(p.l)); });
 		});
 
 		function sideWidth(side) {
@@ -97,70 +210,52 @@
 			return w;
 		}
 
-		var M = 8, GAP = 14, BW = board.style === 'dip' ? 116 : 150, TOP = 58;
-		var leftW = sideWidth('left'), rightW = sideWidth('right');
-		var x0 = M + leftW + GAP, x1 = x0 + BW;
-		var W = x1 + GAP + rightW + M;
+		/* Vùng linh kiện thò ra ngoài mạch (USB, jack) */
+		var minY = 0, maxY = sh.h;
+		(sh.parts || []).forEach(function (t) {
+			var top = t.r && !t.h ? t.y - t.r : t.y, bot = t.r && !t.h ? t.y + t.r : t.y + (t.h || 0);
+			minY = Math.min(minY, top);
+			maxY = Math.max(maxY, bot);
+		});
 
-		function rows(side) {
-			var y = TOP, out = [];
-			board[side].forEach(function (p) {
-				if (p.gap) { y += ROW * 0.6; return; }
-				out.push({ p: p, y: y + ROW / 2 });
-				y += ROW;
-			});
-			return { list: out, end: y };
-		}
-		var L = rows('left'), R = rows('right');
-		var H = Math.max(L.end, R.end) + 44;
+		var M = 8, GAP = 16;
+		var padInset = (sh.w - sh.rowGap) / 2; /* âm khi chân nằm ngoài thân (IC DIP) */
+		var leftW = sideWidth('left'), rightW = sideWidth('right');
+		var leftEdge = Math.min(0, padInset) * K, rightEdge = Math.max(sh.w, sh.w - padInset) * K;
+		var bx = M + leftW + GAP - leftEdge;
+		var by = 12 + (-minY) * K;
+		var W = Math.round(bx + rightEdge + GAP + rightW + M);
+		var H = Math.round(by + maxY * K + (board.style === 'dip' ? 12 : 18));
+
+		var X = function (v) { return bx + v * K; };
+		var Y = function (v) { return by + v * K; };
+		var S = function (v) { return v * K; };
 
 		var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="max-width:' + W + 'px;min-width:' + Math.min(W, 600) + 'px" role="img" aria-label="Sơ đồ chân ' + esc(board.name) + '">';
 
-		/* Thân board */
-		s += '<rect x="' + x0 + '" y="18" width="' + BW + '" height="' + (H - 36) + '" rx="' + (board.style === 'dip' ? 4 : 8) + '" style="fill:' + style.fill + '"/>';
-		var cx = x0 + BW / 2;
-		if (board.connector === 'usb-top') s += usb(cx, 4);
-		if (board.connector === 'usb-bottom' || board.connector === 'antenna-top') s += usb(cx, H - 32);
-		if (board.connector === 'antenna-top') {
-			s += '<rect x="' + (x0 + 14) + '" y="26" width="' + (BW - 28) + '" height="22" rx="2" style="fill:none;stroke:' + style.ink + ';stroke-opacity:.35"/>';
-			s += '<path d="M' + (x0 + 22) + ' 42 h10 v-10 h10 v10 h10 v-10 h10 v10 h10 v-10 h10 v10 h10 v-10 h10 v10 h' + (BW - 104) + '" style="fill:none;stroke:' + style.ink + ';stroke-opacity:.55;stroke-width:1.5"/>';
-		}
-		if (board.connector === 'notch-top') {
-			s += '<path d="M' + (cx - 11) + ' 18 a11 11 0 0 0 22 0 Z" style="fill:var(--kn-paper)"/>';
-		}
-		if (board.style === 'stm32') {
-			['3.3', 'DIO', 'CLK', 'GND'].forEach(function (t, i) {
-				var px = cx - 39 + i * 26;
-				s += '<rect x="' + (px - 5) + '" y="26" width="10" height="10" style="fill:#d4a017"/>' +
-					'<text x="' + px + '" y="48" text-anchor="middle" style="font-family:var(--kn-mono);font-size:8.5px;fill:' + style.ink + '">' + t + '</text>';
-			});
-		}
-
-		var midBoard = (TOP + Math.max(L.end, R.end)) / 2;
-		if (board.style === 'dip') {
-			/* Chip DIP hẹp: in tên chip dọc giữa thân, giống chữ in trên IC thật */
-			s += '<text x="' + cx + '" y="' + midBoard + '" text-anchor="middle" transform="rotate(-90 ' + cx + ' ' + midBoard + ')" style="font-family:var(--kn-mono);font-size:15px;font-weight:700;letter-spacing:.12em;fill:' + style.ink + '">' + esc(board.mcu) + '</text>';
+		/* Thân mạch */
+		if (sh.poly) {
+			s += '<polygon points="' + sh.poly.map(function (pt) { return X(pt[0]).toFixed(1) + ',' + Y(pt[1]).toFixed(1); }).join(' ') + '" style="fill:' + style.fill + '"/>';
 		} else {
-			var nameLines = wrap(board.name, Math.floor((BW - 20) / 7.4));
-			var midY = midBoard - (nameLines.length * 16) / 2;
-			nameLines.forEach(function (ln, i) {
-				s += '<text x="' + cx + '" y="' + (midY + i * 16) + '" text-anchor="middle" style="font-size:13px;font-weight:800;fill:' + style.ink + '">' + esc(ln) + '</text>';
-			});
-			s += '<text x="' + cx + '" y="' + (midY + nameLines.length * 16 + 4) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:10px;fill:' + style.ink + ';opacity:.75">' + esc(board.mcu) + '</text>';
+			s += '<rect x="' + X(0) + '" y="' + Y(0) + '" width="' + S(sh.w) + '" height="' + S(sh.h) + '" rx="' + S(sh.r || 0.8) + '" style="fill:' + style.fill + '"/>';
 		}
+		(sh.parts || []).forEach(function (t) { s += partSVG(t, X, Y, S, style); });
 
 		/* Chân */
+		var padL = X(padInset), padR = X(padInset + sh.rowGap);
 		var idx = 0;
-		[['left', L.list], ['right', R.list]].forEach(function (pair) {
-			var left = pair[0] === 'left';
-			pair[1].forEach(function (r) {
-				var p = r.p, y = r.y, k = KINDS[kindOf(p)];
-				var pad = left ? x0 + 15 : x1 - 15;
-				var lx = left ? x0 - GAP - maxLbl : x1 + GAP;
-				var sh = shownFns(p, cat);
+		['left', 'right'].forEach(function (side) {
+			var left = side === 'left';
+			var yMM = side === 'left' ? (sh.startLeft != null ? sh.startLeft : sh.start) : (sh.startRight != null ? sh.startRight : sh.start);
+			board[side].forEach(function (p) {
+				if (p.gap) { yMM += p.gap === true ? PITCH : p.gap; return; }
+				var y = Y(yMM), k = KINDS[kindOf(p)], sv = shownFns(p, cat);
+				var pad = left ? padL : padR;
+				var lx = left ? Math.min(X(0), pad) - GAP - maxLbl : Math.max(X(sh.w), pad) + GAP;
+				yMM += PITCH;
 
 				var chips = '', cursor = left ? lx - 8 : lx + maxLbl + 8, far = cursor;
-				sh.list.concat(sh.extra ? [{ cat: 'more', text: '+' + sh.extra }] : []).forEach(function (f) {
+				sv.list.concat(sv.extra ? [{ cat: 'more', text: '+' + sv.extra }] : []).forEach(function (f) {
 					var w = chipW(f.text), x = left ? cursor - w : cursor;
 					var color = f.cat === 'more' ? '#9aa3ab' : CATS[f.cat].color;
 					chips += '<rect x="' + x + '" y="' + (y - 8.5) + '" width="' + w + '" height="17" rx="3" style="fill:' + color + '"/>' +
@@ -169,37 +264,26 @@
 					far = cursor;
 				});
 
-				var hx = left ? Math.min(far, lx) - 4 : lx - GAP - 20;
+				var hx = left ? Math.min(far, lx) - 4 : pad - 10;
 				var hw = left ? (pad + 10) - hx : (Math.max(far, lx + maxLbl) + 4) - hx;
+				var padSVG = sh.legs ?
+					'<rect x="' + (left ? pad - 6 : X(sh.w)) + '" y="' + (y - 3) + '" width="' + (left ? X(0) - pad + 6 : pad - X(sh.w) + 6) + '" height="6" rx="1" style="fill:#b5bcc3;stroke:#7d858c;stroke-width:.8"/>' :
+					'<circle cx="' + pad + '" cy="' + y + '" r="5.5" style="fill:#d4a017;stroke:#7a5f08;stroke-width:1"/><circle cx="' + pad + '" cy="' + y + '" r="2" style="fill:#5c4706"/>';
+				var numX = left ? Math.max(X(0) + 4, pad + 10) : Math.min(X(sh.w) - 4, pad - 10);
+
 				s += '<g class="kn-pin__p" data-i="' + idx + '" tabindex="0" role="button" aria-label="' + esc(p.l + (p.name ? ' ' + p.name : '')) + '">' +
-					'<rect class="kn-pin__hl" x="' + hx + '" y="' + (y - ROW / 2 + 1) + '" width="' + hw + '" height="' + (ROW - 2) + '" rx="4"/>' +
-					'<line x1="' + (left ? lx + maxLbl : lx) + '" y1="' + y + '" x2="' + pad + '" y2="' + y + '" style="stroke:#b8a14a;stroke-width:2"/>' +
-					'<circle cx="' + pad + '" cy="' + y + '" r="5.5" style="fill:#d4a017;stroke:#7a5f08;stroke-width:1"/>' +
-					'<circle cx="' + pad + '" cy="' + y + '" r="2" style="fill:#5c4706"/>' +
-					(p.n ? '<text x="' + (left ? pad + 11 : pad - 11) + '" y="' + (y + 3.5) + '"' + (left ? '' : ' text-anchor="end"') + ' style="font-family:var(--kn-mono);font-size:9.5px;fill:' + style.ink + ';opacity:.7">' + p.n + '</text>' : '') +
-					'<rect class="kn-pin__lbl" x="' + lx + '" y="' + (y - 9.5) + '" width="' + maxLbl + '" height="19" rx="3" style="fill:' + k.fill + ';stroke:' + k.stroke + '"/>' +
-					'<text x="' + (lx + maxLbl / 2) + '" y="' + (y + 4.2) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:12px;font-weight:700;fill:' + k.ink + '">' + esc(p.l) + '</text>' +
-					((p.t || []).indexOf('warn') >= 0 ? '<circle cx="' + (left ? lx + 2 : lx + maxLbl - 2) + '" cy="' + (y - 9) + '" r="4" style="fill:#f59e0b;stroke:#fff;stroke-width:1"/>' : '') +
+					'<rect class="kn-pin__hl" x="' + hx.toFixed(1) + '" y="' + (y - ROW / 2 + 1).toFixed(1) + '" width="' + hw.toFixed(1) + '" height="' + (ROW - 2) + '" rx="4"/>' +
+					'<line x1="' + (left ? lx + maxLbl : lx) + '" y1="' + y + '" x2="' + pad + '" y2="' + y + '" style="stroke:#b8a14a;stroke-width:1.5"/>' +
+					padSVG +
+					(p.n ? '<text x="' + numX.toFixed(1) + '" y="' + (y + 3.5).toFixed(1) + '"' + (left ? '' : ' text-anchor="end"') + ' style="font-family:var(--kn-mono);font-size:9.5px;fill:' + style.ink + ';opacity:.75">' + p.n + '</text>' : '') +
+					'<rect class="kn-pin__lbl" x="' + lx.toFixed(1) + '" y="' + (y - 9.5).toFixed(1) + '" width="' + maxLbl + '" height="19" rx="3" style="fill:' + k.fill + ';stroke:' + k.stroke + '"/>' +
+					'<text x="' + (lx + maxLbl / 2).toFixed(1) + '" y="' + (y + 4.2).toFixed(1) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:12px;font-weight:700;fill:' + k.ink + '">' + esc(p.l) + '</text>' +
+					((p.t || []).indexOf('warn') >= 0 ? '<circle cx="' + (left ? lx + 2 : lx + maxLbl - 2).toFixed(1) + '" cy="' + (y - 9).toFixed(1) + '" r="4" style="fill:#f59e0b;stroke:#fff;stroke-width:1"/>' : '') +
 					chips + '</g>';
 				idx++;
 			});
 		});
 		return s + '</svg>';
-	}
-
-	function usb(cx, y) {
-		return '<rect x="' + (cx - 22) + '" y="' + y + '" width="44" height="28" rx="3" style="fill:#c9ced4;stroke:#8a9199"/>' +
-			'<text x="' + cx + '" y="' + (y + 18) + '" text-anchor="middle" style="font-family:var(--kn-mono);font-size:10px;font-weight:700;fill:#4b5258">USB</text>';
-	}
-
-	function wrap(text, max) {
-		var words = text.split(' '), lines = [], cur = '';
-		words.forEach(function (w) {
-			if ((cur + ' ' + w).trim().length > max && cur) { lines.push(cur); cur = w; }
-			else cur = (cur + ' ' + w).trim();
-		});
-		if (cur) lines.push(cur);
-		return lines;
 	}
 
 	/* ---------- Giao diện ---------- */
@@ -268,6 +352,9 @@
 
 		function renderSVG() {
 			x('svg').innerHTML = boardSVG(state.board, state.cat);
+			/* Board rộng (Uno) cần cả chiều ngang: đưa khung chi tiết xuống dưới sơ đồ */
+			var svg = x('svg').querySelector('svg');
+			root.querySelector('.kn-pin__main').classList.toggle('is-wide', !!svg && svg.viewBox.baseVal.width > 780);
 		}
 
 		function renderNotes() {

@@ -137,6 +137,9 @@
 .kn-pin__table tbody tr.is-dim { opacity: .3; }
 .kn-pin__table tbody tr.is-sel { opacity: 1; }
 
+.kn-pin__main.is-wide { grid-template-columns: minmax(0, 1fr); }
+.kn-pin__main.is-wide .kn-pin__detail { max-width: 640px; }
+
 @media (max-width: 849px) {
 	.kn-pin__main { grid-template-columns: minmax(0, 1fr); }
 }

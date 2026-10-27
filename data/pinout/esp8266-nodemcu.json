@@ -6,45 +6,320 @@
   "style": "esp",
   "logic": "3.3V",
   "orientation": "Nhìn từ mặt trên, anten ở phía trên, cổng USB ở phía dưới. Bản V3 (LoLin) thay hai chân RSV bằng GND và VU (5V từ USB)",
-  "connector": "antenna-top",
   "left": [
-    { "l": "A0", "name": "ADC0", "f": ["adc:ADC0 (TOUT)"], "t": ["in"], "note": "Đọc 0–3.3V nhờ cầu chia áp trên board (chân chip chỉ nhận 0–1V). ADC 10-bit" },
-    { "l": "RSV", "k": "nc", "note": "Không dùng. Bản V3: GND" },
-    { "l": "RSV", "k": "nc", "note": "Không dùng. Bản V3: VU (5V từ USB)" },
-    { "l": "SD3", "name": "GPIO10", "f": ["other:SDD3 (flash)"], "t": ["warn"], "note": "Nối với flash. Chỉ dùng được làm GPIO khi flash chạy chế độ DIO" },
-    { "l": "SD2", "name": "GPIO9", "f": ["other:SDD2 (flash)"], "t": ["warn"], "note": "Nối với flash, không dùng" },
-    { "l": "SD1", "name": "GPIO8", "f": ["other:SDD1 (flash)"], "t": ["warn"], "note": "Nối với flash, không dùng" },
-    { "l": "CMD", "name": "GPIO11", "f": ["other:SDCMD (flash)"], "t": ["warn"], "note": "Nối với flash, không dùng" },
-    { "l": "SD0", "name": "GPIO7", "f": ["other:SDD0 (flash)"], "t": ["warn"], "note": "Nối với flash, không dùng" },
-    { "l": "CLK", "name": "GPIO6", "f": ["other:SDCLK (flash)"], "t": ["warn"], "note": "Nối với flash, không dùng" },
-    { "l": "GND", "k": "gnd" },
-    { "l": "3V3", "k": "power" },
-    { "l": "EN", "k": "sys", "f": ["other:CHIP_EN"], "note": "Kéo xuống LOW để tắt chip" },
-    { "l": "RST", "k": "sys", "f": ["other:RESET"], "note": "Kéo xuống LOW để reset" },
-    { "l": "GND", "k": "gnd" },
-    { "l": "VIN", "k": "power", "note": "Nguồn vào 5V" }
+    {
+      "l": "A0",
+      "name": "ADC0",
+      "f": [
+        "adc:ADC0 (TOUT)"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Đọc 0–3.3V nhờ cầu chia áp trên board (chân chip chỉ nhận 0–1V). ADC 10-bit"
+    },
+    {
+      "l": "RSV",
+      "k": "nc",
+      "note": "Không dùng. Bản V3: GND"
+    },
+    {
+      "l": "RSV",
+      "k": "nc",
+      "note": "Không dùng. Bản V3: VU (5V từ USB)"
+    },
+    {
+      "l": "SD3",
+      "name": "GPIO10",
+      "f": [
+        "other:SDD3 (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash. Chỉ dùng được làm GPIO khi flash chạy chế độ DIO"
+    },
+    {
+      "l": "SD2",
+      "name": "GPIO9",
+      "f": [
+        "other:SDD2 (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash, không dùng"
+    },
+    {
+      "l": "SD1",
+      "name": "GPIO8",
+      "f": [
+        "other:SDD1 (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash, không dùng"
+    },
+    {
+      "l": "CMD",
+      "name": "GPIO11",
+      "f": [
+        "other:SDCMD (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash, không dùng"
+    },
+    {
+      "l": "SD0",
+      "name": "GPIO7",
+      "f": [
+        "other:SDD0 (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash, không dùng"
+    },
+    {
+      "l": "CLK",
+      "name": "GPIO6",
+      "f": [
+        "other:SDCLK (flash)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối với flash, không dùng"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "3V3",
+      "k": "power"
+    },
+    {
+      "l": "EN",
+      "k": "sys",
+      "f": [
+        "other:CHIP_EN"
+      ],
+      "note": "Kéo xuống LOW để tắt chip"
+    },
+    {
+      "l": "RST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Kéo xuống LOW để reset"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "VIN",
+      "k": "power",
+      "note": "Nguồn vào 5V"
+    }
   ],
   "right": [
-    { "l": "D0", "name": "GPIO16", "f": ["other:WAKE"], "note": "Nối với RST để thoát deep sleep. Không có PWM, I2C và ngắt. Một số board nối LED ở chân này" },
-    { "l": "D1", "name": "GPIO5", "f": ["i2c:SCL"], "note": "SCL mặc định của thư viện Wire" },
-    { "l": "D2", "name": "GPIO4", "f": ["i2c:SDA"], "note": "SDA mặc định của thư viện Wire" },
-    { "l": "D3", "name": "GPIO0", "f": ["other:FLASH (nút)"], "t": ["warn"], "note": "Phải ở mức HIGH khi khởi động, LOW sẽ vào chế độ nạp. Có điện trở kéo lên trên board" },
-    { "l": "D4", "name": "GPIO2", "f": ["uart:U1_TXD", "other:LED onboard"], "t": ["warn"], "note": "Phải ở mức HIGH khi khởi động. Nối LED xanh trên module (sáng khi LOW)" },
-    { "l": "3V3", "k": "power" },
-    { "l": "GND", "k": "gnd" },
-    { "l": "D5", "name": "GPIO14", "f": ["spi:HSPI_CLK"] },
-    { "l": "D6", "name": "GPIO12", "f": ["spi:HSPI_MISO"] },
-    { "l": "D7", "name": "GPIO13", "f": ["spi:HSPI_MOSI", "uart:RXD2 (Serial.swap)"] },
-    { "l": "D8", "name": "GPIO15", "f": ["spi:HSPI_CS", "uart:TXD2 (Serial.swap)"], "t": ["warn"], "note": "Phải ở mức LOW khi khởi động. Có điện trở kéo xuống trên board" },
-    { "l": "RX", "name": "GPIO3", "f": ["uart:U0_RXD"], "note": "Nối chip USB-Serial" },
-    { "l": "TX", "name": "GPIO1", "f": ["uart:U0_TXD"], "note": "Nối chip USB-Serial, xuất log khi khởi động" },
-    { "l": "GND", "k": "gnd" },
-    { "l": "3V3", "k": "power" }
+    {
+      "l": "D0",
+      "name": "GPIO16",
+      "f": [
+        "other:WAKE"
+      ],
+      "note": "Nối với RST để thoát deep sleep. Không có PWM, I2C và ngắt. Một số board nối LED ở chân này"
+    },
+    {
+      "l": "D1",
+      "name": "GPIO5",
+      "f": [
+        "i2c:SCL"
+      ],
+      "note": "SCL mặc định của thư viện Wire"
+    },
+    {
+      "l": "D2",
+      "name": "GPIO4",
+      "f": [
+        "i2c:SDA"
+      ],
+      "note": "SDA mặc định của thư viện Wire"
+    },
+    {
+      "l": "D3",
+      "name": "GPIO0",
+      "f": [
+        "other:FLASH (nút)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải ở mức HIGH khi khởi động, LOW sẽ vào chế độ nạp. Có điện trở kéo lên trên board"
+    },
+    {
+      "l": "D4",
+      "name": "GPIO2",
+      "f": [
+        "uart:U1_TXD",
+        "other:LED onboard"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải ở mức HIGH khi khởi động. Nối LED xanh trên module (sáng khi LOW)"
+    },
+    {
+      "l": "3V3",
+      "k": "power"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "D5",
+      "name": "GPIO14",
+      "f": [
+        "spi:HSPI_CLK"
+      ]
+    },
+    {
+      "l": "D6",
+      "name": "GPIO12",
+      "f": [
+        "spi:HSPI_MISO"
+      ]
+    },
+    {
+      "l": "D7",
+      "name": "GPIO13",
+      "f": [
+        "spi:HSPI_MOSI",
+        "uart:RXD2 (Serial.swap)"
+      ]
+    },
+    {
+      "l": "D8",
+      "name": "GPIO15",
+      "f": [
+        "spi:HSPI_CS",
+        "uart:TXD2 (Serial.swap)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Phải ở mức LOW khi khởi động. Có điện trở kéo xuống trên board"
+    },
+    {
+      "l": "RX",
+      "name": "GPIO3",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "Nối chip USB-Serial"
+    },
+    {
+      "l": "TX",
+      "name": "GPIO1",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "Nối chip USB-Serial, xuất log khi khởi động"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "3V3",
+      "k": "power"
+    }
   ],
   "notes": [
     "Mức logic 3.3V, các chân không chịu được 5V.",
     "PWM (analogWrite) là PWM phần mềm, dùng được trên GPIO0–15. Ngắt có trên mọi GPIO trừ GPIO16 (D0).",
     "Ba chân quyết định chế độ khởi động: D3 (GPIO0) và D4 (GPIO2) phải HIGH, D8 (GPIO15) phải LOW. Tránh nối linh kiện kéo ngược mức ở các chân này.",
     "Chỉ có một kênh ADC ở chân A0."
-  ]
+  ],
+  "shape": {
+    "w": 25.6,
+    "h": 48.3,
+    "rowGap": 22.86,
+    "start": 10.2,
+    "r": 1.2,
+    "parts": [
+      {
+        "type": "module",
+        "x": 4.8,
+        "y": 0,
+        "w": 16,
+        "h": 24,
+        "fill": "#1c2733"
+      },
+      {
+        "type": "antenna",
+        "x": 5.6,
+        "y": 0.8,
+        "w": 14.4,
+        "h": 5.4
+      },
+      {
+        "type": "shield",
+        "x": 5.6,
+        "y": 8,
+        "w": 14.4,
+        "h": 15,
+        "label": "ESP-12E"
+      },
+      {
+        "type": "reg",
+        "x": 4.2,
+        "y": 27,
+        "w": 6.5,
+        "h": 7,
+        "label": "AMS1117"
+      },
+      {
+        "type": "chip",
+        "x": 14.6,
+        "y": 28.5,
+        "w": 5,
+        "h": 5,
+        "pins": 6,
+        "label": "CP2102",
+        "fs": 7
+      },
+      {
+        "type": "button",
+        "x": 3.2,
+        "y": 39.5,
+        "w": 5,
+        "h": 5,
+        "label": "RST"
+      },
+      {
+        "type": "button",
+        "x": 17.4,
+        "y": 39.5,
+        "w": 5,
+        "h": 5,
+        "label": "FLASH"
+      },
+      {
+        "type": "usb",
+        "x": 9.05,
+        "y": 43.3,
+        "w": 7.5,
+        "h": 5.6
+      }
+    ]
+  }
 }

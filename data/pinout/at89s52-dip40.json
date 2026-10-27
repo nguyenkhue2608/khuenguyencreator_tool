@@ -6,55 +6,377 @@
   "style": "dip",
   "logic": "5V",
   "orientation": "Nhìn từ mặt trên, khuyết chữ U ở phía trên. Chân 1 ở góc trên bên trái, đánh số ngược chiều kim đồng hồ",
-  "connector": "notch-top",
   "left": [
-    { "n": 1, "l": "P1.0", "f": ["pwm:T2"], "note": "Ngõ vào đếm ngoài / ngõ ra clock của Timer 2" },
-    { "n": 2, "l": "P1.1", "f": ["pwm:T2EX"], "note": "Ngõ vào capture / reload của Timer 2" },
-    { "n": 3, "l": "P1.2" },
-    { "n": 4, "l": "P1.3" },
-    { "n": 5, "l": "P1.4" },
-    { "n": 6, "l": "P1.5", "f": ["spi:MOSI (ISP)"], "note": "Dùng khi nạp ISP" },
-    { "n": 7, "l": "P1.6", "f": ["spi:MISO (ISP)"], "note": "Dùng khi nạp ISP" },
-    { "n": 8, "l": "P1.7", "f": ["spi:SCK (ISP)"], "note": "Dùng khi nạp ISP" },
-    { "n": 9, "l": "RST", "k": "sys", "f": ["other:RESET"], "note": "Reset khi ở mức HIGH. Mạch reset thường dùng tụ 10 µF và điện trở 10 kΩ" },
-    { "n": 10, "l": "P3.0", "f": ["uart:RXD"] },
-    { "n": 11, "l": "P3.1", "f": ["uart:TXD"] },
-    { "n": 12, "l": "P3.2", "f": ["int:INT0"] },
-    { "n": 13, "l": "P3.3", "f": ["int:INT1"] },
-    { "n": 14, "l": "P3.4", "f": ["pwm:T0"], "note": "Ngõ vào đếm ngoài của Timer 0" },
-    { "n": 15, "l": "P3.5", "f": ["pwm:T1"], "note": "Ngõ vào đếm ngoài của Timer 1" },
-    { "n": 16, "l": "P3.6", "f": ["other:WR"], "note": "Xung ghi bộ nhớ dữ liệu ngoài" },
-    { "n": 17, "l": "P3.7", "f": ["other:RD"], "note": "Xung đọc bộ nhớ dữ liệu ngoài" },
-    { "n": 18, "l": "XTAL2", "k": "sys", "f": ["other:Thạch anh"], "note": "Nối thạch anh (thường 11.0592 MHz hoặc 12 MHz) và tụ 33 pF xuống GND" },
-    { "n": 19, "l": "XTAL1", "k": "sys", "f": ["other:Thạch anh"], "note": "Nối thạch anh và tụ 33 pF xuống GND" },
-    { "n": 20, "l": "GND", "k": "gnd" }
+    {
+      "n": 1,
+      "l": "P1.0",
+      "f": [
+        "pwm:T2"
+      ],
+      "note": "Ngõ vào đếm ngoài / ngõ ra clock của Timer 2"
+    },
+    {
+      "n": 2,
+      "l": "P1.1",
+      "f": [
+        "pwm:T2EX"
+      ],
+      "note": "Ngõ vào capture / reload của Timer 2"
+    },
+    {
+      "n": 3,
+      "l": "P1.2"
+    },
+    {
+      "n": 4,
+      "l": "P1.3"
+    },
+    {
+      "n": 5,
+      "l": "P1.4"
+    },
+    {
+      "n": 6,
+      "l": "P1.5",
+      "f": [
+        "spi:MOSI (ISP)"
+      ],
+      "note": "Dùng khi nạp ISP"
+    },
+    {
+      "n": 7,
+      "l": "P1.6",
+      "f": [
+        "spi:MISO (ISP)"
+      ],
+      "note": "Dùng khi nạp ISP"
+    },
+    {
+      "n": 8,
+      "l": "P1.7",
+      "f": [
+        "spi:SCK (ISP)"
+      ],
+      "note": "Dùng khi nạp ISP"
+    },
+    {
+      "n": 9,
+      "l": "RST",
+      "k": "sys",
+      "f": [
+        "other:RESET"
+      ],
+      "note": "Reset khi ở mức HIGH. Mạch reset thường dùng tụ 10 µF và điện trở 10 kΩ"
+    },
+    {
+      "n": 10,
+      "l": "P3.0",
+      "f": [
+        "uart:RXD"
+      ]
+    },
+    {
+      "n": 11,
+      "l": "P3.1",
+      "f": [
+        "uart:TXD"
+      ]
+    },
+    {
+      "n": 12,
+      "l": "P3.2",
+      "f": [
+        "int:INT0"
+      ]
+    },
+    {
+      "n": 13,
+      "l": "P3.3",
+      "f": [
+        "int:INT1"
+      ]
+    },
+    {
+      "n": 14,
+      "l": "P3.4",
+      "f": [
+        "pwm:T0"
+      ],
+      "note": "Ngõ vào đếm ngoài của Timer 0"
+    },
+    {
+      "n": 15,
+      "l": "P3.5",
+      "f": [
+        "pwm:T1"
+      ],
+      "note": "Ngõ vào đếm ngoài của Timer 1"
+    },
+    {
+      "n": 16,
+      "l": "P3.6",
+      "f": [
+        "other:WR"
+      ],
+      "note": "Xung ghi bộ nhớ dữ liệu ngoài"
+    },
+    {
+      "n": 17,
+      "l": "P3.7",
+      "f": [
+        "other:RD"
+      ],
+      "note": "Xung đọc bộ nhớ dữ liệu ngoài"
+    },
+    {
+      "n": 18,
+      "l": "XTAL2",
+      "k": "sys",
+      "f": [
+        "other:Thạch anh"
+      ],
+      "note": "Nối thạch anh (thường 11.0592 MHz hoặc 12 MHz) và tụ 33 pF xuống GND"
+    },
+    {
+      "n": 19,
+      "l": "XTAL1",
+      "k": "sys",
+      "f": [
+        "other:Thạch anh"
+      ],
+      "note": "Nối thạch anh và tụ 33 pF xuống GND"
+    },
+    {
+      "n": 20,
+      "l": "GND",
+      "k": "gnd"
+    }
   ],
   "right": [
-    { "n": 40, "l": "VCC", "k": "power", "note": "Nguồn 5V" },
-    { "n": 39, "l": "P0.0", "f": ["other:AD0"], "t": ["warn"], "note": "Port 0 là cực máng hở (open-drain): cần điện trở kéo lên 10 kΩ khi dùng làm I/O" },
-    { "n": 38, "l": "P0.1", "f": ["other:AD1"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 37, "l": "P0.2", "f": ["other:AD2"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 36, "l": "P0.3", "f": ["other:AD3"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 35, "l": "P0.4", "f": ["other:AD4"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 34, "l": "P0.5", "f": ["other:AD5"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 33, "l": "P0.6", "f": ["other:AD6"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 32, "l": "P0.7", "f": ["other:AD7"], "t": ["warn"], "note": "Port 0 là cực máng hở: cần điện trở kéo lên" },
-    { "n": 31, "l": "EA/VPP", "k": "sys", "f": ["other:EA"], "t": ["warn"], "note": "Nối lên VCC để chạy chương trình trong flash nội. Nối GND thì chip đọc chương trình từ bộ nhớ ngoài" },
-    { "n": 30, "l": "ALE", "k": "sys", "f": ["other:ALE/PROG"], "note": "Chốt địa chỉ khi dùng bộ nhớ ngoài" },
-    { "n": 29, "l": "PSEN", "k": "sys", "f": ["other:PSEN"], "note": "Cho phép đọc bộ nhớ chương trình ngoài" },
-    { "n": 28, "l": "P2.7", "f": ["other:A15"] },
-    { "n": 27, "l": "P2.6", "f": ["other:A14"] },
-    { "n": 26, "l": "P2.5", "f": ["other:A13"] },
-    { "n": 25, "l": "P2.4", "f": ["other:A12"] },
-    { "n": 24, "l": "P2.3", "f": ["other:A11"] },
-    { "n": 23, "l": "P2.2", "f": ["other:A10"] },
-    { "n": 22, "l": "P2.1", "f": ["other:A9"] },
-    { "n": 21, "l": "P2.0", "f": ["other:A8"] }
+    {
+      "n": 40,
+      "l": "VCC",
+      "k": "power",
+      "note": "Nguồn 5V"
+    },
+    {
+      "n": 39,
+      "l": "P0.0",
+      "f": [
+        "other:AD0"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở (open-drain): cần điện trở kéo lên 10 kΩ khi dùng làm I/O"
+    },
+    {
+      "n": 38,
+      "l": "P0.1",
+      "f": [
+        "other:AD1"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 37,
+      "l": "P0.2",
+      "f": [
+        "other:AD2"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 36,
+      "l": "P0.3",
+      "f": [
+        "other:AD3"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 35,
+      "l": "P0.4",
+      "f": [
+        "other:AD4"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 34,
+      "l": "P0.5",
+      "f": [
+        "other:AD5"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 33,
+      "l": "P0.6",
+      "f": [
+        "other:AD6"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 32,
+      "l": "P0.7",
+      "f": [
+        "other:AD7"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Port 0 là cực máng hở: cần điện trở kéo lên"
+    },
+    {
+      "n": 31,
+      "l": "EA/VPP",
+      "k": "sys",
+      "f": [
+        "other:EA"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Nối lên VCC để chạy chương trình trong flash nội. Nối GND thì chip đọc chương trình từ bộ nhớ ngoài"
+    },
+    {
+      "n": 30,
+      "l": "ALE",
+      "k": "sys",
+      "f": [
+        "other:ALE/PROG"
+      ],
+      "note": "Chốt địa chỉ khi dùng bộ nhớ ngoài"
+    },
+    {
+      "n": 29,
+      "l": "PSEN",
+      "k": "sys",
+      "f": [
+        "other:PSEN"
+      ],
+      "note": "Cho phép đọc bộ nhớ chương trình ngoài"
+    },
+    {
+      "n": 28,
+      "l": "P2.7",
+      "f": [
+        "other:A15"
+      ]
+    },
+    {
+      "n": 27,
+      "l": "P2.6",
+      "f": [
+        "other:A14"
+      ]
+    },
+    {
+      "n": 26,
+      "l": "P2.5",
+      "f": [
+        "other:A13"
+      ]
+    },
+    {
+      "n": 25,
+      "l": "P2.4",
+      "f": [
+        "other:A12"
+      ]
+    },
+    {
+      "n": 24,
+      "l": "P2.3",
+      "f": [
+        "other:A11"
+      ]
+    },
+    {
+      "n": 23,
+      "l": "P2.2",
+      "f": [
+        "other:A10"
+      ]
+    },
+    {
+      "n": 22,
+      "l": "P2.1",
+      "f": [
+        "other:A9"
+      ]
+    },
+    {
+      "n": 21,
+      "l": "P2.0",
+      "f": [
+        "other:A8"
+      ]
+    }
   ],
   "notes": [
     "Mức logic 5V. Port 1, 2, 3 có điện trở kéo lên bên trong; Port 0 thì không nên cần điện trở kéo lên ngoài.",
     "Chân EA (31) phải nối lên VCC, nếu để GND chương trình nạp vào chip sẽ không chạy.",
     "Không có ADC và PWM phần cứng. PWM thường tạo bằng ngắt Timer 0 hoặc Timer 1.",
     "Nạp ISP qua 4 chân P1.5 (MOSI), P1.6 (MISO), P1.7 (SCK) và RST."
-  ]
+  ],
+  "shape": {
+    "w": 13.97,
+    "h": 52.07,
+    "rowGap": 15.24,
+    "start": 1.27,
+    "r": 0.4,
+    "legs": true,
+    "parts": [
+      {
+        "type": "notch",
+        "x": 6.985,
+        "y": 0,
+        "r": 1.4
+      },
+      {
+        "type": "dot",
+        "x": 2.4,
+        "y": 2.4,
+        "r": 0.7
+      },
+      {
+        "type": "text",
+        "x": 6.985,
+        "y": 26,
+        "fs": 14,
+        "label": "AT89S52",
+        "rot": -90,
+        "weight": 700
+      },
+      {
+        "type": "text",
+        "x": 10.2,
+        "y": 26,
+        "fs": 8,
+        "label": "ATMEL",
+        "rot": -90
+      }
+    ]
+  }
 }

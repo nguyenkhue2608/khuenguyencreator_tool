@@ -6,40 +6,273 @@
   "style": "esp",
   "logic": "3.3V",
   "orientation": "Nhìn từ mặt trên, anten ở phía trên, cổng USB ở phía dưới",
-  "connector": "antenna-top",
   "left": [
-    { "l": "EN", "k": "sys", "f": ["other:CHIP_EN / RESET"], "note": "Kéo xuống LOW để reset. Nối nút EN trên board" },
-    { "l": "VP", "name": "GPIO36", "f": ["adc:ADC1_CH0", "other:RTC_GPIO0"], "t": ["in"], "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong" },
-    { "l": "VN", "name": "GPIO39", "f": ["adc:ADC1_CH3", "other:RTC_GPIO3"], "t": ["in"], "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong" },
-    { "l": "D34", "name": "GPIO34", "f": ["adc:ADC1_CH6", "other:RTC_GPIO4"], "t": ["in"], "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong" },
-    { "l": "D35", "name": "GPIO35", "f": ["adc:ADC1_CH7", "other:RTC_GPIO5"], "t": ["in"], "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong" },
-    { "l": "D32", "name": "GPIO32", "f": ["adc:ADC1_CH4", "touch:TOUCH9", "other:XTAL32_P"] },
-    { "l": "D33", "name": "GPIO33", "f": ["adc:ADC1_CH5", "touch:TOUCH8", "other:XTAL32_N"] },
-    { "l": "D25", "name": "GPIO25", "f": ["dac:DAC1", "adc:ADC2_CH8"] },
-    { "l": "D26", "name": "GPIO26", "f": ["dac:DAC2", "adc:ADC2_CH9"] },
-    { "l": "D27", "name": "GPIO27", "f": ["adc:ADC2_CH7", "touch:TOUCH7"] },
-    { "l": "D14", "name": "GPIO14", "f": ["spi:HSPI_CLK", "adc:ADC2_CH6", "touch:TOUCH6", "other:MTMS (JTAG)"], "note": "Xuất xung PWM trong lúc khởi động" },
-    { "l": "D12", "name": "GPIO12", "f": ["spi:HSPI_MISO", "adc:ADC2_CH5", "touch:TOUCH5", "other:MTDI (JTAG)"], "t": ["warn"], "note": "Chân strapping: phải ở mức LOW khi khởi động. Nếu bị kéo lên HIGH, chip chọn điện áp flash 1.8V và có thể không boot" },
-    { "l": "D13", "name": "GPIO13", "f": ["spi:HSPI_MOSI", "adc:ADC2_CH4", "touch:TOUCH4", "other:MTCK (JTAG)"] },
-    { "l": "GND", "k": "gnd" },
-    { "l": "VIN", "k": "power", "note": "Nguồn vào 5V, nối chung với 5V của cổng USB" }
+    {
+      "l": "EN",
+      "k": "sys",
+      "f": [
+        "other:CHIP_EN / RESET"
+      ],
+      "note": "Kéo xuống LOW để reset. Nối nút EN trên board"
+    },
+    {
+      "l": "VP",
+      "name": "GPIO36",
+      "f": [
+        "adc:ADC1_CH0",
+        "other:RTC_GPIO0"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong"
+    },
+    {
+      "l": "VN",
+      "name": "GPIO39",
+      "f": [
+        "adc:ADC1_CH3",
+        "other:RTC_GPIO3"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong"
+    },
+    {
+      "l": "D34",
+      "name": "GPIO34",
+      "f": [
+        "adc:ADC1_CH6",
+        "other:RTC_GPIO4"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong"
+    },
+    {
+      "l": "D35",
+      "name": "GPIO35",
+      "f": [
+        "adc:ADC1_CH7",
+        "other:RTC_GPIO5"
+      ],
+      "t": [
+        "in"
+      ],
+      "note": "Chỉ là ngõ vào, không có điện trở kéo lên/xuống bên trong"
+    },
+    {
+      "l": "D32",
+      "name": "GPIO32",
+      "f": [
+        "adc:ADC1_CH4",
+        "touch:TOUCH9",
+        "other:XTAL32_P"
+      ]
+    },
+    {
+      "l": "D33",
+      "name": "GPIO33",
+      "f": [
+        "adc:ADC1_CH5",
+        "touch:TOUCH8",
+        "other:XTAL32_N"
+      ]
+    },
+    {
+      "l": "D25",
+      "name": "GPIO25",
+      "f": [
+        "dac:DAC1",
+        "adc:ADC2_CH8"
+      ]
+    },
+    {
+      "l": "D26",
+      "name": "GPIO26",
+      "f": [
+        "dac:DAC2",
+        "adc:ADC2_CH9"
+      ]
+    },
+    {
+      "l": "D27",
+      "name": "GPIO27",
+      "f": [
+        "adc:ADC2_CH7",
+        "touch:TOUCH7"
+      ]
+    },
+    {
+      "l": "D14",
+      "name": "GPIO14",
+      "f": [
+        "spi:HSPI_CLK",
+        "adc:ADC2_CH6",
+        "touch:TOUCH6",
+        "other:MTMS (JTAG)"
+      ],
+      "note": "Xuất xung PWM trong lúc khởi động"
+    },
+    {
+      "l": "D12",
+      "name": "GPIO12",
+      "f": [
+        "spi:HSPI_MISO",
+        "adc:ADC2_CH5",
+        "touch:TOUCH5",
+        "other:MTDI (JTAG)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping: phải ở mức LOW khi khởi động. Nếu bị kéo lên HIGH, chip chọn điện áp flash 1.8V và có thể không boot"
+    },
+    {
+      "l": "D13",
+      "name": "GPIO13",
+      "f": [
+        "spi:HSPI_MOSI",
+        "adc:ADC2_CH4",
+        "touch:TOUCH4",
+        "other:MTCK (JTAG)"
+      ]
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "VIN",
+      "k": "power",
+      "note": "Nguồn vào 5V, nối chung với 5V của cổng USB"
+    }
   ],
   "right": [
-    { "l": "D23", "name": "GPIO23", "f": ["spi:VSPI_MOSI"] },
-    { "l": "D22", "name": "GPIO22", "f": ["i2c:SCL"], "note": "SCL mặc định của thư viện Wire" },
-    { "l": "TX0", "name": "GPIO1", "f": ["uart:U0_TXD"], "note": "Nối chip USB-Serial, xuất log khi khởi động. Tránh dùng làm GPIO" },
-    { "l": "RX0", "name": "GPIO3", "f": ["uart:U0_RXD"], "note": "Nối chip USB-Serial. Tránh dùng làm GPIO" },
-    { "l": "D21", "name": "GPIO21", "f": ["i2c:SDA"], "note": "SDA mặc định của thư viện Wire" },
-    { "l": "D19", "name": "GPIO19", "f": ["spi:VSPI_MISO"] },
-    { "l": "D18", "name": "GPIO18", "f": ["spi:VSPI_CLK"] },
-    { "l": "D5", "name": "GPIO5", "f": ["spi:VSPI_CS"], "t": ["warn"], "note": "Chân strapping, xuất xung PWM lúc khởi động. Dùng bình thường nếu không bị kéo LOW khi boot" },
-    { "l": "TX2", "name": "GPIO17", "f": ["uart:U2_TXD"] },
-    { "l": "RX2", "name": "GPIO16", "f": ["uart:U2_RXD"] },
-    { "l": "D4", "name": "GPIO4", "f": ["adc:ADC2_CH0", "touch:TOUCH0"] },
-    { "l": "D2", "name": "GPIO2", "f": ["adc:ADC2_CH2", "touch:TOUCH2", "other:LED onboard"], "t": ["warn"], "note": "Chân strapping: phải LOW hoặc để trống khi nạp code. Nối LED xanh trên board" },
-    { "l": "D15", "name": "GPIO15", "f": ["spi:HSPI_CS", "adc:ADC2_CH3", "touch:TOUCH3", "other:MTDO (JTAG)"], "t": ["warn"], "note": "Chân strapping: kéo LOW khi khởi động sẽ tắt log boot. Xuất xung PWM lúc khởi động" },
-    { "l": "GND", "k": "gnd" },
-    { "l": "3V3", "k": "power", "note": "Ngõ ra 3.3V từ LDO trên board" }
+    {
+      "l": "D23",
+      "name": "GPIO23",
+      "f": [
+        "spi:VSPI_MOSI"
+      ]
+    },
+    {
+      "l": "D22",
+      "name": "GPIO22",
+      "f": [
+        "i2c:SCL"
+      ],
+      "note": "SCL mặc định của thư viện Wire"
+    },
+    {
+      "l": "TX0",
+      "name": "GPIO1",
+      "f": [
+        "uart:U0_TXD"
+      ],
+      "note": "Nối chip USB-Serial, xuất log khi khởi động. Tránh dùng làm GPIO"
+    },
+    {
+      "l": "RX0",
+      "name": "GPIO3",
+      "f": [
+        "uart:U0_RXD"
+      ],
+      "note": "Nối chip USB-Serial. Tránh dùng làm GPIO"
+    },
+    {
+      "l": "D21",
+      "name": "GPIO21",
+      "f": [
+        "i2c:SDA"
+      ],
+      "note": "SDA mặc định của thư viện Wire"
+    },
+    {
+      "l": "D19",
+      "name": "GPIO19",
+      "f": [
+        "spi:VSPI_MISO"
+      ]
+    },
+    {
+      "l": "D18",
+      "name": "GPIO18",
+      "f": [
+        "spi:VSPI_CLK"
+      ]
+    },
+    {
+      "l": "D5",
+      "name": "GPIO5",
+      "f": [
+        "spi:VSPI_CS"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping, xuất xung PWM lúc khởi động. Dùng bình thường nếu không bị kéo LOW khi boot"
+    },
+    {
+      "l": "TX2",
+      "name": "GPIO17",
+      "f": [
+        "uart:U2_TXD"
+      ]
+    },
+    {
+      "l": "RX2",
+      "name": "GPIO16",
+      "f": [
+        "uart:U2_RXD"
+      ]
+    },
+    {
+      "l": "D4",
+      "name": "GPIO4",
+      "f": [
+        "adc:ADC2_CH0",
+        "touch:TOUCH0"
+      ]
+    },
+    {
+      "l": "D2",
+      "name": "GPIO2",
+      "f": [
+        "adc:ADC2_CH2",
+        "touch:TOUCH2",
+        "other:LED onboard"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping: phải LOW hoặc để trống khi nạp code. Nối LED xanh trên board"
+    },
+    {
+      "l": "D15",
+      "name": "GPIO15",
+      "f": [
+        "spi:HSPI_CS",
+        "adc:ADC2_CH3",
+        "touch:TOUCH3",
+        "other:MTDO (JTAG)"
+      ],
+      "t": [
+        "warn"
+      ],
+      "note": "Chân strapping: kéo LOW khi khởi động sẽ tắt log boot. Xuất xung PWM lúc khởi động"
+    },
+    {
+      "l": "GND",
+      "k": "gnd"
+    },
+    {
+      "l": "3V3",
+      "k": "power",
+      "note": "Ngõ ra 3.3V từ LDO trên board"
+    }
   ],
   "notes": [
     "Mức logic 3.3V, các chân không chịu được 5V.",
@@ -47,5 +280,93 @@
     "ADC2 (GPIO0, 2, 4, 12–15, 25–27) không dùng được khi WiFi đang bật. Cần đọc analog lúc dùng WiFi thì chọn chân ADC1 (GPIO32–39).",
     "I2C, SPI, UART có thể gán sang chân khác qua GPIO matrix. Bảng trên là chân mặc định.",
     "GPIO6–11 nối với flash SPI nên không được đưa ra header của bản 30 chân."
-  ]
+  ],
+  "shape": {
+    "w": 28.3,
+    "h": 51.6,
+    "rowGap": 25.4,
+    "start": 13.5,
+    "r": 1.2,
+    "parts": [
+      {
+        "type": "module",
+        "x": 5.15,
+        "y": 0,
+        "w": 18,
+        "h": 25.5
+      },
+      {
+        "type": "antenna",
+        "x": 6.2,
+        "y": 0.8,
+        "w": 15.9,
+        "h": 5
+      },
+      {
+        "type": "shield",
+        "x": 6.15,
+        "y": 7,
+        "w": 16,
+        "h": 17.5,
+        "label": "ESP32-WROOM-32\nWiFi + BT"
+      },
+      {
+        "type": "reg",
+        "x": 4.6,
+        "y": 28,
+        "w": 6.5,
+        "h": 7,
+        "label": "AMS1117"
+      },
+      {
+        "type": "chip",
+        "x": 16,
+        "y": 30,
+        "w": 5,
+        "h": 5,
+        "pins": 6,
+        "label": "CP2102",
+        "fs": 7
+      },
+      {
+        "type": "led",
+        "x": 12.6,
+        "y": 29,
+        "w": 1.8,
+        "h": 1,
+        "color": "#e53935"
+      },
+      {
+        "type": "led",
+        "x": 12.6,
+        "y": 33,
+        "w": 1.8,
+        "h": 1,
+        "color": "#2f7bff"
+      },
+      {
+        "type": "button",
+        "x": 3.4,
+        "y": 41.5,
+        "w": 5.5,
+        "h": 5.5,
+        "label": "EN"
+      },
+      {
+        "type": "button",
+        "x": 19.4,
+        "y": 41.5,
+        "w": 5.5,
+        "h": 5.5,
+        "label": "BOOT"
+      },
+      {
+        "type": "usb",
+        "x": 10.4,
+        "y": 46.6,
+        "w": 7.5,
+        "h": 5.6
+      }
+    ]
+  }
 }
