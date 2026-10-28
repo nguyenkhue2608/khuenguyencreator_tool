@@ -17,7 +17,7 @@ def read(path):
 
 
 def build(slug):
-    meta = json.loads(read("preview/pages.json"))[slug]
+    meta = json.loads(read("data/pages.json"))[slug]
     deps = meta.get("deps", [])
     css = "\n".join([read("assets/common/kn-tools.css")] + [read(f"assets/common/{d}.css") for d in deps] + [read(f"assets/tools/{slug}/tool.css")])
     js = "\n".join([read(f"assets/common/{d}.js") for d in deps] + [read(f"assets/tools/{slug}/tool.js")])
@@ -46,5 +46,5 @@ def build(slug):
 
 
 if __name__ == "__main__":
-    for s in sys.argv[1:] or json.loads(read("preview/pages.json")).keys():
+    for s in sys.argv[1:] or json.loads(read("data/pages.json")).keys():
         build(s)
