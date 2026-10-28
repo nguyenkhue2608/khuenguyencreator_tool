@@ -74,5 +74,14 @@
       "kn-calc",
       "kn-elec"
     ]
+  },
+  "tools-hub": {
+    "title": "Công cụ lập trình nhúng",
+    "h1": "Công cụ cho dân lập trình nhúng",
+    "intro": "Tính Timer, PWM, mã màu điện trở, CRC, tra sơ đồ chân… ngay trên trình duyệt. Miễn phí, không cần cài đặt, dữ liệu bạn nhập không rời khỏi máy.",
+    "hub": true,
+    "deps": [
+      "kn-hub"
+    ]
   }
 }

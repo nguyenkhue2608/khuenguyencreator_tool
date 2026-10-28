@@ -3,7 +3,7 @@
 Bộ công cụ lập trình nhúng chạy trên trình duyệt cho **khuenguyencreator.com** (WordPress + theme Flatsome), đóng gói dưới dạng một plugin WordPress.
 
 - Mỗi tool là một Page WordPress tại `/tools/<slug>/`, nhúng bằng shortcode `[kn_tool slug="<slug>"]`.
-- Trang Hub `/tools/` dùng `[kn_tools_hub]`, tự liệt kê tool theo `includes/registry.php`.
+- Trang Hub `/tools/` dùng `[kn_tools_hub]`: ô tìm kiếm (không dấu cũng được), lọc theo nhóm, thẻ tool lấy tên, mô tả, tag, icon từ `includes/registry.php`. Nội dung đặt dưới Hub nằm ở `content/tools-hub.html`.
 - Tool chạy hoàn toàn bằng JS phía client: không cần server, AdSense và SEO dùng chung theme.
 
 ## Cấu trúc repo
@@ -86,6 +86,8 @@ kn-tools/
 4. `./build.sh` → upload `dist/kn-tools.zip`.
 
 ## Xem trước giao diện
+
+Trang Hub xem trước bằng `python3 preview/build.py tools-hub` (cần `php`; `preview/render_hub.php` giả lập hàm WordPress, thẻ tool trỏ tới link trong `preview/links.json`).
 
 `python3 preview/build.py <slug>` tạo `dist/preview/<slug>.html`, một file HTML đã inline CSS/JS, mở thẳng bằng trình duyệt để xem tool cùng bài giải thích mà không cần WordPress. Thông tin tiêu đề trang nằm trong `preview/pages.json`.
 

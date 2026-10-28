@@ -1,7 +1,7 @@
 /* Mọi style đều nằm dưới .kn-tool / .kn-tools-hub để không đụng CSS của Flatsome.
    Font kế thừa từ theme (Mulish); chỉ số liệu và code dùng font monospace. */
 .kn-tool,
-.kn-tools-hub {
+.kn-hub {
 	--kn-accent: #00935b;      /* primary color của khuenguyencreator.com (Flatsome) */
 	--kn-accent-ink: #00704a;  /* accent đậm cho chữ trên nền sáng */
 	--kn-accent-soft: #e6f4ee;
@@ -58,18 +58,6 @@
 }
 
 .kn-tool .kn-mono { font-family: var(--kn-mono); font-variant-numeric: tabular-nums; }
-
-/* ---- Hub ---- */
-.kn-tools-hub__list { list-style: none; margin-left: 0; }
-.kn-tools-hub__list li { margin-bottom: 6px; }
-.kn-tools-hub__list .is-planned { color: var(--kn-muted); }
-.kn-tools-hub__list .is-planned span {
-	font-size: 12px;
-	background: var(--kn-panel);
-	border: 1px solid var(--kn-line);
-	border-radius: 4px;
-	padding: 1px 6px;
-}
 
 /* Flatsome/tool CSS có thể đặt display cho phần tử; giữ [hidden] luôn ẩn. */
 .kn-tool [hidden] { display: none !important; }

@@ -4,6 +4,7 @@
     python3 preview/build.py stm32-pwm      (bỏ trống = build mọi trang trong pages.json)
 """
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -24,11 +25,18 @@ def build(slug):
         files = sorted((ROOT / "data" / meta["data"]).glob("*.json"))
         bundle = {f.name: json.loads(f.read_text(encoding="utf-8")) for f in files}
         js = "window.KN_PINOUT_DATA = " + json.dumps(bundle, ensure_ascii=False) + ";\n" + js
+    if meta.get("hub"):
+        # Trang Hub do PHP sinh ra: chạy includes/ thật qua preview/render_hub.php (giả lập vài hàm WordPress)
+        tool = subprocess.run(["php", str(ROOT / "preview" / "render_hub.php")], capture_output=True, text=True, check=True).stdout
+        crumbs = "Trang chủ › Công cụ"
+    else:
+        tool = f'<div class="kn-tool" id="kn-tool-{slug}" data-tool="{slug}"></div>'
+        crumbs = "Trang chủ › Công cụ › " + meta["title"]
     content = "\n".join(l for l in read(f"content/{slug}.html").splitlines() if not l.startswith("<!--"))
     html = read("preview/page.html")
     for key, val in {
         "TITLE": meta["title"], "H1": meta["h1"], "INTRO": meta["intro"], "SLUG": slug,
-        "CSS": css, "JS": js, "CONTENT": content,
+        "CSS": css, "JS": js, "CONTENT": content, "TOOL": tool, "CRUMBS": crumbs,
     }.items():
         html = html.replace("{{" + key + "}}", val)
     out = ROOT / "dist" / "preview" / f"{slug}.html"
