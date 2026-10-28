@@ -24,8 +24,6 @@
 					item.hidden = !ok;
 					if (ok) visible++;
 				});
-				var soon = sec.querySelector('.kn-hub__soon');
-				if (soon) soon.hidden = !soon.querySelector('[data-hub-item]:not([hidden])');
 				sec.hidden = !visible;
 				any = any || visible > 0;
 			});

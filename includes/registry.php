@@ -1,7 +1,7 @@
 <?php
 /**
  * Danh sách tool. Thêm tool mới: thêm một dòng ở đây và tạo assets/tools/<slug>/tool.js (+ tool.css nếu cần).
- * status: 'live' = đã xong, hiện trên Hub; 'planned' = chưa làm, Hub hiện "Sắp ra mắt".
+ * status: 'live' = đã xong, hiện trên Hub; 'planned' = chưa làm, không hiện ở đâu (chỉ để theo dõi lộ trình).
  * deps:   phần dùng chung trong assets/common/<dep>.js|.css, nạp trước tool.js.
  * desc:   một câu mô tả cho thẻ trên Hub. tags: từ khóa hiện trên thẻ và dùng cho ô tìm kiếm.
  * icon:   tên icon trong kn_tools_icon().

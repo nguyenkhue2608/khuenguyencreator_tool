@@ -58,7 +58,7 @@ function kn_tools_render_tool( $atts ) {
 }
 
 /**
- * Trang Hub: ô tìm kiếm + lọc nhóm (JS), lưới thẻ tool theo nhóm, tool sắp ra mắt ở cuối mỗi nhóm.
+ * Trang Hub: ô tìm kiếm + lọc nhóm (JS), lưới thẻ tool theo nhóm. Chỉ hiện tool 'live'; nhóm chưa có tool nào thì ẩn.
  * HTML đầy đủ và đọc được khi tắt JS; kn-hub.js chỉ thêm tìm kiếm / lọc.
  */
 function kn_tools_render_hub() {
@@ -70,8 +70,11 @@ function kn_tools_render_hub() {
 	$by_group = array();
 	$live     = 0;
 	foreach ( kn_tools_registry() as $slug => $tool ) {
+		if ( 'live' !== $tool['status'] ) {
+			continue;
+		}
 		$by_group[ $tool['group'] ][ $slug ] = $tool;
-		$live += 'live' === $tool['status'] ? 1 : 0;
+		$live++;
 	}
 
 	$html  = '<div class="kn-hub" data-hub>';
@@ -84,8 +87,7 @@ function kn_tools_render_hub() {
 		if ( empty( $by_group[ $key ] ) ) {
 			continue;
 		}
-		$n     = count( array_filter( $by_group[ $key ], function ( $t ) { return 'live' === $t['status']; } ) );
-		$html .= '<button type="button" data-hub-group="' . esc_attr( $key ) . '" aria-pressed="false">' . esc_html( $g['label'] ) . ( $n ? ' <span>' . (int) $n . '</span>' : '' ) . '</button>';
+		$html .= '<button type="button" data-hub-group="' . esc_attr( $key ) . '" aria-pressed="false">' . esc_html( $g['label'] ) . ' <span>' . count( $by_group[ $key ] ) . '</span></button>';
 	}
 	$html .= '</div></div>';
 
@@ -93,28 +95,21 @@ function kn_tools_render_hub() {
 		if ( empty( $by_group[ $key ] ) ) {
 			continue;
 		}
-		$cards   = '';
-		$planned = '';
+		$cards = '';
 		foreach ( $by_group[ $key ] as $slug => $tool ) {
-			$icon = kn_tools_icon( isset( $tool['icon'] ) ? $tool['icon'] : 'chip' );
-			if ( 'live' === $tool['status'] ) {
-				$tags   = isset( $tool['tags'] ) ? $tool['tags'] : array();
-				$search = strtolower( $tool['title'] . ' ' . ( isset( $tool['desc'] ) ? $tool['desc'] : '' ) . ' ' . implode( ' ', $tags ) );
-				$cards .= '<a class="kn-hub__card" href="' . esc_url( home_url( '/tools/' . $slug . '/' ) ) . '" data-hub-item data-search="' . esc_attr( $search ) . '">'
-					. '<span class="kn-hub__icon">' . $icon . '</span>'
-					. '<span class="kn-hub__title">' . esc_html( $tool['title'] ) . '</span>'
-					. ( isset( $tool['desc'] ) ? '<span class="kn-hub__desc">' . esc_html( $tool['desc'] ) . '</span>' : '' )
-					. '<span class="kn-hub__foot"><span class="kn-hub__tags">'
-					. implode( '', array_map( function ( $t ) { return '<span>' . esc_html( $t ) . '</span>'; }, $tags ) )
-					. '</span><span class="kn-hub__go" aria-hidden="true">→</span></span></a>';
-			} else {
-				$planned .= '<li data-hub-item data-search="' . esc_attr( strtolower( $tool['title'] ) ) . '"><span class="kn-hub__icon is-small">' . $icon . '</span>' . esc_html( $tool['title'] ) . '</li>';
-			}
+			$tags   = isset( $tool['tags'] ) ? $tool['tags'] : array();
+			$search = strtolower( $tool['title'] . ' ' . ( isset( $tool['desc'] ) ? $tool['desc'] : '' ) . ' ' . implode( ' ', $tags ) );
+			$cards .= '<a class="kn-hub__card" href="' . esc_url( home_url( '/tools/' . $slug . '/' ) ) . '" data-hub-item data-search="' . esc_attr( $search ) . '">'
+				. '<span class="kn-hub__icon">' . kn_tools_icon( isset( $tool['icon'] ) ? $tool['icon'] : 'chip' ) . '</span>'
+				. '<span class="kn-hub__title">' . esc_html( $tool['title'] ) . '</span>'
+				. ( isset( $tool['desc'] ) ? '<span class="kn-hub__desc">' . esc_html( $tool['desc'] ) . '</span>' : '' )
+				. '<span class="kn-hub__foot"><span class="kn-hub__tags">'
+				. implode( '', array_map( function ( $t ) { return '<span>' . esc_html( $t ) . '</span>'; }, $tags ) )
+				. '</span><span class="kn-hub__go" aria-hidden="true">→</span></span></a>';
 		}
 		$html .= '<section class="kn-hub__group" data-hub-section="' . esc_attr( $key ) . '">'
 			. '<div class="kn-hub__ghead"><h2>' . esc_html( $g['label'] ) . '</h2><p>' . esc_html( $g['desc'] ) . '</p></div>'
-			. ( $cards ? '<div class="kn-hub__grid">' . $cards . '</div>' : '' )
-			. ( $planned ? '<div class="kn-hub__soon"><span class="kn-hub__soon-label">Sắp ra mắt</span><ul>' . $planned . '</ul></div>' : '' )
+			. '<div class="kn-hub__grid">' . $cards . '</div>'
 			. '</section>';
 	}
 

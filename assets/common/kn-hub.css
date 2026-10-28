@@ -1,4 +1,4 @@
-/* Trang Hub /tools/. Layout: thanh tìm kiếm + lọc nhóm -> từng nhóm (tiêu đề, lưới thẻ, dải "Sắp ra mắt"). */
+/* Trang Hub /tools/. Layout: thanh tìm kiếm + lọc nhóm -> từng nhóm (tiêu đề, lưới thẻ). */
 
 .kn-hub { color: var(--kn-ink); display: grid; gap: 40px; margin-bottom: 40px; }
 .kn-hub *, .kn-hub *::before, .kn-hub *::after { box-sizing: border-box; }
@@ -93,8 +93,6 @@
 	color: var(--kn-accent-ink);
 	margin-bottom: 4px;
 }
-.kn-hub__icon.is-small { width: 28px; height: 28px; border-radius: 7px; margin: 0; background: var(--kn-panel); color: var(--kn-muted); }
-.kn-hub__icon.is-small svg { width: 16px; height: 16px; }
 .kn-hub__title { font-size: 17px; font-weight: 800; line-height: 1.35; }
 .kn-hub__desc { font-size: 14px; line-height: 1.55; color: var(--kn-muted); flex: 1; }
 .kn-hub__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 6px; }
@@ -109,18 +107,6 @@
 }
 .kn-hub__go { font-size: 20px; font-weight: 700; color: var(--kn-accent); transition: transform .15s; }
 .kn-hub__card:hover .kn-hub__go { transform: translateX(3px); }
-
-/* ---- Sắp ra mắt ---- */
-.kn-hub__soon {
-	display: grid;
-	gap: 10px;
-	padding: 14px 16px;
-	border: 1px dashed var(--kn-line);
-	border-radius: 12px;
-}
-.kn-hub__soon-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--kn-muted); }
-.kn-hub__soon ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
-.kn-hub__soon li { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; color: var(--kn-muted); }
 
 .kn-hub__empty { margin: 0; padding: 20px; border-radius: 12px; background: var(--kn-panel); color: var(--kn-muted); text-align: center; }
 .kn-hub [hidden] { display: none !important; }
