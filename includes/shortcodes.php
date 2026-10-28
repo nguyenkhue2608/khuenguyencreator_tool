@@ -100,7 +100,7 @@ function kn_tools_render_hub() {
 		foreach ( $by_group[ $key ] as $slug => $tool ) {
 			$tags   = isset( $tool['tags'] ) ? $tool['tags'] : array();
 			$search = strtolower( $tool['title'] . ' ' . ( isset( $tool['desc'] ) ? $tool['desc'] : '' ) . ' ' . implode( ' ', $tags ) );
-			$cards .= '<a class="kn-hub__card" href="' . esc_url( home_url( '/tools/' . $slug . '/' ) ) . '" data-hub-item data-search="' . esc_attr( $search ) . '">'
+			$cards .= '<a class="kn-hub__card" target="_blank" rel="noopener" href="' . esc_url( home_url( '/tools/' . $slug . '/' ) ) . '" data-hub-item data-search="' . esc_attr( $search ) . '">'
 				. '<span class="kn-hub__icon">' . kn_tools_icon( isset( $tool['icon'] ) ? $tool['icon'] : 'chip' ) . '</span>'
 				. '<span class="kn-hub__title">' . esc_html( $tool['title'] ) . '</span>'
 				. ( isset( $tool['desc'] ) ? '<span class="kn-hub__desc">' . esc_html( $tool['desc'] ) . '</span>' : '' )
