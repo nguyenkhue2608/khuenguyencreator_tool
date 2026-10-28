@@ -16,6 +16,7 @@ add_action( 'init', function () {
 
 function kn_tools_enqueue_common() {
 	wp_enqueue_style( 'kn-tools-common', KN_TOOLS_URL . 'assets/common/kn-tools.css', array(), KN_TOOLS_VERSION );
+	wp_enqueue_script( 'kn-select', KN_TOOLS_URL . 'assets/common/kn-select.js', array(), KN_TOOLS_VERSION, true );
 }
 
 function kn_tools_render_tool( $atts ) {

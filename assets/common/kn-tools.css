@@ -1,7 +1,8 @@
 /* Mọi style đều nằm dưới .kn-tool / .kn-tools-hub để không đụng CSS của Flatsome.
    Font kế thừa từ theme (Mulish); chỉ số liệu và code dùng font monospace. */
 .kn-tool,
-.kn-hub {
+.kn-hub,
+.kn-sel {
 	--kn-accent: #00935b;      /* primary color của khuenguyencreator.com (Flatsome) */
 	--kn-accent-ink: #00704a;  /* accent đậm cho chữ trên nền sáng */
 	--kn-accent-soft: #e6f4ee;
@@ -61,3 +62,24 @@
 
 /* Flatsome/tool CSS có thể đặt display cho phần tử; giữ [hidden] luôn ẩn. */
 .kn-tool [hidden] { display: none !important; }
+
+/* Danh sách chọn tự vẽ (kn-select.js), gắn vào body nên không nằm trong .kn-tool. */
+.kn-sel {
+	position: fixed;
+	z-index: 100000;
+	overflow-y: auto;
+	padding: 4px;
+	border: 1px solid var(--kn-line);
+	border-radius: 8px;
+	background: var(--kn-paper);
+	box-shadow: 0 8px 24px rgba(16, 32, 28, .16);
+	color: var(--kn-ink);
+	font-size: 15px;
+	line-height: 1.35;
+	text-align: left;
+}
+.kn-sel__opt { padding: 7px 10px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
+.kn-sel__opt.is-selected { font-weight: 700; color: var(--kn-accent-ink); }
+.kn-sel__opt.is-active { background: var(--kn-accent-soft); }
+.kn-sel__opt.is-disabled { color: var(--kn-muted); opacity: .6; cursor: default; }
+.kn-sel__group { padding: 8px 10px 4px; font-size: 12px; font-weight: 700; color: var(--kn-muted); }

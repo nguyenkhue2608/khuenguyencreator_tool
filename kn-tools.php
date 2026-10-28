@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KN_TOOLS_VERSION', '1.0.0' );
+define( 'KN_TOOLS_VERSION', '1.0.1' );
 define( 'KN_TOOLS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'KN_TOOLS_URL', plugin_dir_url( __FILE__ ) );
 
