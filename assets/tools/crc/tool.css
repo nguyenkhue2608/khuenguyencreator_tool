@@ -1,0 +1,63 @@
+/* CRC & checksum: textarea dữ liệu, khối tự cấu hình, bảng mọi thuật toán, code C. */
+
+.kn-crc__body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.kn-tool textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-family: var(--kn-mono);
+	font-size: 14px;
+	line-height: 1.5;
+	resize: vertical;
+	margin: 0;
+	box-shadow: none;
+}
+.kn-tool textarea:focus { outline: 2px solid var(--kn-accent); outline-offset: 1px; border-color: var(--kn-accent); }
+
+.kn-crc__custom { border: 1px solid var(--kn-line); border-radius: 6px; padding: 10px 12px; background: var(--kn-panel); }
+.kn-crc__custom summary { cursor: pointer; font-size: 13px; font-weight: 700; }
+.kn-crc__cgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.kn-crc__cgrid input { font-family: var(--kn-mono) !important; }
+.kn-crc__checks { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; font-size: 13px; }
+.kn-crc__checks label { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-weight: 400; }
+.kn-crc__checks input { margin: 0; }
+
+.kn-crc__wrap { white-space: normal; overflow-wrap: anywhere; }
+.kn-crc__use { font-family: inherit !important; color: var(--kn-muted); white-space: normal !important; text-align: left !important; min-width: 200px; }
+
+.kn-crc__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.kn-crc__head .kn-calc__h { margin: 0; }
+.kn-crc__copy {
+	height: 32px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	min-height: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.kn-crc__code {
+	margin: 0;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #14201d;
+	color: #d7e7e1;
+	font-family: var(--kn-mono);
+	font-size: 13px;
+	line-height: 1.6;
+	overflow-x: auto;
+	white-space: pre;
+}
+
+@media (max-width: 600px) {
+	.kn-crc__cgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

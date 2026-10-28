@@ -105,6 +105,7 @@
 .kn-calc__figure svg { display: block; width: 100%; height: auto; margin: 0 auto; }
 
 .kn-calc__more { border-top: 1px solid var(--kn-line); padding: 20px; display: grid; gap: 20px; }
+.kn-calc__more > * { min-width: 0; }
 .kn-calc__h { margin: 0 0 8px; font-size: 16px; }
 
 .kn-calc__table-wrap { overflow-x: auto; }

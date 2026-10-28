@@ -39,9 +39,9 @@ function kn_tools_registry() {
 		'pinout'                 => array( 'group' => 'mcu', 'title' => 'Pinout viewer', 'status' => 'live' ),
 
 		// 3. Dữ liệu / giao thức
-		'crc'                    => array( 'group' => 'du-lieu', 'title' => 'CRC & Checksum', 'status' => 'planned' ),
-		'hex-dec-bin'            => array( 'group' => 'du-lieu', 'title' => 'Hex ↔ Dec ↔ Bin + Bitfield', 'status' => 'planned' ),
-		'float-ieee754'          => array( 'group' => 'du-lieu', 'title' => 'Float ↔ IEEE754', 'status' => 'planned' ),
+		'crc'                    => array( 'group' => 'du-lieu', 'title' => 'CRC & Checksum', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
+		'hex-dec-bin'            => array( 'group' => 'du-lieu', 'title' => 'Hex ↔ Dec ↔ Bin + Bitfield', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
+		'float-ieee754'          => array( 'group' => 'du-lieu', 'title' => 'Float ↔ IEEE754', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
 
 		// 4. Đồ họa / dữ liệu nhúng
 		'image-to-c-array'       => array( 'group' => 'do-hoa', 'title' => 'Image → C array', 'status' => 'planned' ),

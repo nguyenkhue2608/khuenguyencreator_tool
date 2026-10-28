@@ -47,5 +47,32 @@
       "kn-calc",
       "kn-elec"
     ]
+  },
+  "hex-dec-bin": {
+    "title": "Hex Dec Bin Converter",
+    "h1": "Chuyển đổi Hex, Dec, Bin và bật tắt từng bit",
+    "intro": "Đổi qua lại giữa thập phân, hex, nhị phân, bát phân cho số 8 tới 64 bit, có dấu hoặc không dấu. Bấm vào từng bit để tạo mặt nạ thanh ghi và lấy code C.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "crc": {
+    "title": "CRC Calculator",
+    "h1": "Tính CRC và checksum: Modbus, CCITT, CRC-32",
+    "intro": "Nhập dữ liệu dạng byte hex hoặc chuỗi ký tự, công cụ tính cùng lúc CRC-8, CRC-16 (Modbus, CCITT, XMODEM), CRC-32 và các checksum, kèm hàm C để dùng ngay trên vi điều khiển.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "float-ieee754": {
+    "title": "Float IEEE754 Converter",
+    "h1": "Chuyển đổi số thực Float sang Hex (IEEE 754)",
+    "intro": "Đổi số thực float, double sang hex và ngược lại, xem bit dấu, mũ, định trị, thứ tự byte khi gửi qua UART hay Modbus, và chuyển đổi fixed-point Q15, Q31.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
   }
 }

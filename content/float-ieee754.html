@@ -1,0 +1,23 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/float-ieee754/. -->
+<h2>Số thực float được lưu thế nào?</h2>
+<p>Theo chuẩn IEEE 754, một số <code>float</code> 32-bit gồm 3 phần:</p>
+<ul>
+	<li><strong>Dấu</strong> (1 bit): 0 là dương, 1 là âm.</li>
+	<li><strong>Mũ</strong> (8 bit): lưu số mũ cộng thêm 127 (bias).</li>
+	<li><strong>Định trị</strong> (23 bit): phần lẻ sau dấu phẩy, ngầm hiểu có số 1 đứng trước.</li>
+</ul>
+<pre>giá trị = (−1)^dấu × 1.định_trị × 2^(mũ − 127)</pre>
+<p>Ví dụ 3.14159 được lưu thành <code>0x40490FD0</code>. Giá trị thật trong bộ nhớ là 3.14159012, lệch một chút vì 23 bit định trị chỉ cho độ chính xác khoảng 7 chữ số thập phân. Cần chính xác hơn thì dùng <code>double</code> (khoảng 15–16 chữ số).</p>
+
+<h2>Gửi số float qua UART, Modbus</h2>
+<p>Khi truyền float theo từng byte, hai bên phải thống nhất thứ tự byte. STM32, ESP32 lưu little-endian (byte thấp trước). Thiết bị Modbus thường chia float thành 2 thanh ghi 16-bit, và mỗi hãng sắp xếp một kiểu (ABCD, CDAB, BADC, DCBA). Bảng "Thứ tự byte" ở trên liệt kê đủ 4 kiểu để bạn so với dữ liệu đọc được.</p>
+<p>Trong C, chuyển float sang mảng byte và ngược lại bằng <code>memcpy</code>, không nên ép kiểu con trỏ <code>*(float*)buf</code> vì có thể lỗi căn lề trên Cortex-M0.</p>
+
+<h2>Fixed-point Q15, Q31 là gì?</h2>
+<p>Trên vi điều khiển không có FPU, phép tính float chạy chậm. Fixed-point lưu số thực dưới dạng số nguyên đã nhân với 2^n. Ví dụ Q15 dùng số nguyên 16-bit có dấu với 15 bit phần lẻ: 0.5 được lưu thành 0.5 × 32768 = <code>0x4000</code>. Thư viện CMSIS-DSP của ARM có sẵn các hàm lọc, FFT cho kiểu Q15 và Q31.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lo-trinh-hoc-lap-trinh-c-tu-a-toi-z/">Lộ trình học lập trình C từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+</ul>

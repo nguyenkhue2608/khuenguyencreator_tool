@@ -1,0 +1,22 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/hex-dec-bin/. -->
+<h2>Vì sao lập trình nhúng dùng hex và nhị phân?</h2>
+<p>Thanh ghi của vi điều khiển là các dãy bit, mỗi bit bật một chức năng. Viết giá trị ở dạng <strong>nhị phân</strong> thì thấy rõ từng bit, còn <strong>hex</strong> gọn hơn: mỗi chữ số hex ứng đúng 4 bit (một nibble), nên <code>0x2A</code> đọc ngay ra <code>0010 1010</code>.</p>
+
+<h2>Bật, tắt, đảo bit trong C</h2>
+<pre>REG |=  (1U << 5);   /* bật bit 5 */
+REG &= ~(1U << 5);   /* tắt bit 5 */
+REG ^=  (1U << 5);   /* đảo bit 5 */
+if (REG & (1U << 5)) { /* bit 5 đang bật */ }</pre>
+<p>Bấm các bit trên lưới, công cụ ghép thành mặt nạ và sinh sẵn các dòng code này.</p>
+
+<h2>Số có dấu và bù 2</h2>
+<p>Với kiểu <code>int8_t</code>, giá trị <code>0xFF</code> là −1 chứ không phải 255. Vi điều khiển lưu số âm theo dạng <strong>bù 2</strong>: đảo tất cả các bit rồi cộng 1. Chọn chế độ <em>signed</em> để nhập số âm và xem dạng hex tương ứng, hữu ích khi đọc dữ liệu cảm biến (nhiệt độ, gia tốc) trả về dạng có dấu.</p>
+
+<h2>Thứ tự byte (endianness)</h2>
+<p>STM32, ESP32, AVR đều là <strong>little-endian</strong>: số <code>0x12345678</code> nằm trong RAM theo thứ tự <code>78 56 34 12</code>. Khi gửi số qua UART, SPI hay lưu vào EEPROM theo từng byte, hai bên phải thống nhất thứ tự này, nếu không dữ liệu nhận được sẽ bị đảo.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lo-trinh-hoc-lap-trinh-c-tu-a-toi-z/">Lộ trình học lập trình C từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+</ul>

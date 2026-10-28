@@ -1,0 +1,22 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/crc/. -->
+<h2>CRC là gì?</h2>
+<p>CRC (Cyclic Redundancy Check) là một con số tính từ khung dữ liệu và gửi kèm theo khung. Bên nhận tính lại CRC; nếu không khớp thì biết dữ liệu bị lỗi trên đường truyền. CRC phát hiện lỗi tốt hơn nhiều so với checksum cộng dồn, nhất là lỗi nhiều bit liền nhau do nhiễu.</p>
+
+<h2>Vì sao cùng là CRC-16 mà ra kết quả khác nhau?</h2>
+<p>Một thuật toán CRC được xác định bởi 6 tham số: <strong>width</strong> (độ rộng), <strong>poly</strong> (đa thức), <strong>init</strong> (giá trị khởi tạo), <strong>refin / refout</strong> (có đảo thứ tự bit không) và <strong>xorout</strong>. Chỉ cần khác một tham số là kết quả khác hẳn. Vì vậy CRC-16/MODBUS và CRC-16/CCITT-FALSE cho hai số khác nhau dù cùng 16 bit. Bảng kết quả ở trên tính mọi biến thể phổ biến cùng lúc để bạn dò xem thiết bị đang dùng loại nào.</p>
+
+<h2>Ví dụ: khung Modbus RTU</h2>
+<p>Lệnh đọc 10 thanh ghi từ địa chỉ 0 của slave 1 là <code>01 03 00 00 00 0A</code>. CRC-16/MODBUS của 6 byte này là <code>0xCDC5</code>, và Modbus gửi <strong>byte thấp trước</strong>, nên khung hoàn chỉnh là:</p>
+<pre>01 03 00 00 00 0A C5 CD</pre>
+
+<h2>Kiểm tra code CRC của bạn</h2>
+<p>Mỗi thuật toán có một "giá trị kiểm tra" chuẩn, là CRC của chuỗi ASCII <code>123456789</code>. Chuyển sang chế độ <em>Chuỗi ký tự</em>, nhập <code>123456789</code> rồi so kết quả với dòng "Giá trị kiểm tra". Nếu hàm C trên vi điều khiển của bạn ra cùng số đó thì cài đặt đã đúng.</p>
+
+<h2>CRC trên STM32</h2>
+<p>STM32 có khối CRC phần cứng. Ở cấu hình mặc định, khối này tính <strong>CRC-32/MPEG-2</strong> (không đảo bit, không XOR kết quả) và nạp dữ liệu theo từng word 32-bit, nên kết quả khác CRC-32 của file ZIP. Các dòng STM32 đời mới hơn (F0, F3, F7, G0, L4…) cho phép bật đảo bit vào/ra và trên nhiều dòng còn đổi được đa thức, nhờ đó tính ra đúng CRC-32 chuẩn.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/embedded-automotive/tieu-chuan-va-giao-thuc-automotive/">Tiêu chuẩn và giao thức Automotive</a></li>
+</ul>

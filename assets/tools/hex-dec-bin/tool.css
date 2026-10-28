@@ -1,0 +1,78 @@
+/* Hex / Dec / Bin: ô nhập có nút chép, lưới bit chia nibble và byte, khối code. */
+
+.kn-hex__body { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+
+.kn-hex__in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; }
+.kn-hex__in input { font-family: var(--kn-mono) !important; }
+
+.kn-hex__copy {
+	height: 40px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+	min-height: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.kn-hex__copy:hover { border-color: var(--kn-accent); color: var(--kn-accent-ink); }
+.kn-hex__head .kn-hex__copy { height: 32px; }
+
+.kn-hex__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.kn-hex__head .kn-calc__h { margin: 0; }
+
+.kn-hex__grid { display: grid; gap: 2px; }
+.kn-hex__row { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 3px; }
+.kn-hex__bit {
+	display: grid;
+	justify-items: center;
+	gap: 1px;
+	padding: 5px 0 3px;
+	min-height: 0;
+	height: auto;
+	margin: 0;
+	border: 1px solid var(--kn-line);
+	border-radius: 4px;
+	background: var(--kn-paper);
+	color: var(--kn-muted);
+	cursor: pointer;
+	text-transform: none;
+	letter-spacing: 0;
+	line-height: 1.1;
+}
+.kn-hex__bit b { font-family: var(--kn-mono); font-size: 15px; }
+.kn-hex__bit i { font-style: normal; font-family: var(--kn-mono); font-size: 9px; opacity: .8; }
+.kn-hex__bit.is-on { background: var(--kn-accent); border-color: var(--kn-accent); color: #fff; }
+.kn-hex__bit.is-nib { margin-left: 4px; }
+.kn-hex__bit.is-byte { margin-left: 10px; }
+.kn-hex__nibs { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); margin: 2px 0 10px; }
+.kn-hex__nibs span { text-align: center; font-family: var(--kn-mono); font-size: 13px; font-weight: 700; color: var(--kn-accent-ink); border-top: 2px solid var(--kn-line); margin: 0 3px; padding-top: 2px; }
+
+.kn-hex__code {
+	margin: 0;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #14201d;
+	color: #d7e7e1;
+	font-family: var(--kn-mono);
+	font-size: 13px;
+	line-height: 1.6;
+	overflow-x: auto;
+	white-space: pre;
+}
+
+.kn-hex__ops { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.4fr) auto; gap: 8px; margin-bottom: 10px; }
+.kn-hex__ops input { font-family: var(--kn-mono) !important; }
+.kn-hex__wrap { white-space: normal; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+	.kn-hex__ops { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+	.kn-hex__bit b { font-size: 13px; }
+	.kn-hex__bit.is-byte { margin-left: 6px; }
+	.kn-hex__bit.is-nib { margin-left: 2px; }
+}
