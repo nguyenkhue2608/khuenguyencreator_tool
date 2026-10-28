@@ -1,0 +1,34 @@
+/* Mã màu điện trở: hàng chọn màu cho từng vạch, hình điện trở bấm được. */
+
+.kn-res__bands { display: grid; gap: 12px; }
+.kn-res__row { display: grid; gap: 6px; }
+.kn-res__row-h { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--kn-muted); }
+.kn-res__row-h b { color: var(--kn-ink); }
+.kn-res__sws { display: flex; flex-wrap: wrap; gap: 6px; }
+.kn-res__sw {
+	width: 30px;
+	height: 30px;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: 1px solid rgba(0, 0, 0, .25);
+	border-radius: 6px;
+	cursor: pointer;
+}
+.kn-res__sw[aria-pressed="true"] { outline: 3px solid var(--kn-accent); outline-offset: 2px; }
+.kn-res__sw.is-none {
+	background: repeating-linear-gradient(45deg, var(--kn-paper) 0 4px, var(--kn-line) 4px 8px) !important;
+}
+
+.kn-res__fig svg { max-width: 520px; }
+
+.kn-res__dot {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-right: 8px;
+	border-radius: 3px;
+	border: 1px solid rgba(0, 0, 0, .25);
+	vertical-align: -2px;
+}
+.kn-res__dot.is-none { border-style: dashed; }

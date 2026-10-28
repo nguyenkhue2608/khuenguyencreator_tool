@@ -20,5 +20,32 @@
     "h1": "Sơ đồ chân ESP32, STM32, Arduino, Raspberry Pi, 8051",
     "intro": "Chọn board để xem sơ đồ chân vẽ theo hình dạng thật, lọc theo chức năng ADC, PWM, UART, I2C, SPI và bấm vào từng chân để xem chi tiết cùng các lưu ý khi đấu nối.",
     "data": "pinout"
+  },
+  "ma-mau-dien-tro": {
+    "title": "Mã Màu Điện Trở",
+    "h1": "Tính mã màu điện trở 4, 5, 6 vạch",
+    "intro": "Chọn màu từng vạch để đọc giá trị điện trở, hoặc nhập giá trị để biết điện trở có những vạch màu nào. Có bảng mã màu đầy đủ theo chuẩn IEC 60062.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "cau-chia-ap": {
+    "title": "Cầu Chia Áp",
+    "h1": "Tính cầu chia áp và chọn điện trở",
+    "intro": "Tính điện áp ra của cầu chia áp, hoặc nhập điện áp mong muốn để tìm cặp R1, R2 theo dãy E12, E24, E96. Hay dùng khi đo điện áp pin, nguồn 12V bằng chân ADC.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "dien-tro-led": {
+    "title": "Điện Trở Cho LED",
+    "h1": "Tính điện trở hạn dòng cho LED",
+    "intro": "Nhập điện áp nguồn, màu LED và dòng mong muốn, công cụ chọn điện trở chuẩn, công suất điện trở và cảnh báo khi dòng quá lớn cho chân GPIO.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
   }
 }

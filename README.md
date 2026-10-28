@@ -62,7 +62,7 @@ kn-tools/
 |---|---|---|
 | 0 | Plugin khung + trang Hub `/tools/` | Nền cho mọi tool |
 | 1 | STM32 ngắt Timer, STM32 PWM | Giá trị cao nhất, gắn với ~47 bài STM32. Dùng chung `assets/common/stm32-clock.*` (dữ liệu chip, clock tree) |
-| 1 | Mã màu điện trở, Cầu chia áp, Điện trở LED | Dễ làm, lượng tìm kiếm lớn, gắn chuyên mục Điện tử cơ bản |
+| 1 | Mã màu điện trở, Cầu chia áp, Điện trở LED (đã xong) | Dùng chung `assets/common/kn-elec.js` (đọc giá trị 4k7, dãy E, bảng màu) và `kn-calc.css` |
 | 2 | Hex/Dec/Bin + Bitfield, CRC, Float↔IEEE754 | Dễ, dùng hằng ngày, gắn series C/C++ |
 | 2 | Web Serial Monitor | Tool "giữ chân" người dùng quay lại, gắn series ESP32 |
 | 3 | Image → C array, Pinout viewer (board priority 1) | Cần dữ liệu và xử lý ảnh |

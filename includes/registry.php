@@ -22,9 +22,9 @@ function kn_tools_groups() {
 function kn_tools_registry() {
 	return array(
 		// 1. Phần cứng / mạch
-		'ma-mau-dien-tro'        => array( 'group' => 'phan-cung', 'title' => 'Mã màu điện trở', 'status' => 'planned' ),
-		'cau-chia-ap'            => array( 'group' => 'phan-cung', 'title' => 'Cầu chia áp', 'status' => 'planned' ),
-		'dien-tro-led'           => array( 'group' => 'phan-cung', 'title' => 'Điện trở hạn dòng LED', 'status' => 'planned' ),
+		'ma-mau-dien-tro'        => array( 'group' => 'phan-cung', 'title' => 'Mã màu điện trở', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
+		'cau-chia-ap'            => array( 'group' => 'phan-cung', 'title' => 'Cầu chia áp', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
+		'dien-tro-led'           => array( 'group' => 'phan-cung', 'title' => 'Điện trở hạn dòng LED', 'status' => 'live', 'deps' => array( 'kn-calc', 'kn-elec' ) ),
 		'pull-up-i2c'            => array( 'group' => 'phan-cung', 'title' => 'Điện trở pull-up I2C', 'status' => 'planned' ),
 		'rc-calculator'          => array( 'group' => 'phan-cung', 'title' => 'RC calculator', 'status' => 'planned' ),
 		'tan-nhiet-ldo'          => array( 'group' => 'phan-cung', 'title' => 'Tản nhiệt LDO', 'status' => 'planned' ),

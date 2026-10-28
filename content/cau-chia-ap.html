@@ -1,0 +1,25 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/cau-chia-ap/. -->
+<h2>Công thức cầu chia áp</h2>
+<pre>Vout = Vin × R2 / (R1 + R2)</pre>
+<p>Hai điện trở mắc nối tiếp giữa Vin và GND. Điện áp tại điểm giữa tỉ lệ với R2 trên tổng trở. R1 là điện trở phía trên (nối Vin), R2 là điện trở phía dưới (nối GND).</p>
+
+<h2>Ví dụ: đo nguồn 12V bằng ADC 3.3V</h2>
+<p>Chân ADC của ESP32 hay STM32 chỉ nhận tối đa 3.3V. Dùng R1 = 27 kΩ, R2 = 10 kΩ:</p>
+<pre>12 × 10 / (27 + 10) = 3.24 V</pre>
+<p>Vout nhỏ hơn 3.3V một chút nên vẫn an toàn khi nguồn lên tới khoảng 12.2V. Trong code, nhân giá trị đọc được với (R1 + R2) / R2 = 3.7 để ra điện áp thật. Muốn đo cả khi nguồn tăng (pin 12V sạc đầy khoảng 13.8V), hãy nhập Vin bằng điện áp lớn nhất có thể xảy ra.</p>
+
+<h2>Chọn tổng trở bao nhiêu?</h2>
+<ul>
+	<li><strong>Quá nhỏ</strong> (dưới 1 kΩ): cầu chia ngốn dòng liên tục, tốn pin và nóng điện trở.</li>
+	<li><strong>Quá lớn</strong> (trên vài trăm kΩ): tải phía sau, ví dụ tụ lấy mẫu của ADC, làm Vout bị kéo lệch. Thêm tụ 100 nF song song với R2 sẽ giúp ADC đọc ổn định hơn.</li>
+	<li><strong>Mạch đo thông thường</strong>: tổng 10 kΩ – 100 kΩ là hợp lý.</li>
+</ul>
+
+<h2>Khi nào không nên dùng cầu chia áp</h2>
+<p>Cầu chia áp chỉ dùng để <strong>đo</strong> hoặc tạo điện áp tham chiếu dòng rất nhỏ. Không dùng nó làm nguồn cấp cho module hay vi điều khiển, vì Vout tụt ngay khi có tải. Cần nguồn ổn định thì dùng IC ổn áp (LDO) hoặc mạch buck.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/tong-hop-kien-thuc-ve-dien-tu-co-ban-cho-nguoi-moi-bat-dau/">Kiến thức điện tử cơ bản cho người mới bắt đầu</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-esp32-tu-a-toi-z/">Lập trình ESP32 từ A tới Z</a></li>
+</ul>

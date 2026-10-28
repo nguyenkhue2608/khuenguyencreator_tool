@@ -1,0 +1,25 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/dien-tro-led/. -->
+<h2>Vì sao LED cần điện trở?</h2>
+<p>LED không tự giới hạn dòng. Khi điện áp vượt qua Vf (điện áp thuận), dòng qua LED tăng rất nhanh và có thể làm cháy LED hoặc chân GPIO chỉ trong tích tắc. Điện trở mắc nối tiếp giữ dòng ở mức an toàn.</p>
+
+<h2>Công thức</h2>
+<pre>R = (Vnguồn − n × Vf) / I</pre>
+<p>n là số LED mắc nối tiếp, I là dòng mong muốn (tính bằng A). Kết quả thường lẻ nên chọn giá trị chuẩn <strong>lớn hơn gần nhất</strong> để dòng thực tế không vượt mức đặt.</p>
+
+<h2>Ví dụ: LED đỏ trên Arduino 5V</h2>
+<p>LED đỏ có Vf khoảng 2V, muốn chạy 10 mA:</p>
+<pre>R = (5 − 2) / 0.01 = 300 Ω  →  chọn 330 Ω (E12)</pre>
+<p>Dòng thực tế là 3 / 330 ≈ 9.1 mA. Điện trở tiêu tán khoảng 27 mW, loại 1/8 W hay 1/4 W đều dư sức.</p>
+
+<h2>Lưu ý khi nối LED vào vi điều khiển</h2>
+<ul>
+	<li>Chân GPIO của Arduino Uno chịu tối đa 20 mA khuyến nghị; ESP32, STM32 nên giữ dưới khoảng 10–20 mA. Cần dòng lớn hơn thì đóng cắt LED bằng transistor hoặc MOSFET.</li>
+	<li>Với vi điều khiển 3.3V, LED xanh dương, trắng (Vf khoảng 3V) chỉ còn 0.3V cho điện trở nên sáng yếu và không ổn định. Nên cấp LED từ nguồn 5V qua transistor.</li>
+	<li>LED mắc song song nên có điện trở riêng cho từng LED, vì Vf mỗi LED khác nhau một chút khiến dòng chia không đều.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/tong-hop-kien-thuc-ve-dien-tu-co-ban-cho-nguoi-moi-bat-dau/">Kiến thức điện tử cơ bản cho người mới bắt đầu</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+</ul>
