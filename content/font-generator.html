@@ -1,0 +1,27 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/font-generator/. -->
+<h2>Font bitmap là gì?</h2>
+<p>Màn hình nhúng không có sẵn bộ vẽ chữ như máy tính. Mỗi ký tự được lưu thành một ô điểm ảnh (bitmap) trong Flash, và thư viện vẽ từng điểm khi in chữ. Công cụ này vẽ ký tự bằng font của trình duyệt rồi chuyển thành các ô bitmap đó.</p>
+
+<h2>Dùng với Adafruit GFX</h2>
+<pre>#include "MyFont16.h"
+
+display.setFont(&amp;MyFont16);
+display.setCursor(0, 16);   // y là đường chân chữ, không phải mép trên
+display.print("23.5°C");</pre>
+<p>Định dạng GFXfont dùng được cho mọi màn hình chạy Adafruit GFX: SSD1306, ST7735, ILI9341, cũng như TFT_eSPI (qua <code>setFreeFont</code>). Lưu ý tọa độ y của con trỏ là đường chân chữ, nên muốn chữ nằm sát mép trên thì đặt y bằng chiều cao phần trên của chữ.</p>
+
+<h2>Tiết kiệm bộ nhớ</h2>
+<ul>
+	<li>Chỉ tạo các ký tự thật sự dùng. Một đồng hồ số chỉ cần "0123456789:" thay vì cả bảng ASCII.</li>
+	<li>Font cỡ 16 px đủ toàn bộ ASCII tốn khoảng 2–3 KB; cỡ 32 px tốn gấp khoảng 4 lần.</li>
+	<li>Font pixel như Press Start 2P, VT323 hiển thị sắc nét nhất ở đúng cỡ gốc (8 px, 16 px) hoặc bội số của nó.</li>
+</ul>
+
+<h2>Ký tự tiếng Việt</h2>
+<p>GFXfont yêu cầu dải mã ký tự liên tục, mà chữ có dấu nằm rải rác trong bảng Unicode nên bảng tra rất lớn. Với tiếng Việt, hãy chọn "Mảng ô cố định", tự nhập đúng các ký tự cần dùng và tra vị trí ký tự trong chuỗi <code>_chars</code> đi kèm.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-esp32-tu-a-toi-z/">Lập trình ESP32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/bai-1-huong-dan-cai-dat-arduino-ide-va-cach-them-thu-vien/">Hướng dẫn cài đặt Arduino IDE và thêm thư viện</a></li>
+</ul>

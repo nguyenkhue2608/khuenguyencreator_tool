@@ -1,0 +1,22 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/opamp-gain/. -->
+<h2>Ba mạch khuếch đại cơ bản</h2>
+<ul>
+	<li><strong>Không đảo</strong>: G = 1 + Rf / Rg. Tín hiệu vào chân +, trở kháng vào rất lớn nên không làm tải nguồn tín hiệu. Hay dùng để khuếch đại cảm biến.</li>
+	<li><strong>Đảo</strong>: G = −Rf / Rin. Tín hiệu ra ngược pha, trở kháng vào bằng Rin.</li>
+	<li><strong>Vi sai</strong>: Vout = Rf / Rin × (V2 − V1). Khuếch đại hiệu hai điện áp, ví dụ đo dòng qua điện trở shunt.</li>
+</ul>
+
+<h2>Vì sao Vout thực tế khác tính toán?</h2>
+<p>Op-amp không ra được điện áp vượt quá nguồn cấp. LM358 chạy nguồn 5V chỉ ra được tối đa khoảng 3.5V. Op-amp rail-to-rail như MCP6002 ra sát 0V và 5V. Mạch đảo chạy nguồn đơn 0–5V thì không ra được điện áp âm: cần nguồn âm, hoặc nâng chân + lên điện áp giữa (ví dụ 2.5V) để dịch mức.</p>
+
+<h2>Băng thông</h2>
+<p>Mỗi op-amp có tích độ lợi – băng thông (GBW) gần như cố định. LM358 có GBW khoảng 1 MHz, nên ở hệ số 10 lần thì băng thông chỉ còn khoảng 100 kHz. Cần khuếch đại lớn cho tín hiệu nhanh thì chia thành hai tầng, hoặc chọn op-amp có GBW cao hơn.</p>
+
+<h2>Ví dụ: đưa cảm biến 0–300 mV lên ADC 3.3V</h2>
+<p>Cần hệ số khoảng 11: dùng mạch không đảo với Rf = 10 kΩ, Rg = 1 kΩ, nguồn 3.3V và op-amp rail-to-rail. 300 mV ra 3.3V, vừa đủ dải đo của ADC trên ESP32 hay STM32.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/tong-hop-kien-thuc-ve-dien-tu-co-ban-cho-nguoi-moi-bat-dau/">Kiến thức điện tử cơ bản cho người mới bắt đầu</a></li>
+	<li><a href="https://khuenguyencreator.com/tong-hop-cac-mach-dien-tu-thong-dung/">Tổng hợp các mạch điện tử thông dụng</a></li>
+</ul>

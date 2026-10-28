@@ -7,5 +7,10 @@
   "dien-tro-led": "https://claude.ai/artifact/JGCDbkkk9JThSv5XfT5LSe",
   "hex-dec-bin": "https://claude.ai/artifact/TPuYHKAHxhWkmaEu1mLxFF",
   "crc": "https://claude.ai/artifact/HvQJ82DhvZH5CXde5WjWhD",
-  "float-ieee754": "https://claude.ai/artifact/5a9QcNiFXXFyj5ebPdhuLF"
+  "float-ieee754": "https://claude.ai/artifact/5a9QcNiFXXFyj5ebPdhuLF",
+  "be-rong-duong-mach-pcb": "https://claude.ai/artifact/3nA8h12tThExBYM9DVkWXX",
+  "tro-khang-microstrip": "https://claude.ai/artifact/BTY6ohBxfk5t4W7GNzzY72",
+  "opamp-gain": "https://claude.ai/artifact/9ZTE1X6LfmePBsLJYYNwUD",
+  "image-to-c-array": "https://claude.ai/artifact/Vq14qzGA53ZvXfMDKe25X8",
+  "font-generator": "https://claude.ai/artifact/6fhyfGQHTiBaLoaiBNfi3y"
 }

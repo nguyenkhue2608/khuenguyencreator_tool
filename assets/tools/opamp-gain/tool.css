@@ -1,0 +1,2 @@
+/* Op-amp: hàng nhập hệ số mong muốn cạnh chọn dãy điện trở. */
+.kn-oa__find { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; max-width: 480px; margin-bottom: 8px; }

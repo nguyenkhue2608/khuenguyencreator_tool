@@ -1,0 +1,23 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/be-rong-duong-mach-pcb/. -->
+<h2>Vì sao đường mạch cần đủ rộng?</h2>
+<p>Đường mạch đồng có điện trở. Dòng điện chạy qua làm đường mạch nóng lên; nếu quá hẹp, đồng có thể nóng tới mức làm phồng lớp phủ, bong đường mạch hoặc đứt hẳn. Đường mạch hẹp còn gây sụt áp, khiến động cơ, relay hay module WiFi hoạt động chập chờn.</p>
+
+<h2>Công thức IPC-2221</h2>
+<pre>I = k × ΔT^0.44 × A^0.725</pre>
+<p>I là dòng điện (A), ΔT là độ tăng nhiệt cho phép (°C), A là tiết diện đường mạch (mil²). Hệ số k = 0.048 cho lớp ngoài và 0.024 cho lớp trong. Lớp trong cần rộng gấp khoảng 2.6 lần vì bị kẹp giữa các lớp điện môi, khó tản nhiệt hơn lớp ngoài tiếp xúc trực tiếp với không khí.</p>
+
+<h2>Ví dụ</h2>
+<p>Đường nguồn 2 A, đồng 1 oz (35 µm), cho phép nóng thêm 10 °C: lớp ngoài cần khoảng <strong>0.8 mm</strong>. Nếu muốn đường mạch nhỏ hơn, có thể chấp nhận nhiệt tăng 20 °C, đặt hàng đồng 2 oz, hoặc đổ polygon thay cho đường mạch.</p>
+
+<h2>Mẹo khi vẽ trên Altium, KiCad</h2>
+<ul>
+	<li>Đường tín hiệu thường vẽ 0.2–0.25 mm; đường nguồn tính theo dòng lớn nhất cộng thêm dư 20–30%.</li>
+	<li>Dòng qua via cũng cần tính: một via 0.3 mm thường chịu khoảng 1 A; dòng lớn hơn thì dùng nhiều via song song.</li>
+	<li>Tạo rule bề rộng riêng cho net nguồn (Net Class) để không phải nhớ khi đi dây.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lo-trinh-hoc-thiet-ke-mach-in-tren-altium/">Lộ trình học thiết kế mạch in trên Altium</a></li>
+	<li><a href="https://khuenguyencreator.com/hoc-altium-tu-a-toi-z-cho-sinh-vien/">Học Altium từ A tới Z cho sinh viên</a></li>
+</ul>

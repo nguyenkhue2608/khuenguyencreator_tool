@@ -75,6 +75,51 @@
       "kn-elec"
     ]
   },
+  "be-rong-duong-mach-pcb": {
+    "title": "PCB Trace Width",
+    "h1": "Tính bề rộng đường mạch PCB theo dòng điện (IPC-2221)",
+    "intro": "Nhập dòng điện, độ tăng nhiệt và độ dày đồng, công cụ trả về bề rộng đường mạch cho lớp ngoài và lớp trong, kèm điện trở, sụt áp và công suất tỏa nhiệt.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "tro-khang-microstrip": {
+    "title": "Microstrip Impedance",
+    "h1": "Tính trở kháng microstrip trên PCB",
+    "intro": "Tìm bề rộng đường mạch cho trở kháng 50 Ω hay 90 Ω theo chiều dày điện môi và vật liệu, hoặc tính trở kháng từ bề rộng có sẵn. Dùng cho anten, USB, Ethernet.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "opamp-gain": {
+    "title": "Op-amp Gain",
+    "h1": "Tính hệ số khuếch đại Op-amp",
+    "intro": "Tính hệ số khuếch đại mạch không đảo, đảo, vi sai, xem điện áp ra có bị kẹp theo nguồn và loại op-amp không, và tìm cặp điện trở chuẩn cho hệ số mong muốn.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "image-to-c-array": {
+    "title": "Image to C Array",
+    "h1": "Chuyển ảnh sang mảng C cho OLED, TFT",
+    "intro": "Tải ảnh lên, chọn kích thước màn hình và định dạng màu, công cụ tạo mảng C cho Adafruit GFX, U8g2, TFT_eSPI. Ảnh chỉ được xử lý trên trình duyệt của bạn.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "font-generator": {
+    "title": "LCD Font Generator",
+    "h1": "Tạo font bitmap cho LCD, OLED",
+    "intro": "Chọn font, cỡ chữ và tập ký tự, công cụ vẽ từng ký tự thành bitmap và xuất GFXfont cho Adafruit GFX hoặc mảng ô cố định cho code tự viết.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
   "tools-hub": {
     "title": "Công cụ lập trình nhúng",
     "h1": "Công cụ cho dân lập trình nhúng",

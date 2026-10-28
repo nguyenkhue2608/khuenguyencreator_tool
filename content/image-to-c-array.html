@@ -1,0 +1,23 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/image-to-c-array/. -->
+<h2>Hiển thị ảnh trên màn hình nhúng</h2>
+<p>Vi điều khiển không đọc được file PNG hay JPG một cách nhẹ nhàng. Cách đơn giản nhất là đổi ảnh thành mảng byte đúng định dạng màn hình, nhúng vào code dưới dạng hằng số trong Flash, rồi gửi thẳng lên màn hình.</p>
+
+<h2>Chọn định dạng nào?</h2>
+<ul>
+	<li><strong>OLED SSD1306, SH1106</strong> (128×64, 128×32): đơn sắc 1-bit, mỗi byte chứa 8 điểm. Ảnh 128×64 tốn 1024 byte.</li>
+	<li><strong>TFT ST7735, ST7789, ILI9341</strong>: RGB565, mỗi điểm 2 byte. Ảnh 320×240 tốn 150 KB, phù hợp ESP32 và STM32 nhiều Flash, không vừa Arduino Uno.</li>
+	<li><strong>Thứ tự byte của ảnh đơn sắc</strong> phải khớp thư viện. Adafruit GFX <code>drawBitmap</code> dùng hàng ngang, bit cao bên trái. U8g2 <code>drawXBMP</code> dùng hàng ngang, bit thấp bên trái. Buffer gốc của SSD1306 xếp theo cột dọc 8 điểm (page).</li>
+</ul>
+
+<h2>Mẹo cho ảnh đẹp trên OLED</h2>
+<ul>
+	<li>Logo, icon nét đơn giản: tắt dither, chỉnh ngưỡng sáng cho nét gọn.</li>
+	<li>Ảnh chụp: bật dither để giữ chi tiết sáng tối bằng mật độ điểm.</li>
+	<li>Ảnh nền sáng chữ tối: bật "Đảo màu" vì trên OLED bit 1 là điểm sáng.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-esp32-tu-a-toi-z/">Lập trình ESP32 từ A tới Z</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+</ul>

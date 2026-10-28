@@ -1,0 +1,22 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/tro-khang-microstrip/. -->
+<h2>Microstrip là gì?</h2>
+<p>Microstrip là đường mạch ở lớp ngoài, nằm ngay trên một mặt phẳng GND liền và cách nó một lớp điện môi. Trở kháng đặc tính Z0 của đường này phụ thuộc vào bề rộng đường mạch W, chiều dày điện môi H, độ dày đồng và hằng số điện môi εr của vật liệu.</p>
+
+<h2>Khi nào cần quan tâm trở kháng?</h2>
+<ul>
+	<li><strong>Anten, RF</strong> (WiFi, BLE, LoRa, GPS): đường từ chip tới anten thường phải là 50 Ω.</li>
+	<li><strong>USB</strong>: cặp vi sai 90 Ω. <strong>Ethernet</strong>: 100 Ω. <strong>HDMI</strong>: 100 Ω.</li>
+	<li>Tín hiệu có sườn lên rất nhanh và đường mạch dài. Với UART, I2C, SPI tốc độ thấp thì không cần tính.</li>
+</ul>
+
+<h2>Mạch 2 lớp và 4 lớp khác nhau thế nào?</h2>
+<p>Ở mạch 2 lớp dày 1.6 mm, lớp GND cách đường tín hiệu tới 1.6 mm nên đường 50 Ω phải rộng gần 3 mm, rất khó đi dây. Mạch 4 lớp có lớp prepreg chỉ khoảng 0.1–0.2 mm, nên đường 50 Ω chỉ rộng khoảng 0.3–0.4 mm. Đây là lý do module có WiFi hay USB tốc độ cao thường dùng mạch 4 lớp.</p>
+
+<h2>Độ chính xác</h2>
+<p>Công cụ dùng công thức Hammerstad–Jensen có hiệu chỉnh độ dày đồng, sai số thường vài phần trăm so với phần mềm giải trường điện từ. Khi đặt mạch thật, hãy chọn tùy chọn kiểm soát trở kháng (impedance control) và dùng bề rộng theo bảng stackup của nhà mạch.</p>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lo-trinh-hoc-thiet-ke-mach-in-tren-altium/">Lộ trình học thiết kế mạch in trên Altium</a></li>
+	<li><a href="https://khuenguyencreator.com/dien-tu-va-phan-cung/ve-mach-in/">Chuyên mục Vẽ mạch in trên Altium</a></li>
+</ul>

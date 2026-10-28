@@ -49,9 +49,15 @@ function kn_tools_registry() {
 		'rc-calculator'          => array( 'group' => 'phan-cung', 'title' => 'Mạch lọc RC', 'status' => 'planned', 'icon' => 'divider' ),
 		'tan-nhiet-ldo'          => array( 'group' => 'phan-cung', 'title' => 'Tản nhiệt LDO', 'status' => 'planned', 'icon' => 'chip' ),
 		'thoi-luong-pin'         => array( 'group' => 'phan-cung', 'title' => 'Thời lượng pin', 'status' => 'planned', 'icon' => 'battery' ),
-		'be-rong-duong-mach-pcb' => array( 'group' => 'phan-cung', 'title' => 'Bề rộng đường mạch PCB', 'status' => 'planned', 'icon' => 'pcb' ),
-		'tro-khang-microstrip'   => array( 'group' => 'phan-cung', 'title' => 'Trở kháng microstrip', 'status' => 'planned', 'icon' => 'pcb' ),
-		'opamp-gain'             => array( 'group' => 'phan-cung', 'title' => 'Hệ số khuếch đại Op-amp', 'status' => 'planned', 'icon' => 'opamp' ),
+		'be-rong-duong-mach-pcb' => array( 'group' => 'phan-cung', 'title' => 'Bề rộng đường mạch PCB', 'status' => 'live', 'deps' => $calc, 'icon' => 'pcb',
+			'desc' => 'Bề rộng đường mạch theo dòng điện và độ tăng nhiệt (IPC-2221), kèm sụt áp và tỏa nhiệt.',
+			'tags' => array( 'PCB', 'IPC-2221', 'Altium' ) ),
+		'tro-khang-microstrip'   => array( 'group' => 'phan-cung', 'title' => 'Trở kháng microstrip', 'status' => 'live', 'deps' => $calc, 'icon' => 'pcb',
+			'desc' => 'Tìm bề rộng đường mạch cho 50 Ω, 90 Ω theo stackup, hoặc tính Z0 từ bề rộng.',
+			'tags' => array( 'PCB', 'RF', '50 Ω' ) ),
+		'opamp-gain'             => array( 'group' => 'phan-cung', 'title' => 'Hệ số khuếch đại Op-amp', 'status' => 'live', 'deps' => $calc, 'icon' => 'opamp',
+			'desc' => 'Hệ số khuếch đại mạch đảo, không đảo, vi sai; mức ra bị kẹp và cặp điện trở chuẩn.',
+			'tags' => array( 'Op-amp', 'Analog', 'ADC' ) ),
 
 		// Dữ liệu & giao thức
 		'hex-dec-bin'            => array( 'group' => 'du-lieu', 'title' => 'Hex ↔ Dec ↔ Bin', 'status' => 'live', 'deps' => $calc, 'icon' => 'binary',
@@ -65,8 +71,12 @@ function kn_tools_registry() {
 			'tags' => array( 'Float', 'Modbus', 'Q15' ) ),
 
 		// Đồ họa & bảng tra
-		'image-to-c-array'       => array( 'group' => 'do-hoa', 'title' => 'Ảnh sang mảng C', 'status' => 'planned', 'icon' => 'image' ),
-		'font-generator'         => array( 'group' => 'do-hoa', 'title' => 'Tạo font cho LCD', 'status' => 'planned', 'icon' => 'font' ),
+		'image-to-c-array'       => array( 'group' => 'do-hoa', 'title' => 'Ảnh sang mảng C', 'status' => 'live', 'deps' => $calc, 'icon' => 'image',
+			'desc' => 'Chuyển ảnh thành mảng C cho OLED SSD1306, TFT ST7735, ILI9341: 1-bit, RGB565.',
+			'tags' => array( 'OLED', 'TFT', 'RGB565' ) ),
+		'font-generator'         => array( 'group' => 'do-hoa', 'title' => 'Tạo font cho LCD', 'status' => 'live', 'deps' => $calc, 'icon' => 'font',
+			'desc' => 'Tạo font bitmap từ font máy tính hoặc Google Fonts, xuất GFXfont cho Adafruit GFX.',
+			'tags' => array( 'OLED', 'Adafruit GFX', 'Font' ) ),
 		'lut-generator'          => array( 'group' => 'do-hoa', 'title' => 'Bảng tra LUT (sin, NTC)', 'status' => 'planned', 'icon' => 'wave' ),
 		'fir-iir-filter'         => array( 'group' => 'do-hoa', 'title' => 'Thiết kế bộ lọc FIR / IIR', 'status' => 'planned', 'icon' => 'wave' ),
 

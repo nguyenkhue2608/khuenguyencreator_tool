@@ -1,0 +1,63 @@
+/* Tạo font cho LCD: màn hình xem thử kiểu OLED, danh sách ký tự. Nút / khối code dùng chung class kn-img__* (nạp cùng file này). */
+
+.kn-font__body { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+.kn-font__check { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-size: 14px; font-weight: 400; margin: 0; }
+.kn-font__check input { margin: 0; }
+.kn-tool input[type="range"] { width: 100%; margin: 6px 0 0; accent-color: var(--kn-accent); }
+
+.kn-font__screen {
+	display: grid;
+	place-items: center;
+	min-height: 160px;
+	padding: 16px;
+	border-radius: 10px;
+	background: #10161d;
+	overflow: auto;
+}
+.kn-font__screen canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; max-width: 100%; height: auto; }
+.kn-font__glyphs {
+	font-family: var(--kn-mono);
+	font-size: 13px;
+	line-height: 1.8;
+	color: var(--kn-muted);
+	word-break: break-all;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: var(--kn-panel);
+}
+
+.kn-img__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.kn-img__head .kn-calc__h { margin: 0; }
+.kn-img__btn {
+	display: inline-flex;
+	align-items: center;
+	height: 32px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink) !important;
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none !important;
+	text-transform: none;
+	letter-spacing: 0;
+	min-height: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.kn-img__btn:hover { border-color: var(--kn-accent); color: var(--kn-accent-ink) !important; }
+.kn-img__code {
+	margin: 0;
+	max-height: 420px;
+	overflow: auto;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #14201d;
+	color: #d7e7e1;
+	font-family: var(--kn-mono);
+	font-size: 12.5px;
+	line-height: 1.55;
+	white-space: pre;
+}
+.kn-img__warn { color: var(--kn-warn); }
