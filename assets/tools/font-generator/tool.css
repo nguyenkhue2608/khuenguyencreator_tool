@@ -1,6 +1,27 @@
 /* Tạo font cho LCD: màn hình xem thử kiểu OLED, danh sách ký tự. Nút / khối code dùng chung class kn-img__* (nạp cùng file này). */
 
 .kn-font__body { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+.kn-font__drop {
+	display: block;
+	padding: 16px;
+	border: 2px dashed var(--kn-line);
+	border-radius: 10px;
+	background: var(--kn-panel);
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: var(--kn-ink);
+	cursor: pointer;
+	margin: 0;
+}
+.kn-font__drop strong { color: var(--kn-accent-ink); }
+.kn-font__drop span { font-size: 12px; color: var(--kn-muted); }
+.kn-font__drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.kn-font__drop:hover,
+.kn-font__drop.is-over,
+.kn-font__drop:focus-within { border-color: var(--kn-accent); background: var(--kn-accent-soft); }
+
 .kn-font__check { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-size: 14px; font-weight: 400; margin: 0; }
 .kn-font__check input { margin: 0; }
 .kn-tool input[type="range"] { width: 100%; margin: 6px 0 0; accent-color: var(--kn-accent); }

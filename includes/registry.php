@@ -75,7 +75,7 @@ function kn_tools_registry() {
 			'desc' => 'Chuyển ảnh thành mảng C cho OLED SSD1306, TFT ST7735, ILI9341: 1-bit, RGB565.',
 			'tags' => array( 'OLED', 'TFT', 'RGB565' ) ),
 		'font-generator'         => array( 'group' => 'do-hoa', 'title' => 'Tạo font cho LCD', 'status' => 'live', 'deps' => $calc, 'icon' => 'font',
-			'desc' => 'Tạo font bitmap từ font máy tính hoặc Google Fonts, xuất GFXfont cho Adafruit GFX.',
+			'desc' => 'Tạo font bitmap từ file font của bạn hoặc Google Fonts, xuất GFXfont cho Adafruit GFX.',
 			'tags' => array( 'OLED', 'Adafruit GFX', 'Font' ) ),
 		'lut-generator'          => array( 'group' => 'do-hoa', 'title' => 'Bảng tra LUT (sin, NTC)', 'status' => 'planned', 'icon' => 'wave' ),
 		'fir-iir-filter'         => array( 'group' => 'do-hoa', 'title' => 'Thiết kế bộ lọc FIR / IIR', 'status' => 'planned', 'icon' => 'wave' ),

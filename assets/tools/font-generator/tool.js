@@ -72,6 +72,11 @@
 		root.innerHTML =
 			'<div class="kn-calc__body kn-font__body">' +
 				'<div class="kn-calc__inputs">' +
+					'<label class="kn-font__drop" data-x="drop" for="' + uid + '-up">' +
+						'<input type="file" id="' + uid + '-up" data-x="up" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2">' +
+						'<strong>Tải font của bạn lên</strong> hoặc kéo thả file vào đây<br><span>.ttf, .otf, .woff, .woff2. Font chỉ được đọc trên trình duyệt, không gửi đi đâu.</span>' +
+					'</label>' +
+					'<p class="kn-calc__msg is-error" data-x="uperr" hidden></p>' +
 					'<div class="kn-calc__field"><label for="' + uid + '-f">Font chữ</label><select id="' + uid + '-f" data-x="font">' +
 						FONTS.map(function (f) { return '<option value="' + E.esc(f.v) + '">' + E.esc(f.n) + '</option>'; }).join('') + '</select></div>' +
 					'<div class="kn-calc__row2">' +
@@ -88,7 +93,7 @@
 						'<div class="kn-calc__field"><label for="' + uid + '-n">Tên font</label><input type="text" id="' + uid + '-n" data-x="name" value="MyFont16" spellcheck="false"></div>' +
 						'<div class="kn-calc__field"><label for="' + uid + '-p">Chữ xem thử</label><input type="text" id="' + uid + '-p" data-x="sample" value="Hello 123!"></div>' +
 					'</div>' +
-					'<p class="kn-calc__hint">Font Google (Roboto, Press Start 2P…) có giấy phép mở, dùng được trong sản phẩm. Với font hệ thống, kiểm tra giấy phép trước khi đưa vào sản phẩm thương mại.</p>' +
+					'<p class="kn-calc__hint">Font Google (Roboto, Press Start 2P…) có giấy phép mở, dùng được trong sản phẩm. Với font hệ thống hoặc font bạn tải lên, kiểm tra giấy phép có cho phép nhúng vào thiết bị trước khi dùng cho sản phẩm thương mại.</p>' +
 				'</div>' +
 				'<div class="kn-calc__results">' +
 					'<div class="kn-font__screen"><canvas data-x="cv"></canvas></div>' +
@@ -101,7 +106,37 @@
 				'<pre class="kn-img__code" data-x="code"></pre></div></div>';
 
 		var x = function (k) { return root.querySelector('[data-x="' + k + '"]'); };
-		var st = { code: '', url: null, job: 0 };
+		var st = { code: '', url: null, job: 0, uploads: 0 };
+
+		/* Nạp font người dùng tải lên bằng FontFace API rồi thêm vào danh sách chọn */
+		function loadFontFile(file) {
+			var err = x('uperr');
+			err.hidden = true;
+			if (!file) return;
+			if (!/\.(ttf|otf|woff2?)$/i.test(file.name)) { err.textContent = 'Chỉ nhận file font .ttf, .otf, .woff, .woff2.'; err.hidden = false; return; }
+			if (!window.FontFace) { err.textContent = 'Trình duyệt không hỗ trợ nạp font từ file. Hãy dùng Chrome, Edge hoặc Firefox bản mới.'; err.hidden = false; return; }
+			var reader = new FileReader();
+			reader.onload = function () {
+				var family = 'KN Upload ' + (++st.uploads);
+				var face = new FontFace(family, reader.result);
+				face.load().then(function (loaded) {
+					document.fonts.add(loaded);
+					var base = file.name.replace(/\.[^.]+$/, '');
+					FONTS.push({ v: family, n: 'Font tải lên: ' + base, up: true });
+					var opt = document.createElement('option');
+					opt.value = family;
+					opt.textContent = 'Font tải lên: ' + base;
+					x('font').appendChild(opt);
+					x('font').value = family;
+					x('name').value = ident(base.replace(/[-\s]+/g, '_')) + (x('size').value || '');
+					build();
+				}, function () {
+					err.textContent = 'Không đọc được "' + file.name + '". File có thể bị hỏng hoặc không phải font.';
+					err.hidden = false;
+				});
+			};
+			reader.readAsArrayBuffer(file);
+		}
 
 		function chars() {
 			var key = x('set').value;
@@ -113,8 +148,9 @@
 			var f = FONTS.filter(function (q) { return q.v === x('font').value; })[0];
 			var size = Math.max(6, Math.min(64, Math.floor(Number(x('size').value) || 16)));
 			var weight = x('bold').checked ? 'bold ' : '';
-			var family = /\s/.test(f.v) || f.g ? '"' + f.v + '"' : f.v;
+			var family = /\s/.test(f.v) || f.g || f.up ? '"' + f.v + '"' : f.v;
 			var css = weight + size + 'px ' + family;
+			st.label = weight + size + 'px ' + (f.up ? f.n.replace('Font tải lên: ', '') : f.v);
 			var list = chars();
 			ensureGoogle(f);
 			var job = ++st.job;
@@ -157,7 +193,7 @@
 				var lines = [];
 				for (var i = 0; i < bitmap.length; i += 16) lines.push(bitmap.slice(i, i + 16).map(hex2).join(', '));
 				bytesTotal = bitmap.length + rows.length * 7 + 9;
-				code = '/* ' + name + ': ' + css.replace(/"/g, '') + ', ' + list.length + ' ký tự, tạo bởi khuenguyencreator.com/tools/font-generator */\n' +
+				code = '/* ' + name + ': ' + st.label + ', ' + list.length + ' ký tự, tạo bởi khuenguyencreator.com/tools/font-generator */\n' +
 					'#include <Adafruit_GFX.h>\n\n' +
 					'const uint8_t ' + name + 'Bitmaps[] PROGMEM = {\n  ' + (lines.join(',\n  ') || '0x00') + '\n};\n\n' +
 					'const GFXglyph ' + name + 'Glyphs[] PROGMEM = {\n  /* bitmapOffset, width, height, xAdvance, xOffset, yOffset */\n' + rows.join('\n') + '\n};\n\n' +
@@ -178,7 +214,7 @@
 				});
 				bytesTotal = arr.length * per;
 				var idx = list.join('').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-				code = '/* ' + name + ': ' + css.replace(/"/g, '') + ', ô ' + cw + '×' + ch2 + ' px, mỗi hàng ' + bpr + ' byte, bit cao = điểm bên trái */\n' +
+				code = '/* ' + name + ': ' + st.label + ', ô ' + cw + '×' + ch2 + ' px, mỗi hàng ' + bpr + ' byte, bit cao = điểm bên trái */\n' +
 					'#include <stdint.h>\n\n' +
 					'#define ' + name.toUpperCase() + '_W ' + cw + '\n#define ' + name.toUpperCase() + '_H ' + ch2 + '\n\n' +
 					'/* Thứ tự ký tự trong mảng (UTF-8): */\nconst char ' + name + '_chars[] = "' + idx + '";\n\n' +
@@ -219,12 +255,17 @@
 		}
 
 		x('set').addEventListener('change', function () { x('customw').hidden = x('set').value !== 'custom'; build(); });
+		x('up').addEventListener('change', function (e) { e.stopPropagation(); loadFontFile(x('up').files[0]); x('up').value = ''; });
+		['dragenter', 'dragover'].forEach(function (ev) { x('drop').addEventListener(ev, function (e) { e.preventDefault(); x('drop').classList.add('is-over'); }); });
+		['dragleave', 'drop'].forEach(function (ev) { x('drop').addEventListener(ev, function (e) { e.preventDefault(); x('drop').classList.remove('is-over'); }); });
+		x('drop').addEventListener('drop', function (e) { loadFontFile(e.dataTransfer.files[0]); });
 		x('th').addEventListener('input', function () { x('tv').textContent = x('th').value; });
 		x('size').addEventListener('input', function () {
-			if (/^MyFont\d*$/.test(x('name').value)) x('name').value = 'MyFont' + (x('size').value || '');
+			var nm = x('name').value.replace(/\d+$/, '');
+			if (nm && /^[A-Za-z_][A-Za-z0-9_]*$/.test(nm)) x('name').value = nm + (x('size').value || '');
 		});
-		root.addEventListener('input', build);
-		root.addEventListener('change', build);
+		root.addEventListener('input', function (e) { if (e.target !== x('up')) build(); });
+		root.addEventListener('change', function (e) { if (e.target !== x('up')) build(); });
 		E.copyText(x('copy'), function () { return st.code; });
 		build();
 	});
