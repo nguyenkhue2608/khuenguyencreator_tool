@@ -1,0 +1,37 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/mach-loc-rc/. -->
+<h2>Công thức mạch lọc RC</h2>
+<pre>fc = 1 / (2π × R × C)
+τ  = R × C</pre>
+<p>Mạch lọc RC bậc 1 chỉ gồm một điện trở và một tụ. <strong>fc</strong> là tần số cắt: tại đó biên độ ra còn 70.7% biên độ vào, tức giảm 3 dB. <strong>τ</strong> (tau) là hằng số thời gian: sau τ giây tụ nạp được 63%, sau 5τ thì coi như đầy (99.3%).</p>
+<p>Ví dụ R = 10 kΩ, C = 100 nF: τ = 1 ms, fc = 1 / (2π × 0.001) ≈ 159 Hz.</p>
+
+<h2>Thông thấp và thông cao khác nhau thế nào?</h2>
+<ul>
+	<li><strong>Thông thấp</strong> (low-pass): R nối tiếp, tụ C xuống GND. Cho tín hiệu chậm đi qua, chặn nhiễu tần số cao. Đây là loại hay dùng nhất.</li>
+	<li><strong>Thông cao</strong> (high-pass): tụ C nối tiếp, R xuống GND. Chặn thành phần DC, chỉ cho phần dao động đi qua. Hay gặp ở đầu vào micro, mạch ghép tín hiệu âm thanh.</li>
+</ul>
+<p>Bậc 1 nghĩa là ngoài fc, tín hiệu giảm 20 dB mỗi khi tần số gấp 10 lần. Nhiễu ở tần số 10 × fc chỉ còn 10%, ở 100 × fc còn 1%. Muốn chặn mạnh hơn thì ghép 2 tầng RC hoặc dùng mạch lọc tích cực với op-amp.</p>
+
+<h2>Các ứng dụng hay gặp trong mạch nhúng</h2>
+<h3>Lọc nhiễu trước chân ADC</h3>
+<p>Thêm R 1 kΩ – 10 kΩ nối tiếp và tụ 100 nF từ chân ADC xuống GND. Tụ còn đóng vai trò kho điện tích cho tụ lấy mẫu bên trong ADC, giúp kết quả đọc ổn định hơn. Chọn fc nhỏ hơn một nửa tần số lấy mẫu để tránh hiện tượng chồng phổ (aliasing).</p>
+
+<h3>Biến PWM thành điện áp DC</h3>
+<p>Khi không có DAC, có thể cho PWM đi qua mạch lọc thông thấp để ra điện áp bằng duty × VCC. Chọn fc nhỏ hơn tần số PWM ít nhất 100 lần. Ví dụ PWM 20 kHz thì fc khoảng 100 – 200 Hz. fc càng thấp thì điện áp càng phẳng, nhưng đổi duty thì điện áp ra đổi chậm hơn.</p>
+
+<h3>Chống dội nút nhấn</h3>
+<p>R kéo lên 10 kΩ và tụ 100 nF song song với nút nhấn tạo τ = 1 ms, đủ để lọc phần lớn các xung dội cơ khí. Nên đọc chân qua Schmitt trigger (đa số chân GPIO của STM32, ESP32 đã có sẵn) để cạnh tín hiệu dứt khoát.</p>
+
+<h2>Lưu ý khi chọn linh kiện</h2>
+<ul>
+	<li><strong>Tụ gốm X5R, X7R</strong> giảm điện dung khi có điện áp DC đặt vào, có thể mất 30–50% với tụ nhỏ ở áp cao. Mạch cần fc chính xác nên dùng tụ C0G (NP0) hoặc tụ film.</li>
+	<li><strong>Tải phía sau</strong> mắc song song với tụ (ví dụ trở kháng vào của mạch kế tiếp) làm fc tăng lên và biên độ giảm. Trở kháng tải nên lớn hơn R ít nhất 10 lần.</li>
+	<li><strong>R quá lớn</strong> (trên 1 MΩ) dễ bị ảnh hưởng bởi dòng rò và nhiễu. Nên tăng C để giảm R.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/tong-hop-kien-thuc-ve-dien-tu-co-ban-cho-nguoi-moi-bat-dau/">Kiến thức điện tử cơ bản cho người mới bắt đầu</a></li>
+	<li><a href="https://khuenguyencreator.com/opamp-la-gi-uu-diem-khi-su-dung-opamp-trong-thuc-te/">Opamp là gì? Ưu điểm khi sử dụng Opamp trong thực tế</a></li>
+	<li><a href="https://khuenguyencreator.com/tong-hop-cac-mach-dien-tu-thong-dung/">Tổng hợp các mạch điện tử thông dụng</a></li>
+</ul>

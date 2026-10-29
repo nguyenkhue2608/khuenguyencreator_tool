@@ -1,0 +1,40 @@
+<!-- Nội dung bài giải thích đặt dưới tool trên Page /tools/lut-generator/. -->
+<h2>Bảng tra LUT là gì?</h2>
+<p><strong>LUT</strong> (Look-Up Table) là mảng giá trị được tính sẵn trên máy tính rồi nạp vào Flash của vi điều khiển. Lúc chạy, chip chỉ cần đọc phần tử thứ i của mảng thay vì tự tính <code>sin()</code> hay <code>log()</code>.</p>
+<p>Giống như bảng cửu chương: thuộc sẵn 7 × 8 = 56 thì trả lời ngay, không phải cộng 7 tám lần. Với các chip không có bộ tính số thực (FPU) như STM32F103, ESP8266, AVR, một lần gọi <code>sin()</code> có thể mất hàng trăm chu kỳ, còn đọc mảng chỉ mất vài chu kỳ.</p>
+
+<h2>Bảng sóng sin cho DAC và PWM</h2>
+<p>Mỗi lần ngắt Timer, chương trình xuất một phần tử của bảng ra DAC (hoặc ghi vào thanh ghi CCR của PWM), rồi tăng chỉ số lên 1, hết bảng thì quay về 0. Tần số sóng ra:</p>
+<pre>f_ra = f_ngắt_Timer / số_điểm</pre>
+<p>Bảng 256 điểm, muốn sóng 1 kHz thì Timer phải ngắt 256 000 lần mỗi giây. Ở tần số này nên dùng DMA để xuất bảng, CPU không phải xử lý từng ngắt. Xem cách làm thực tế trong bài <a href="https://khuenguyencreator.com/lap-trinh-stm32-dac-tao-song-hinh-sin-tren-kit-stm32f407-discovery/">Lập trình STM32 DAC tạo sóng hình Sin</a>.</p>
+<ul>
+	<li><strong>Giá trị lớn nhất</strong>: DAC 12 bit là 4095, DAC 8 bit là 255. Với PWM, nhập đúng giá trị ARR (Counter Period) của Timer.</li>
+	<li><strong>Số điểm</strong>: nhiều điểm thì sóng mịn hơn nhưng tốn Flash và cần ngắt nhanh hơn. 64 – 256 điểm là đủ cho hầu hết ứng dụng.</li>
+	<li><strong>Có dấu</strong>: dùng cho xử lý tín hiệu số, ví dụ trộn âm thanh hay tạo tín hiệu I/Q. Xuất ra DAC thì chọn không dấu.</li>
+</ul>
+
+<h2>Bảng tra nhiệt độ cho NTC</h2>
+<p><strong>NTC</strong> là nhiệt điện trở có hệ số nhiệt âm: nóng lên thì điện trở giảm. NTC được mắc thành cầu chia áp với một điện trở cố định, điểm giữa nối vào chân ADC. Quan hệ giữa điện trở và nhiệt độ theo mô hình Beta:</p>
+<pre>R(T) = R25 × exp(B × (1/T − 1/298.15))     (T tính bằng Kelvin)</pre>
+<p>Tính ngược từ ADC ra nhiệt độ cần hàm <code>log()</code>, khá nặng với chip nhỏ. Bảng tra giúp đổi ADC ra nhiệt độ chỉ bằng vài phép cộng, nhân số nguyên.</p>
+<h3>Chọn kiểu bảng nào?</h3>
+<ul>
+	<li><strong>Theo nhiệt độ</strong>: mỗi phần tử là giá trị ADC tại một mốc nhiệt độ (ví dụ −20, −15, ..., 100 °C). Bảng ngắn, dễ đọc, dễ kiểm tra với datasheet. Hàm tra sẽ dò tìm khoảng chứa giá trị ADC rồi nội suy.</li>
+	<li><strong>Theo ADC</strong>: chỉ số mảng chính là giá trị ADC dịch phải. Tra nhanh nhất, không cần vòng lặp, hợp với chip chạy chậm hoặc cần đọc liên tục.</li>
+</ul>
+<p>Cả hai kiểu đều trả nhiệt độ theo đơn vị 0.1 °C dưới dạng số nguyên (253 nghĩa là 25.3 °C), tránh phải dùng số thực.</p>
+
+<h2>Lưu ý khi dùng NTC</h2>
+<ul>
+	<li><strong>Điện trở nối tiếp nên bằng R25</strong> (10 kΩ với NTC 10 kΩ). Khi đó độ nhạy lớn nhất nằm quanh 25 °C. Nếu cần đo chính xác ở nhiệt độ cao, ví dụ 80 °C, hãy chọn điện trở bằng điện trở của NTC tại 80 °C.</li>
+	<li><strong>Hệ số Beta</strong> phụ thuộc khoảng nhiệt độ hãng dùng để đo (B25/50, B25/85). Chọn đúng giá trị in trong datasheet. Mô hình Beta chính xác khoảng ±1 °C trong dải 0 – 100 °C. Ngoài dải này nên dùng bảng R – T của hãng.</li>
+	<li><strong>Cấp nguồn cho cầu chia từ cùng nguồn với Vref của ADC.</strong> Khi đó kết quả là tỉ lệ (ratiometric), nguồn 3.3 V có dao động thì nhiệt độ vẫn đúng.</li>
+	<li>Thêm tụ 100 nF từ chân ADC xuống GND để lọc nhiễu. Có thể tính bằng công cụ <a href="/tools/mach-loc-rc/">Mạch lọc RC</a>.</li>
+</ul>
+
+<h2>Bài viết liên quan</h2>
+<ul>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-dac-tao-song-hinh-sin-tren-kit-stm32f407-discovery/">Lập trình STM32 DAC tạo sóng hình Sin trên KIT STM32F407 Discovery</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-esp32-timer-millis-va-ngat-timer/">Lập trình ESP32 Timer Millis và ngắt Timer</a></li>
+	<li><a href="https://khuenguyencreator.com/lap-trinh-stm32-tu-a-toi-z/">Lập trình STM32 từ A tới Z</a></li>
+</ul>

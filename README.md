@@ -32,7 +32,7 @@ kn-tools/
 │   ├── Cầu chia áp                       cau-chia-ap
 │   ├── Điện trở hạn dòng LED             dien-tro-led
 │   ├── Điện trở pull-up I2C              pull-up-i2c
-│   ├── RC calculator                     rc-calculator
+│   ├── Mạch lọc RC                       mach-loc-rc
 │   ├── Tản nhiệt LDO                     tan-nhiet-ldo
 │   ├── Thời lượng pin                    thoi-luong-pin
 │   ├── Bề rộng đường mạch (IPC-2221)     be-rong-duong-mach-pcb
@@ -49,7 +49,7 @@ kn-tools/
 ├── 4. Đồ họa / dữ liệu nhúng
 │   ├── Image → C array                   image-to-c-array
 │   ├── Font generator                    font-generator
-│   ├── LUT generator                     lut-generator
+│   ├── Bảng tra LUT (sin, NTC)           lut-generator
 │   └── Thiết kế bộ lọc FIR / IIR         fir-iir-filter
 └── 5. Giao tiếp phần cứng qua trình duyệt
     ├── Web Serial Monitor (+ plotter)    web-serial-monitor
@@ -66,8 +66,8 @@ kn-tools/
 | 2 | Hex/Dec/Bin + Bitfield, CRC, Float↔IEEE754 (đã xong) | Dễ, dùng hằng ngày, gắn series C/C++ |
 | 2 | Web Serial Monitor | Tool "giữ chân" người dùng quay lại, gắn series ESP32 |
 | 3 | Image → C array, Pinout viewer (board priority 1) | Cần dữ liệu và xử lý ảnh |
-| 3 | RC, LDO, Pull-up I2C, Op-amp, Thời lượng pin | Bổ sung nhóm phần cứng |
-| 4 | Pinout (priority 2–3), LUT, Font, PCB, BLE | |
+| 3 | RC, Op-amp (đã xong); LDO, Pull-up I2C, Thời lượng pin | Bổ sung nhóm phần cứng |
+| 4 | Pinout (priority 2–3), LUT, Font, PCB (đã xong); BLE | |
 | 5 | FIR/IIR | Khó nhất, làm sau cùng |
 
 ## Ghi chú cho Flatsome

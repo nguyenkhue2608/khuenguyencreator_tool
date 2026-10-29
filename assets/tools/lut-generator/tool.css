@@ -1,0 +1,37 @@
+/* Bảng tra LUT: khối code dùng chung class kn-img__* như công cụ Ảnh sang mảng C. */
+
+.kn-img__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.kn-img__head .kn-calc__h { margin: 0; }
+.kn-img__btn {
+	display: inline-flex;
+	align-items: center;
+	height: 32px;
+	padding: 0 12px;
+	border: 1px solid var(--kn-line);
+	border-radius: 6px;
+	background: var(--kn-paper);
+	color: var(--kn-ink) !important;
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none !important;
+	text-transform: none;
+	letter-spacing: 0;
+	min-height: 0;
+	margin: 0;
+	cursor: pointer;
+}
+.kn-img__btn:hover { border-color: var(--kn-accent); color: var(--kn-accent-ink) !important; }
+.kn-img__code {
+	margin: 0;
+	max-height: 420px;
+	overflow: auto;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #14201d;
+	color: #d7e7e1;
+	font-family: var(--kn-mono);
+	font-size: 12.5px;
+	line-height: 1.55;
+	white-space: pre;
+}
+.kn-img__warn { color: var(--kn-warn); }

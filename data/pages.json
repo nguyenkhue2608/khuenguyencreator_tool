@@ -128,5 +128,23 @@
     "deps": [
       "kn-hub"
     ]
+  },
+  "mach-loc-rc": {
+    "title": "Mạch Lọc RC",
+    "h1": "Tính mạch lọc RC thông thấp, thông cao",
+    "intro": "Tính tần số cắt và hằng số thời gian của mạch lọc RC, xem tín hiệu ở một tần số bị giảm bao nhiêu dB, hoặc nhập tần số cắt để tìm cặp R, C chuẩn dễ mua.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
+  },
+  "lut-generator": {
+    "title": "Bảng Tra LUT",
+    "h1": "Tạo bảng tra LUT sóng sin và nhiệt điện trở NTC",
+    "intro": "Tạo mảng C cho sóng sin, tam giác, răng cưa để xuất ra DAC hoặc PWM, và bảng tra nhiệt độ cho NTC kèm hàm nội suy, dán thẳng vào code STM32, ESP32, Arduino.",
+    "deps": [
+      "kn-calc",
+      "kn-elec"
+    ]
   }
 }
